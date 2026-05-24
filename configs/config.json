@@ -1,0 +1,36 @@
+{
+  "project_root": "/home/yi/Stealth System",
+  "directories": {
+    "pcaps": "/home/yi/Stealth System/pcaps",
+    "dataset": "/home/yi/Stealth System/dataset",
+    "models": "/home/yi/Stealth System/models",
+    "dashboard": "/home/yi/Stealth System/dashboard",
+    "results": "/home/yi/Stealth System/results",
+    "logs": "/home/yi/Stealth System/logs",
+    "configs": "/home/yi/Stealth System/configs"
+  },
+  "capture": {
+    "default_interface": "any",
+    "pcap_filename": "recon_capture.pcap",
+    "sniff_timeout": 30,
+    "buffer_size": 1000
+  },
+  "features": {
+    "flow_timeout_seconds": 60,
+    "sliding_window_seconds": 30,
+    "min_packets_per_flow": 1
+  },
+  "ml": {
+    "random_state": 42,
+    "test_size": 0.2,
+    "rf_n_estimators": 100,
+    "xgboost_max_depth": 5,
+    "models_to_train": ["random_forest", "isolation_forest", "xgboost"]
+  },
+  "alerts": {
+    "alert_log_file": "/home/yi/Stealth System/logs/alerts.log",
+    "log_file": "/home/yi/Stealth System/logs/system.log",
+    "entropy_threshold": 3.0,
+    "syn_ratio_threshold": 5.0
+  }
+}

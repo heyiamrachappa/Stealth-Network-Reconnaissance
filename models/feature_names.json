@@ -1,0 +1,22 @@
+[
+  "flow_duration",
+  "flow_packet_count",
+  "flow_bytes",
+  "flow_syn_ratio",
+  "flow_ack_ratio",
+  "flow_rst_ratio",
+  "flow_fin_ratio",
+  "flow_size_mean",
+  "flow_size_var",
+  "flow_interval_mean",
+  "flow_interval_var",
+  "host_port_entropy",
+  "host_dst_entropy",
+  "host_dst_diversity",
+  "host_syn_ratio",
+  "host_failed_flow_ratio",
+  "host_packet_rate",
+  "host_interval_mean",
+  "host_interval_var",
+  "host_packet_size_var"
+]
