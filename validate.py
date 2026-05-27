@@ -29,8 +29,20 @@ def run_pipeline_validation():
     for folder in ["dataset", "models", "results", "logs"]:
         path = os.path.join(project_root, folder)
         if os.path.exists(path):
-            shutil.rmtree(path)
-        os.makedirs(path, exist_ok=True)
+            if folder == "models":
+                # Only clean serialized weights and configurations, preserve our python code files
+                for item in os.listdir(path):
+                    if not item.endswith(".py"):
+                        item_path = os.path.join(path, item)
+                        if os.path.isdir(item_path):
+                            shutil.rmtree(item_path)
+                        else:
+                            os.remove(item_path)
+            else:
+                shutil.rmtree(path)
+                os.makedirs(path, exist_ok=True)
+        else:
+            os.makedirs(path, exist_ok=True)
     
     # 2. Generate Synthetic Attack PCAP
     logger.info("Step 2: Generating synthetic stealth scanning PCAP...")
