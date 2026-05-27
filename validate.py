@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-# ==============================================================================
-# Phase 10 - End-to-End System Validation Script
-# AI-Assisted Detection of Stealth Network Reconnaissance
-# ==============================================================================
-
 import os
 import sys
 import time
@@ -11,41 +6,28 @@ import shutil
 import logging
 
 # Ensure project root is in PYTHONPATH
-sys.path.append("/home/yi/Stealth System")
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-# Setup Logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] - %(message)s",
-    handlers=[
-        logging.StreamHandler(sys.stdout)
-    ]
-)
-logger = logging.getLogger("SystemValidation")
+from utils.helpers import setup_logger, load_config, get_project_root
+from pipeline import DatasetPipeline
+from models.engine import ModelEngine
+from realtime_detector import RealTimeDetectorSystem
 
+logger = setup_logger("SystemValidation")
 
 def run_pipeline_validation():
     logger.info("==========================================================")
-    logger.info("🛡️ STARTING END-TO-END SYSTEM INTEGRATION VALIDATION")
+    logger.info("🛡️ STARTING MODULAR REAL-TIME SYSTEM INTEGRATION VALIDATION")
     logger.info("==========================================================")
     
-    project_root = "/home/yi/Stealth System"
-    pcap_path = f"{project_root}/pcaps/synthetic_scan.pcap"
+    project_root = get_project_root()
+    pcap_path = os.path.join(project_root, "pcaps", "synthetic_scan.pcap")
+    alert_file = os.path.join(project_root, "logs", "alerts.log")
     
-    # Activate virtual environment import safety checks
-    try:
-        from scapy.all import IP, TCP, wrpcap
-        from src.pipeline import DatasetPipeline
-        from src.models import ModelEngine
-        from src.detector import RealTimeDetector
-    except ImportError as e:
-        logger.error(f"Failed to import core modules. Make sure virtual environment is active: {e}")
-        sys.exit(1)
-
     # 1. Clean previous run logs and results for absolute verification
     logger.info("Step 1: Cleaning previous logs and serialized weights...")
     for folder in ["dataset", "models", "results", "logs"]:
-        path = f"{project_root}/{folder}"
+        path = os.path.join(project_root, folder)
         if os.path.exists(path):
             shutil.rmtree(path)
         os.makedirs(path, exist_ok=True)
@@ -53,6 +35,7 @@ def run_pipeline_validation():
     # 2. Generate Synthetic Attack PCAP
     logger.info("Step 2: Generating synthetic stealth scanning PCAP...")
     try:
+        from scapy.all import IP, TCP, wrpcap
         pkts = []
         base_time = time.time()
         
@@ -73,6 +56,7 @@ def run_pipeline_validation():
             pkts.append(IP(src="192.168.1.187", dst="192.168.1.5")/TCP(sport=38200+i, dport=target_port, flags="S"))
             pkts[-1].time = base_time + 5.0 + (i * 0.5)
             
+        os.makedirs(os.path.dirname(pcap_path), exist_ok=True)
         wrpcap(pcap_path, pkts)
         logger.info(f"Successfully created synthetic scan PCAP: {pcap_path} ({len(pkts)} packets)")
     except Exception as e:
@@ -114,20 +98,19 @@ def run_pipeline_validation():
     logger.info("Step 5: Executing Real-Time Streaming Detection Engine Simulation...")
     try:
         # Load detector with pre-trained Random Forest and PCAP simulation file
-        detector = RealTimeDetector(
+        detector = RealTimeDetectorSystem(
             model_name="random_forest",
             interface="none",
             pcap_simulation=pcap_path
         )
-        # Run simulation (the thread will process packets and shutdown at the end of the generator stream)
+        # Run simulation
         detector.start(duration=15)
         
         # Verify alert output
-        alert_file = f"{project_root}/logs/alerts.log"
         if os.path.exists(alert_file) and os.path.getsize(alert_file) > 0:
             with open(alert_file, 'r') as f:
                 alerts_count = sum(1 for line in f if line.strip())
-            logger.info(f"🟢 SUCCESS! Real-time simulation complete. Triggered {alerts_count} threat alarms in alerts.log.")
+            logger.info(f"🟢 SUCCESS! Real-time simulation complete. Triggered {alerts_count} threat alerts in alerts.log.")
         else:
             logger.error("🔴 FAILURE: Real-time simulation completed but no threat alarms were triggered.")
             sys.exit(1)
@@ -137,8 +120,8 @@ def run_pipeline_validation():
         sys.exit(1)
 
     logger.info("==========================================================")
-    logger.info("🎉 CONGRATULATIONS! ALL 10 PHASES OF THE STEALTH NETWORK")
-    logger.info("   DETECTION SYSTEM HAVE INTEGRATED AND PASSED SUCCESSFULLY!")
+    logger.info("🎉 CONGRATULATIONS! ALL RESTRENGTHENED MODULAR REAL-TIME")
+    logger.info("   DETECTION SYSTEM PHASES INTEGRATED & PASSED SUCCESSFULLY!")
     logger.info("==========================================================")
 
 
