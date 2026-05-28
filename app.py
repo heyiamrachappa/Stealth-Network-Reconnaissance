@@ -2,11 +2,11 @@
 import os
 import sys
 
-# Add current folder to python path to resolve modules correctly
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Add project root to PYTHONPATH so all modules resolve correctly
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# Run the Streamlit Dashboard
-if __name__ == "__main__":
-    from dashboard.app import DashboardApp
-    app = DashboardApp()
-    app.run()
+# Import and run the PhantomTrace forensics dashboard
+from dashboard.app import ForensicWorkstationApp
+
+app = ForensicWorkstationApp()
+app.run()
