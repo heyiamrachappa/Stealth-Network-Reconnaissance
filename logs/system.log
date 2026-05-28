@@ -30,3 +30,11 @@
 2026-05-28 10:26:54,994 [INFO] (parser.py:139) - Successfully processed PCAP: 2196 packets loaded across 21.12 seconds.
 2026-05-28 10:26:55,021 [INFO] (engine.py:31) - Loading StandardScaler from /home/yi/My-Projects/Stealth-Network-Reconnissance-System/models/scaler.joblib
 2026-05-28 10:26:55,023 [INFO] (engine.py:42) - Loading ML classifier: 'xgboost' from /home/yi/My-Projects/Stealth-Network-Reconnissance-System/models/xgboost_model.joblib
+2026-05-28 11:02:37,389 [INFO] (parser.py:90) - Opening and parsing capture file: /home/yi/My-Projects/Stealth-Network-Reconnissance-System/pcaps/uploaded_temp.pcap
+2026-05-28 11:02:37,630 [INFO] (parser.py:139) - Successfully processed PCAP: 2196 packets loaded across 21.12 seconds.
+2026-05-28 11:02:37,659 [INFO] (engine.py:31) - Loading StandardScaler from /home/yi/My-Projects/Stealth-Network-Reconnissance-System/models/scaler.joblib
+2026-05-28 11:02:38,088 [INFO] (engine.py:42) - Loading ML classifier: 'random_forest' from /home/yi/My-Projects/Stealth-Network-Reconnissance-System/models/random_forest_model.joblib
+2026-05-28 11:02:42,040 [INFO] (parser.py:90) - Opening and parsing capture file: /home/yi/My-Projects/Stealth-Network-Reconnissance-System/pcaps/uploaded_temp.pcap
+2026-05-28 11:02:42,292 [INFO] (parser.py:139) - Successfully processed PCAP: 2196 packets loaded across 21.12 seconds.
+2026-05-28 11:02:42,322 [INFO] (engine.py:31) - Loading StandardScaler from /home/yi/My-Projects/Stealth-Network-Reconnissance-System/models/scaler.joblib
+2026-05-28 11:02:42,323 [INFO] (engine.py:42) - Loading ML classifier: 'xgboost' from /home/yi/My-Projects/Stealth-Network-Reconnissance-System/models/xgboost_model.joblib
