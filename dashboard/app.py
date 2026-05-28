@@ -13,745 +13,834 @@ from typing import Dict, List, Any, Optional, Tuple
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.helpers import load_config, get_project_root
-from capture.sniffer import PacketRecord
-from flows.tracker import FlowSession, FlowTracker
-from features.extractor import FeatureExtractor
-from detection.engine import MLInferenceEngine
-from alerts.engine import AlertEngine
+from pcap_processing.parser import PCAPParser, PacketRecord
+from feature_extraction.extractor import FeatureExtractor, StaticFlowTracker, FlowSession
+from ml_engine.engine import MLInferenceEngine
+from threat_analysis.analyzer import ThreatAnalyzer, ForensicThreatReport
+from reporting.generator import ForensicReporter
 
 # Setup page properties
 st.set_page_config(
-    page_title="Aegis AI - Stealth IDS Dashboard",
-    page_icon="🛡️",
+    page_title="PhantomTrace // OFFLINE PCAP FORENSIC WORKSTATION",
+    page_icon="🔬",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom premium styling CSS with Space Grotesk and Plus Jakarta Sans
+# Custom High-End Modernistic Forensic CSS injection
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
-    /* Global Base Setup */
+    /* Global styling and Cyber grid overlay */
     .stApp {
-        background: radial-gradient(circle at 50% 0%, #0F172A 0%, #020617 100%) !important;
-        color: #F8FAFC !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        background: radial-gradient(circle at 50% 0%, #060913 0%, #010204 100%) !important;
+        color: #E2E8F0 !important;
+        font-family: 'Inter', sans-serif !important;
     }
     
-    /* Sidebar Navigation Style */
-    section[data-testid="stSidebar"] {
-        background: rgba(15, 23, 42, 0.95) !important;
-        backdrop-filter: blur(20px);
-        border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-    }
-    section[data-testid="stSidebar"] div[class^="stButton"] button {
-        background: linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%);
-        border: none;
-        color: #020617;
-        font-weight: 700;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
-        transition: all 0.2s ease;
-    }
-    section[data-testid="stSidebar"] div[class^="stButton"] button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 242, 254, 0.5);
-    }
-    
-    /* Typography Override */
-    h1, h2, h3, h4, h5, h6 {
-        font-family: 'Space Grotesk', sans-serif !important;
-        letter-spacing: -0.03em !important;
-        font-weight: 700 !important;
-        color: #F8FAFC !important;
-    }
-    
-    /* Modern Title Neon Gradient */
-    .neon-title {
-        background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 50%, #8B5CF6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-family: 'Space Grotesk', sans-serif;
-        font-weight: 800;
-        font-size: 2.8rem;
-        letter-spacing: -0.04em;
-        text-shadow: 0 0 50px rgba(0, 242, 254, 0.1);
-    }
-
-    /* Glassmorphism Cyber Card Base */
-    .cyber-card {
-        background: rgba(30, 41, 59, 0.3) !important;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.06) !important;
-        border-radius: 20px !important;
-        padding: 24px !important;
-        box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.4);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 20px;
-    }
-    .cyber-card::before {
+    .stApp::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 3px;
-        background: linear-gradient(90deg, #4FACFE, #00F2FE);
-        opacity: 0.8;
-    }
-    .cyber-card-danger::before {
-        background: linear-gradient(90deg, #EF4444, #EC4899);
-    }
-    .cyber-card-warning::before {
-        background: linear-gradient(90deg, #F59E0B, #FF5E62);
-    }
-    .cyber-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(79, 172, 254, 0.4) !important;
-        box-shadow: 0 15px 40px 0 rgba(0, 242, 254, 0.15);
+        height: 100%;
+        background-image: 
+            linear-gradient(rgba(0, 242, 254, 0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 242, 254, 0.012) 1px, transparent 1px);
+        background-size: 35px 35px;
+        pointer-events: none;
+        z-index: 0;
     }
 
-    /* Metric Values Styles */
-    .metric-title {
+    /* Left Sidebar Navigation override */
+    section[data-testid="stSidebar"] {
+        background: rgba(4, 7, 14, 0.95) !important;
+        border-right: 1px solid rgba(0, 242, 254, 0.15) !important;
+        backdrop-filter: blur(25px);
+        box-shadow: 5px 0 35px rgba(0,0,0,0.85);
+    }
+    
+    /* Interactive Sidebar menu buttons */
+    div[data-testid="stSidebarUserContent"] button {
+        background: rgba(30, 41, 59, 0.2) !important;
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        color: #94A3B8 !important;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 600;
+        border-radius: 6px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    div[data-testid="stSidebarUserContent"] button:hover {
+        background: rgba(0, 242, 254, 0.1) !important;
+        border-color: #00F2FE !important;
+        color: #00F2FE !important;
+        box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+    }
+
+    /* Headings and Titles */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Orbitron', sans-serif !important;
+        letter-spacing: -0.01em !important;
+        font-weight: 700 !important;
+        color: #F8FAFC !important;
+        text-shadow: 0 0 20px rgba(0, 242, 254, 0.05);
+    }
+
+    /* Forensic Lab HUD Bar */
+    .forensic-hud-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(8, 14, 27, 0.85);
+        border: 1px solid rgba(0, 242, 254, 0.25);
+        border-bottom: 2px solid rgba(0, 242, 254, 0.35);
+        padding: 14px 20px;
+        border-radius: 4px;
+        margin-bottom: 25px;
+        font-family: 'Orbitron', sans-serif;
         font-size: 0.8rem;
-        color: #94A3B8;
+        letter-spacing: 0.05em;
+        box-shadow: 0 0 25px rgba(0, 242, 254, 0.05);
+        position: relative;
+    }
+    .lbl { color: #64748B; font-weight: 600; }
+    .val { font-weight: 700; margin-left: 6px; }
+    .cyan-glow { color: #00F2FE; text-shadow: 0 0 8px rgba(0, 242, 254, 0.5); }
+    .purple-glow { color: #A78BFA; text-shadow: 0 0 8px rgba(167, 139, 250, 0.5); }
+    .red-glow { color: #EF4444; text-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+    .green-glow { color: #10B981; text-shadow: 0 0 8px rgba(16, 185, 129, 0.5); }
+
+    /* Tactical Title Headers */
+    .lab-header {
+        border-left: 4px solid #00F2FE;
+        padding-left: 12px;
+        margin-bottom: 20px;
+    }
+    .lab-subtitle {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.75rem;
+        color: #4FACFE;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-top: -8px;
+    }
+
+    /* Cyber Lab Panels */
+    .cyber-panel {
+        background: rgba(8, 12, 21, 0.75) !important;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 242, 254, 0.15) !important;
+        border-radius: 4px !important;
+        padding: 20px !important;
+        position: relative;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(0, 242, 254, 0.01);
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+    .cyber-panel::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: 12px;
+        height: 12px;
+        border-top: 2px solid #00F2FE;
+        border-left: 2px solid #00F2FE;
+    }
+    .cyber-panel::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        right: -1px;
+        width: 12px;
+        height: 12px;
+        border-bottom: 2px solid #8B5CF6;
+        border-right: 2px solid #8B5CF6;
+    }
+    
+    .panel-critical { border-color: rgba(239, 68, 68, 0.4) !important; }
+    .panel-critical::before { border-top-color: #EF4444; border-left-color: #EF4444; }
+    .panel-critical::after { border-bottom-color: #EF4444; border-right-color: #EF4444; }
+
+    /* Lab Telemetry HUD Labels */
+    .hud-label {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.72rem;
+        color: #64748B;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        margin-bottom: 6px;
-        font-weight: 600;
+        margin-bottom: 5px;
     }
-    .metric-value-neo {
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: 2.5rem;
+    .hud-value-large {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 3.2rem;
         font-weight: 700;
-        line-height: 1.1;
-    }
-    .val-cyan {
-        background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .val-purple {
-        background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .val-red {
-        background: linear-gradient(135deg, #F87171 0%, #EF4444 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
-    }
-    .val-gold {
-        background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        line-height: 0.9;
+        margin-bottom: 8px;
     }
 
-    /* Pulsing Green Sniffer Status Indicator */
-    .sniffer-status-bar {
-        display: flex;
-        align-items: center;
-        background: rgba(16, 185, 129, 0.08);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        padding: 10px 16px;
-        border-radius: 12px;
-        margin-bottom: 25px;
-        width: fit-content;
-    }
-    .status-dot {
-        width: 10px;
-        height: 10px;
-        background-color: #10B981;
+    /* Radar Sweep animation */
+    .radar-container {
+        width: 180px;
+        height: 180px;
+        border: 2px solid rgba(0, 242, 254, 0.18);
         border-radius: 50%;
-        margin-right: 10px;
-        box-shadow: 0 0 8px #10B981;
-        animation: sniffer-pulse 2s infinite;
+        position: relative;
+        background: radial-gradient(circle, rgba(0,242,254,0.03) 0%, rgba(4,7,15,0.95) 100%);
+        overflow: hidden;
+        margin: 0 auto;
+        box-shadow: 0 0 30px rgba(0,0,0,0.85);
     }
-    @keyframes sniffer-pulse {
-        0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-        70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    .radar-sweep {
+        width: 100%;
+        height: 100%;
+        background: conic-gradient(from 0deg, rgba(0, 242, 254, 0.35) 0deg, transparent 70deg, transparent 360deg);
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: rotate-radar 3.2s linear infinite;
+        transform-origin: center;
     }
-    
-    /* Cyber Threat Alerts Stream */
-    .cyber-feed-container {
-        max-height: 480px;
+    .radar-cross-h {
+        width: 100%;
+        height: 1px;
+        background: rgba(0, 242, 254, 0.12);
+        position: absolute;
+        top: 50%;
+        left: 0;
+    }
+    .radar-cross-v {
+        width: 1px;
+        height: 100%;
+        background: rgba(0, 242, 254, 0.12);
+        position: absolute;
+        top: 0;
+        left: 50%;
+    }
+    @keyframes rotate-radar {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    /* Tactical Alerts stream */
+    .forensic-alerts-feed {
+        max-height: 550px;
         overflow-y: auto;
-        padding-right: 8px;
+        padding-right: 6px;
     }
-    .feed-item {
-        background: rgba(15, 23, 42, 0.4);
+    .alert-card {
+        background: rgba(10, 15, 27, 0.55);
         border-left: 4px solid #3B82F6;
-        border-radius: 0 16px 16px 0;
-        padding: 18px;
-        margin-bottom: 14px;
-        border-top: 1px solid rgba(255, 255, 255, 0.04);
-        border-right: 1px solid rgba(255, 255, 255, 0.04);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        transition: all 0.2s ease;
+        border-top: 1px solid rgba(255, 255, 255, 0.02);
+        border-right: 1px solid rgba(255, 255, 255, 0.02);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        padding: 15px;
+        margin-bottom: 12px;
+        border-radius: 0 6px 6px 0;
+        transition: all 0.2s ease-in-out;
     }
-    .feed-item:hover {
-        background: rgba(30, 41, 59, 0.45);
+    .alert-card:hover {
+        background: rgba(15, 23, 42, 0.65);
         transform: translateX(4px);
     }
-    .feed-high {
-        border-left-color: #EF4444;
-        box-shadow: inset 4px 0 20px rgba(239, 68, 68, 0.05);
-    }
-    .feed-medium {
-        border-left-color: #F59E0B;
-        box-shadow: inset 4px 0 20px rgba(245, 158, 11, 0.05);
-    }
     
-    /* Badges */
-    .cyber-badge {
-        padding: 4px 10px;
-        border-radius: 8px;
-        font-size: 0.75rem;
+    .card-crit { border-left-color: #EF4444; box-shadow: inset 4px 0 20px rgba(239, 68, 68, 0.05); }
+    .card-high { border-left-color: #FF5E62; box-shadow: inset 4px 0 20px rgba(255, 94, 98, 0.04); }
+    .card-med { border-left-color: #FBBF24; box-shadow: inset 4px 0 20px rgba(251, 191, 36, 0.04); }
+    .card-low { border-left-color: #06B6D4; box-shadow: inset 4px 0 20px rgba(6, 182, 212, 0.04); }
+
+    .tag-sec {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.68rem;
+        padding: 2px 8px;
+        border-radius: 3px;
         font-weight: 700;
+        letter-spacing: 0.05em;
         text-transform: uppercase;
         display: inline-block;
-        margin-right: 8px;
+        border: 1px solid currentColor;
     }
-    .badge-high {
-        background: rgba(239, 68, 68, 0.15);
-        color: #F87171;
-        border: 1px solid rgba(239, 68, 68, 0.3);
+    .tag-crit { color: #EF4444; background: rgba(239, 68, 68, 0.08); }
+    .tag-high { color: #FF9900; background: rgba(255, 153, 0, 0.08); }
+    .tag-med { color: #FBBF24; background: rgba(251, 191, 36, 0.08); }
+    .tag-low { color: #06B6D4; background: rgba(6, 182, 212, 0.08); }
+
+    /* MITRE ATT&CK visual grids */
+    .mitre-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin-top: 15px;
     }
-    .badge-medium {
-        background: rgba(245, 158, 11, 0.15);
-        color: #FBBF24;
-        border: 1px solid rgba(245, 158, 11, 0.3);
-    }
-    
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-        background: rgba(2, 6, 17, 0.4);
-    }
-    ::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.1);
+    .mitre-card {
+        background: rgba(14, 22, 40, 0.5);
+        border: 1px solid rgba(0, 242, 254, 0.15);
         border-radius: 4px;
+        padding: 12px;
+        text-align: center;
     }
-    ::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.2);
+    .mitre-id {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.75rem;
+        color: #00F2FE;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+    .mitre-name {
+        font-size: 0.8rem;
+        color: #F8FAFC;
+        font-weight: 600;
     }
 
-    /* Integrated Image Styling */
-    .cyber-image-frame {
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 16px;
-        padding: 8px;
-        background: rgba(2, 6, 17, 0.4);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    /* Custom technical dividers */
+    .tech-line {
+        height: 1px;
+        background: linear-gradient(90deg, rgba(0,242,254,0.05) 0%, rgba(0,242,254,0.4) 50%, rgba(139,92,246,0.05) 100%);
+        margin: 25px 0;
+        position: relative;
     }
-    
-    /* Futuristic Table Override */
+    .tech-line::after {
+        content: '[ LAB FORENSIC PERIMETER SECURE ]';
+        position: absolute;
+        top: -7px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #020306;
+        padding: 0 12px;
+        color: #64748B;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.62rem;
+        letter-spacing: 0.15em;
+    }
+
+    /* Drag & Drop File Loader Override */
+    div[data-testid="stFileUploader"] {
+        background: rgba(10, 15, 27, 0.6) !important;
+        border: 1.5px dashed rgba(0, 242, 254, 0.3) !important;
+        border-radius: 6px !important;
+        padding: 15px !important;
+        transition: all 0.3s ease;
+    }
+    div[data-testid="stFileUploader"]:hover {
+        border-color: #00F2FE !important;
+        background: rgba(0, 242, 254, 0.03) !important;
+    }
+
+    /* Forensic Table Override */
     div[data-testid="stTable"] table {
-        background-color: rgba(30, 41, 59, 0.2) !important;
-        border: 1px solid rgba(255, 255, 255, 0.05) !important;
-        border-radius: 12px;
+        background-color: rgba(4, 7, 15, 0.6) !important;
+        border: 1px solid rgba(0, 242, 254, 0.15) !important;
+        border-collapse: collapse;
     }
     div[data-testid="stTable"] th {
-        background-color: rgba(15, 23, 42, 0.8) !important;
-        color: #94A3B8 !important;
-        font-family: 'Space Grotesk', sans-serif;
+        background: rgba(8, 14, 27, 0.9) !important;
+        border-bottom: 2px solid rgba(0, 242, 254, 0.3) !important;
+        color: #F8FAFC !important;
+        font-family: 'Orbitron', sans-serif !important;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
     }
 </style>
 """, unsafe_allow_html=True)
 
 
-class DashboardApp:
+class ForensicWorkstationApp:
     """
-    Renders the unified interactive front-end.
-    Provides live traffic monitoring, manual PCAP uploading analysis, and model training analytics.
+    Unified Offline Cybersecurity PCAP Reconnaissance Forensics Workstation.
+    Statically analyzes Wireshark capture packages.
     """
     def __init__(self):
         self.config = load_config()
         self.project_root = self.config.get("project_root", get_project_root())
-        self.alert_log_file = self.config.get("alerts", {}).get("alert_log_file", os.path.join(self.project_root, "logs", "alerts.log"))
-        self.metrics_file = os.path.join(self.project_root, "results", "model_metrics.json")
-        self.models_dir = os.path.join(self.project_root, "models")
-        
         self.available_models = ["random_forest", "xgboost", "svm", "isolation_forest"]
+        self.metrics_file = os.path.join(self.project_root, "results", "model_metrics.json")
 
     def load_metrics(self) -> Dict[str, Any]:
-        """
-        Loads pre-compiled model evaluation metrics.
-        """
         if os.path.exists(self.metrics_file):
             try:
                 with open(self.metrics_file, 'r') as f:
                     return json.load(f)
             except Exception as e:
-                st.error(f"Failed to read evaluation metrics: {e}")
+                st.error(f"Failed to read metrics database: {e}")
         return {}
 
-    def load_alerts(self) -> List[Dict[str, Any]]:
-        """
-        Reads the real-time threat detection alerts log file.
-        """
-        alerts = []
-        if os.path.exists(self.alert_log_file):
-            try:
-                with open(self.alert_log_file, 'r') as f:
-                    for line in f:
-                        if line.strip():
-                            alerts.append(json.loads(line.strip()))
-            except Exception as e:
-                st.error(f"Failed to read alert logs: {e}")
-        return alerts
+    def draw_hud_bar(self, filename: str, packets: int, anomalies: int, duration: float) -> None:
+        st.markdown(f"""
+        <div class="forensic-hud-bar">
+            <div class="hud-item"><span class="lbl">WORKSTATION:</span> <span class="val cyan-glow">PhantomTrace v3.0</span></div>
+            <div class="hud-item"><span class="lbl">PCAP LOADED:</span> <span class="val purple-glow">{filename}</span></div>
+            <div class="hud-item"><span class="lbl">PACKETS:</span> <span class="val cyan-glow">{packets} pkts</span></div>
+            <div class="hud-item"><span class="lbl">DURATION:</span> <span class="val cyan-glow">{duration:.2f}s</span></div>
+            <div class="hud-item"><span class="lbl">ANOMALIES:</span> <span class="val red-glow">{anomalies} DETECTED</span></div>
+            <div class="hud-item"><span class="lbl">RISK:</span> <span class="val red-glow">{"HIGH" if anomalies > 0 else "SECURE"}</span></div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    def bootstrap_mock_data(self) -> None:
-        """
-        Populates mock stats and metrics logs if uninitialized.
-        """
-        os.makedirs(os.path.join(self.project_root, "logs"), exist_ok=True)
-        os.makedirs(os.path.join(self.project_root, "results"), exist_ok=True)
+    def generate_radar_sweep_plot(self, reports: List[ForensicThreatReport]) -> plt.Figure:
+        fig, ax = plt.subplots(figsize=(6, 5), subplot_kw={'projection': 'polar'})
+        fig.patch.set_facecolor('none')
+        ax.set_facecolor('none')
         
-        if not os.path.exists(self.alert_log_file) or os.path.getsize(self.alert_log_file) == 0:
-            mock_alerts = [
-                {
-                    "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(time.time() - 3600)),
-                    "alert_id": "IDS-ALERT-1001",
-                    "severity": "HIGH",
-                    "threat_category": "Stealth Reconnaissance Scan",
-                    "detection_method": "ML Inference (Random Forest)",
-                    "source_ip": "192.168.1.187",
-                    "destination_ip": "192.168.1.254",
-                    "target_port": 80,
-                    "protocol": "TCP",
-                    "flow_statistics": {"packets": 2, "duration_seconds": 0.05, "syn_ratio": 1.0, "rst_ratio": 0.0},
-                    "host_context": {"port_entropy": 2.87, "destination_diversity": 12, "failed_flow_ratio": 0.95},
-                    "threat_confidence": 0.984,
-                    "trigger_evidence": ["ML Model Classification (Confidence: 98.4%)", "Critical Destination Port Entropy (2.87)", "Severe Failed Connection Rate (95.0%)"]
-                },
-                {
-                    "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(time.time() - 1800)),
-                    "alert_id": "IDS-ALERT-1002",
-                    "severity": "HIGH",
-                    "threat_category": "Stealth Reconnaissance Scan",
-                    "detection_method": "ML Inference (Isolation Forest)",
-                    "source_ip": "10.0.0.45",
-                    "destination_ip": "10.0.0.12",
-                    "target_port": 443,
-                    "protocol": "TCP",
-                    "flow_statistics": {"packets": 1, "duration_seconds": 0.0, "syn_ratio": 1.0, "rst_ratio": 0.0},
-                    "host_context": {"port_entropy": 3.41, "destination_diversity": 1, "failed_flow_ratio": 1.00},
-                    "threat_confidence": 0.891,
-                    "trigger_evidence": ["ML Model Anomaly Detected", "Severe Destination Port Entropy (3.41)"]
-                },
-                {
-                    "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(time.time() - 300)),
-                    "alert_id": "IDS-ALERT-1003",
-                    "severity": "MEDIUM",
-                    "threat_category": "Stealth Reconnaissance Scan",
-                    "detection_method": "Behavioral Heuristics",
-                    "source_ip": "192.168.43.92",
-                    "destination_ip": "192.168.43.1",
-                    "target_port": 22,
-                    "protocol": "TCP",
-                    "flow_statistics": {"packets": 3, "duration_seconds": 1.25, "syn_ratio": 0.67, "rst_ratio": 0.33},
-                    "host_context": {"port_entropy": 1.95, "destination_diversity": 4, "failed_flow_ratio": 0.75},
-                    "threat_confidence": 0.58,
-                    "trigger_evidence": ["Elevated Failed Connection Rate (75.0%)", "Moderate Destination Port Entropy (1.95)"]
-                }
-            ]
-            with open(self.alert_log_file, 'w') as f:
-                for a in mock_alerts:
-                    f.write(json.dumps(a) + "\n")
-                    
-        if not os.path.exists(self.metrics_file):
-            mock_metrics = {
-                "random_forest": {
-                    "accuracy": 0.992, "precision": 0.985, "recall": 0.991, "f1_score": 0.988, "auc": 0.998,
-                    "confusion_matrix": [[1200, 3], [2, 240]]
-                },
-                "xgboost": {
-                    "accuracy": 0.995, "precision": 0.992, "recall": 0.992, "f1_score": 0.992, "auc": 0.999,
-                    "confusion_matrix": [[1201, 2], [2, 240]]
-                },
-                "svm": {
-                    "accuracy": 0.978, "precision": 0.965, "recall": 0.970, "f1_score": 0.967, "auc": 0.989,
-                    "confusion_matrix": [[1195, 8], [7, 235]]
-                },
-                "isolation_forest": {
-                    "accuracy": 0.912, "precision": 0.885, "recall": 0.892, "f1_score": 0.888, "auc": 0.932,
-                    "confusion_matrix": [[1150, 53], [26, 216]]
-                }
-            }
-            with open(self.metrics_file, 'w') as f:
-                json.dump(mock_metrics, f, indent=4)
+        ax.spines['polar'].set_color((0.0, 0.949, 0.996, 0.25))
+        ax.grid(True, color=(0.0, 0.949, 0.996, 0.12), linestyle='dashed')
+        ax.tick_params(colors=(0.0, 0.949, 0.996, 0.55), labelsize=7)
+        
+        theta = np.linspace(0, 2*np.pi, 100)
+        ax.fill_between(theta, 0, 95, color=(0.0, 0.949, 0.996, 0.025))
+        
+        # Plot parsed threat reports as blips
+        r_blips = []
+        theta_blips = []
+        color_blips = []
+        
+        # Compile threat anomalies
+        anomalies = [r for r in reports if r.severity in ["CRITICAL", "HIGH", "MEDIUM"]]
+        for i, a in enumerate(anomalies[:40]):  # Limit to 40 polar elements
+            # Generate polar coordinates dynamically based on target ports
+            r = min(90.0, 15.0 + (a.dst_port % 75.0))
+            t = (hash(a.src_ip) % 360) * (np.pi / 180.0)
+            
+            r_blips.append(r)
+            theta_blips.append(t)
+            
+            if a.severity == "CRITICAL":
+                color_blips.append("#EF4444")
+            elif a.severity == "HIGH":
+                color_blips.append("#FF5E62")
+            else:
+                color_blips.append("#FBBF24")
+                
+        if r_blips:
+            ax.scatter(theta_blips, r_blips, c=color_blips, s=80, alpha=0.9, edgecolors='#F8FAFC', linewidths=1.2, zorder=5)
+            
+        ax.set_title("Reconnaissance Coordinate Radar Map", color='#F8FAFC', fontname='Orbitron', fontsize=10, fontweight='bold', pad=15)
+        plt.tight_layout()
+        return fig
+
+    def generate_anomaly_timeline_plot(self, reports: List[ForensicThreatReport]) -> plt.Figure:
+        fig, ax = plt.subplots(figsize=(6, 3.5))
+        fig.patch.set_facecolor('none')
+        ax.set_facecolor('none')
+        
+        ax.spines['bottom'].set_color((1.0, 1.0, 1.0, 0.15))
+        ax.spines['left'].set_color((1.0, 1.0, 1.0, 0.15))
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.tick_params(colors='#94A3B8', labelsize=8)
+        ax.grid(True, color=(1.0, 1.0, 1.0, 0.04), linestyle='solid')
+        
+        if reports:
+            # Group anomalies chronologically in chunks
+            df = pd.DataFrame([r.to_dict() for r in reports])
+            df["time"] = pd.to_datetime(df["timestamp"])
+            df = df.sort_values("time")
+            # Build rolling count
+            df["anomaly_cum"] = (df["ml_confidence"] > 0.5).astype(int).cumsum()
+            
+            ax.plot(df["time"], df["anomaly_cum"], color='#8B5CF6', linewidth=2.5, label='Recon Infiltration Vector')
+            ax.fill_between(df["time"], 0, df["anomaly_cum"], color=(0.545, 0.361, 0.965, 0.12))
+            
+        ax.legend(facecolor='#060913', edgecolor=(1.0, 1.0, 1.0, 0.1), labelcolor='#E2E8F0', fontsize=8)
+        ax.set_title("Chronological Behavioral Escalation", color='#F8FAFC', fontname='Orbitron', fontsize=10, fontweight='bold')
+        plt.tight_layout()
+        return fig
 
     def draw_sidebar(self) -> Tuple[str, str]:
-        """
-        Renders left navigation layout.
-        """
         with st.sidebar:
-            st.markdown("<h2 style='text-align: center; margin-top: 20px; margin-bottom: 0;'>🛡️ AEGIS AI</h2>", unsafe_allow_html=True)
-            st.markdown("<p style='text-align: center; color: #4FACFE; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 30px;'>Stealth IDS Command Center</p>", unsafe_allow_html=True)
+            st.markdown("<h2 style='text-align: center; margin-top: 15px; margin-bottom: 0;'>👻 PhantomTrace</h2>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #00F2FE; font-size: 0.65rem; font-family:\"Orbitron\",sans-serif; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 25px;'>Stealth Forensics Platform</p>", unsafe_allow_html=True)
             
             navigation = st.radio(
-                "System Navigation",
-                ["Live Threat Monitor", "Offline PCAP Analyzer", "ML Engine & Diagnostics"],
+                "DECK SECTIONS",
+                [
+                    "PCAP Upload Center", 
+                    "Forensic Overview", 
+                    "MITRE ATT&CK Mapping", 
+                    "ML Analysis Diagnostics",
+                    "Settings & Utilities"
+                ],
                 key="nav_selection"
             )
             
-            st.markdown("<br><hr style='border-top: 1px solid rgba(255,255,255,0.08);'><br>", unsafe_allow_html=True)
-            st.markdown("<h4>Engine Settings</h4>", unsafe_allow_html=True)
+            st.markdown("<br><hr style='border-top: 1px solid rgba(0,242,254,0.15);'><br>", unsafe_allow_html=True)
+            st.markdown("<h4>FORENSIC CLASSIFIER</h4>", unsafe_allow_html=True)
             sel_model = st.selectbox(
-                "Inference Engine Classifier",
+                "Analysis Inference Engine",
                 self.available_models,
                 index=0
             )
             
-            st.markdown("<br><hr style='border-top: 1px solid rgba(255,255,255,0.08);'><br>", unsafe_allow_html=True)
-            if st.button("Generate Synthetic Scan PCAP"):
-                st.info("Creating a synthetic TCP/IP capture file in `pcaps/synthetic_scan.pcap`...")
-                self.create_mock_pcap_file()
-                st.success("Successfully created `pcaps/synthetic_scan.pcap`!")
-                
+            st.markdown("<br><hr style='border-top: 1px solid rgba(0,242,254,0.15);'><br>", unsafe_allow_html=True)
+            st.markdown("<p style='font-size:0.75rem; color:#64748B; font-family:\"JetBrains Mono\"; text-align:center;'>LAB OPERATOR LEVEL 4 // CLASSIFIED SESSIONS</p>", unsafe_allow_html=True)
+            
             return navigation, sel_model
 
     def create_mock_pcap_file(self) -> None:
-        """
-        Writes a valid basic mock PCAP using Scapy for testing components.
-        """
         try:
             from scapy.all import IP, TCP, wrpcap
             pkts = []
             base_time = time.time()
-            
-            # Normal flows
-            for i in range(10):
-                sport = 49000 + i
-                pkts.append(IP(src="192.168.1.10", dst="8.8.8.8")/TCP(sport=sport, dport=80, flags="S"))
-                pkts[-1].time = base_time + (i * 0.2)
-                pkts.append(IP(src="8.8.8.8", dst="192.168.1.10")/TCP(sport=80, dport=sport, flags="SA"))
-                pkts[-1].time = base_time + (i * 0.2) + 0.02
-                pkts.append(IP(src="192.168.1.10", dst="8.8.8.8")/TCP(sport=sport, dport=80, flags="A"))
-                pkts[-1].time = base_time + (i * 0.2) + 0.04
-                
-            # Scan flows (Attacker: 192.168.1.187 targeting victim 192.168.1.5 ports 20-50)
-            for i in range(30):
+
+            # Normal flows: 12 bidirectional TCP handshakes
+            for i in range(12):
+                sport = 49100 + i
+                pkt_syn = IP(src="192.168.1.10", dst="8.8.8.8")/TCP(sport=sport, dport=80, flags="S")
+                pkt_syn.time = base_time + i * 0.15
+                pkts.append(pkt_syn)
+                pkt_synack = IP(src="8.8.8.8", dst="192.168.1.10")/TCP(sport=80, dport=sport, flags="SA")
+                pkt_synack.time = base_time + i * 0.15 + 0.02
+                pkts.append(pkt_synack)
+                pkt_ack = IP(src="192.168.1.10", dst="8.8.8.8")/TCP(sport=sport, dport=80, flags="A")
+                pkt_ack.time = base_time + i * 0.15 + 0.04
+                pkts.append(pkt_ack)
+
+            # TCP SYN Scan attacker: 25 half-open probes
+            for i in range(25):
                 target_port = 20 + i
-                pkts.append(IP(src="192.168.1.187", dst="192.168.1.5")/TCP(sport=35000+i, dport=target_port, flags="S"))
-                pkts[-1].time = base_time + 5.0 + (i * 0.5)
-                
+                pkt = IP(src="192.168.1.187", dst="192.168.1.5")/TCP(sport=38200 + i, dport=target_port, flags="S")
+                pkt.time = base_time + 4.0 + i * 0.4
+                pkts.append(pkt)
+
             out_path = os.path.join(self.project_root, "pcaps", "synthetic_scan.pcap")
             os.makedirs(os.path.dirname(out_path), exist_ok=True)
             wrpcap(out_path, pkts)
         except Exception as e:
-            st.error(f"Failed to generate synthetic PCAP: {e}")
+            st.error(f"Failed to generate synthetic attack capture: {e}")
 
-    def render_live_monitor(self, active_model: str) -> None:
-        """
-        Renders live monitoring view.
-        """
-        st.markdown("<div class='neon-title'>⚔️ Live Threat Stream Console</div>", unsafe_allow_html=True)
-        
-        # Pulsing active status bar
-        st.markdown(f"""
-        <div class='sniffer-status-bar'>
-            <div class='status-dot'></div>
-            <span style='font-size: 0.85rem; font-weight: 700; color: #10B981; text-transform: uppercase; letter-spacing: 0.05em;'>
-                Active Security Stream — ML Model Engine: {active_model.upper()}
-            </span>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        alerts = self.load_alerts()
-        
-        total_alerts = len(alerts)
-        unique_attackers = len(set(a["source_ip"] for a in alerts)) if alerts else 0
-        critical_alarms = sum(1 for a in alerts if a.get("severity", "LOW") == "HIGH") if alerts else 0
-        avg_confidence = np.mean([a.get("threat_confidence", 0.0) for a in alerts]) if alerts else 0.0
-        
-        # Stat cards row in premium glassmorphic grid
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            st.markdown(f"""
-            <div class='cyber-card'>
-                <div class='metric-title'>Total Alarms Triggers</div>
-                <div class='metric-value-neo val-cyan'>{total_alerts}</div>
-            </div>
-            """, unsafe_allow_html=True)
-        with col2:
-            st.markdown(f"""
-            <div class='cyber-card'>
-                <div class='metric-title'>Host Scanner Entities</div>
-                <div class='metric-value-neo val-purple'>{unique_attackers}</div>
-            </div>
-            """, unsafe_allow_html=True)
-        with col3:
-            st.markdown(f"""
-            <div class='cyber-card cyber-card-danger'>
-                <div class='metric-title'>High Severity Hazards</div>
-                <div class='metric-value-neo val-red'>{critical_alarms}</div>
-            </div>
-            """, unsafe_allow_html=True)
-        with col4:
-            st.markdown(f"""
-            <div class='cyber-card'>
-                <div class='metric-title'>Avg Threat Intensity</div>
-                <div class='metric-value-neo val-gold'>{avg_confidence*100:.1f}%</div>
-            </div>
-            """, unsafe_allow_html=True)
-            
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        main_col, side_col = st.columns([3, 2])
-        
-        with main_col:
-            st.markdown("<h3>Detailed Incident Activity Log</h3>", unsafe_allow_html=True)
-            if alerts:
-                df_alerts = pd.DataFrame(alerts[::-1])
-                display_cols = ["timestamp", "severity", "source_ip", "destination_ip", "target_port", "protocol", "detection_method", "threat_confidence"]
-                df_display = df_alerts[display_cols].copy()
-                df_display["threat_confidence"] = df_display["threat_confidence"].map(lambda c: f"{c*100:.2f}%")
-                
-                st.dataframe(df_display, use_container_width=True)
-                
-                st.markdown("---")
-                chart_col1, chart_col2 = st.columns(2)
-                with chart_col1:
-                    st.markdown("#### Scanner Distribution Mapping")
-                    attacker_counts = df_alerts["source_ip"].value_counts()
-                    st.bar_chart(attacker_counts)
-                with chart_col2:
-                    st.markdown("#### Targeted Port Frequency")
-                    port_counts = df_alerts["target_port"].value_counts()
-                    st.bar_chart(port_counts)
-            else:
-                st.info("No threat incidents recorded in alerts.log yet. Make sure a live/synthetic scan is active.")
-                
-        with side_col:
-            st.markdown("<h3>Futuristic Alerts Live Feed</h3>", unsafe_allow_html=True)
-            if alerts:
-                # Beautiful scrollable alert feed
-                st.markdown("<div class='cyber-feed-container'>", unsafe_allow_html=True)
-                for alert in alerts[::-1][:10]:  # Limit to top 10 recent alerts
-                    sev = alert.get("severity", "LOW")
-                    feed_class = "feed-high" if sev == "HIGH" else "feed-medium"
-                    badge_class = "badge-high" if sev == "HIGH" else "badge-medium"
-                    
-                    evidence_str = "".join([f"<li>{ev}</li>" for ev in alert.get("trigger_evidence", ["Stealth SCAN signature detected"])])
-                    
-                    st.markdown(f"""
-                    <div class='feed-item {feed_class}'>
-                        <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;'>
-                            <span class='cyber-badge {badge_class}'>{sev} Severity</span>
-                            <span style='font-family: "JetBrains Mono", monospace; font-size: 0.75rem; color: #64748B;'>{alert['timestamp']}</span>
-                        </div>
-                        <div style='font-size: 1.05rem; font-weight: 700; color: #F8FAFC; margin-bottom: 4px;'>
-                            {alert.get('threat_category', 'Stealth Reconnaissance Scan')}
-                        </div>
-                        <div style='font-size: 0.85rem; color: #94A3B8; font-family: "JetBrains Mono", monospace; margin-bottom: 10px;'>
-                            SOURCE IP: <span style='color: #4FACFE;'>{alert['source_ip']}</span> -> TARGET IP: <span style='color: #FBBF24;'>{alert['destination_ip']}:{alert['target_port']}</span> ({alert['protocol']})
-                        </div>
-                        <div style='font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.03);'>
-                            <span style='font-weight: 600; color: #38BDF8;'>Correlated Evidences:</span>
-                            <ul style='margin: 4px 0 0 15px; padding: 0; color: #E2E8F0; list-style-type: square;'>
-                                {evidence_str}
-                            </ul>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-            else:
-                st.info("Log console empty. Run real-time scans to pipe alerts.")
-
-    def render_pcap_analyzer(self, active_model: str) -> None:
-        """
-        Allows drag-and-drop offline PCAP file threat analysis.
-        """
-        st.markdown("<div class='neon-title'>📁 High-Tech PCAP Analyzer</div>", unsafe_allow_html=True)
-        st.markdown("<p style='color: #94A3B8; font-size: 1.05rem; margin-bottom: 25px;'>Upload any standard standard packet capture file to run real-time behavioral sliding feature extractions and ML model predictions.</p>", unsafe_allow_html=True)
-        
-        # Cyber upload wrapper
-        st.markdown("<div class='cyber-card'>", unsafe_allow_html=True)
-        uploaded_file = st.file_uploader("Drop your security captures (.pcap / .cap)", type=["pcap", "cap"])
-        st.markdown("</div>", unsafe_allow_html=True)
-        
-        if uploaded_file is not None:
-            temp_path = os.path.join(self.project_root, "pcaps", "uploaded_temp.pcap")
-            os.makedirs(os.path.dirname(temp_path), exist_ok=True)
-            with open(temp_path, "wb") as f:
-                f.write(uploaded_file.getbuffer())
-                
-            st.success("PCAP Capture File Loaded successfully!")
-            
-            with st.spinner("Decoding packets and tracking connection session states..."):
-                from scapy.all import PcapReader
-                from capture.sniffer import PacketSniffer
-                
-                tracker = FlowTracker(flow_timeout_seconds=99999)  # Infinite timeout for batch parse
-                
-                try:
-                    with PcapReader(temp_path) as reader:
-                        for pkt in reader:
-                            parsed = PacketSniffer.parse_packet(pkt)
-                            if parsed:
-                                tracker.handle_packet(parsed)
-                except Exception as e:
-                    st.error(f"Failed to read PCAP: {e}")
-                    return
-                    
-                flows = tracker.get_active_sessions()
-                if not flows:
-                    st.error("No valid IP/TCP/UDP packets found in the uploaded PCAP file.")
-                    return
-                    
-                extractor = FeatureExtractor()
-                df_features = extractor.extract_features(flows)
-                
-            with st.spinner("Applying scale standardizer & executing model classifier predictions..."):
-                inference_engine = MLInferenceEngine(model_name=active_model)
-                
-                preds = []
-                confidences = []
-                for _, row in df_features.iterrows():
-                    feat_dict = row.to_dict()
-                    pred, conf = inference_engine.predict(feat_dict)
-                    preds.append(pred)
-                    confidences.append(conf)
-                    
-                df_features["is_anomaly"] = preds
-                df_features["confidence"] = confidences
-                
-            anomalous_flows = df_features[df_features["is_anomaly"] == 1]
-            total_flows = len(df_features)
-            anomaly_count = len(anomalous_flows)
-            
-            st.markdown("<br><h3>Threat Classification Report Summary</h3>", unsafe_allow_html=True)
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                st.markdown(f"""
-                <div class='cyber-card'>
-                    <div class='metric-title'>Flow Sessions Parsed</div>
-                    <div class='metric-value-neo val-cyan'>{total_flows}</div>
-                </div>
-                """, unsafe_allow_html=True)
-            with col2:
-                st.markdown(f"""
-                <div class='cyber-card cyber-card-danger'>
-                    <div class='metric-title'>Stealth Recon Incidents</div>
-                    <div class='metric-value-neo val-red'>{anomaly_count}</div>
-                </div>
-                """, unsafe_allow_html=True)
-            with col3:
-                rate = (anomaly_count / total_flows) * 100 if total_flows > 0 else 0
-                st.markdown(f"""
-                <div class='cyber-card'>
-                    <div class='metric-title'>Host Anomaly Ratio</div>
-                    <div class='metric-value-neo val-gold'>{rate:.2f}%</div>
-                </div>
-                """, unsafe_allow_html=True)
-                
-            st.markdown("<br>", unsafe_allow_html=True)
-            if anomaly_count > 0:
-                st.markdown("#### Confirmed Anomalous SCAN Sessions")
-                disp_cols = ["src_ip", "dst_ip", "dst_port", "flow_syn_ratio", "host_port_entropy", "host_dst_diversity", "confidence"]
-                st.dataframe(anomalous_flows[disp_cols].sort_values(by="confidence", ascending=False), use_container_width=True)
-                
-                csv_data = anomalous_flows.to_csv(index=False).encode('utf-8')
-                
-                st.markdown("<br>", unsafe_allow_html=True)
-                st.download_button(
-                    label="📥 Download Threat Forensic Report (CSV)",
-                    data=csv_data,
-                    file_name="Forensic_Threat_Report.csv",
-                    mime="text/csv"
-                )
-            else:
-                st.balloons()
-                st.success("Clean Capture! No anomalies or stealth reconnaissance scans were detected in this PCAP.")
-
-    def render_diagnostics(self) -> None:
-        """
-        Renders Model Management & diagnostic plots.
-        """
-        st.markdown("<div class='neon-title'>🧠 ML Engine Diagnostics & Performance</div>", unsafe_allow_html=True)
-        st.markdown("<p style='color: #94A3B8; font-size: 1.05rem; margin-bottom: 25px;'>Analyze offline evaluation reports, roc curve graphs, and relative information gain importance values for features.</p>", unsafe_allow_html=True)
-        
-        metrics = self.load_metrics()
-        if not metrics:
-            st.warning("No evaluation metrics database found. Retrain your models to populate diagnostics.")
-            return
-            
-        st.markdown("<h3>Comparative Multi-Classifier Evaluation Matrix</h3>", unsafe_allow_html=True)
-        
-        metric_rows = []
-        for name, data in metrics.items():
-            metric_rows.append({
-                "Classifier Model": name.replace('_', ' ').upper(),
-                "Accuracy": f"{data.get('accuracy', 0.0)*100:.2f}%",
-                "Precision": f"{data.get('precision', 0.0)*100:.2f}%",
-                "Recall (Detection Rate)": f"{data.get('recall', 0.0)*100:.2f}%",
-                "F1-Score": f"{data.get('f1_score', 0.0)*100:.2f}%",
-                "ROC-AUC": f"{data.get('auc', 0.0):.4f}" if "auc" in data else "N/A"
-            })
-        st.table(pd.DataFrame(metric_rows))
-        
-        st.markdown("<br><hr style='border-top: 1px solid rgba(255,255,255,0.08);'><br>", unsafe_allow_html=True)
-        st.markdown("<h3>Pre-rendered Diagnostic Diagnostic Visualizations</h3>", unsafe_allow_html=True)
-        
-        plot_col1, plot_col2 = st.columns(2)
-        
-        with plot_col1:
-            st.markdown("#### Receiver Operating Characteristic (ROC) curves")
-            roc_img_path = os.path.join(self.project_root, "results", "roc_curves.png")
-            if os.path.exists(roc_img_path):
-                st.markdown("<div class='cyber-image-frame'>", unsafe_allow_html=True)
-                st.image(roc_img_path, caption="Comparative ROC curves")
-                st.markdown("</div>", unsafe_allow_html=True)
-            else:
-                fig, ax = plt.subplots(figsize=(6, 5))
-                ax.plot([0, 1], [0, 1], 'k--', label="Random Guess")
-                ax.set_xlabel("FPR")
-                ax.set_ylabel("TPR")
-                ax.set_title("No Pre-rendered ROC Graph Available")
-                st.pyplot(fig)
-                
-        with plot_col2:
-            st.markdown("#### Relative Feature Significances")
-            fi_img_path = os.path.join(self.project_root, "results", "random_forest_feature_importance.png")
-            if os.path.exists(fi_img_path):
-                st.markdown("<div class='cyber-image-frame'>", unsafe_allow_html=True)
-                st.image(fi_img_path, caption="Information Gain significance values")
-                st.markdown("</div>", unsafe_allow_html=True)
-            else:
-                fig, ax = plt.subplots(figsize=(6, 5))
-                ax.set_title("No Pre-rendered Feature Significance Available")
-                st.pyplot(fig)
 
     def run(self) -> None:
-        self.bootstrap_mock_data()
         navigation, active_model = self.draw_sidebar()
         
-        if navigation == "Live Threat Monitor":
-            self.render_live_monitor(active_model)
-        elif navigation == "Offline PCAP Analyzer":
-            self.render_pcap_analyzer(active_model)
-        elif navigation == "ML Engine & Diagnostics":
-            self.render_diagnostics()
+        st.markdown("""
+        <div class="lab-header">
+            <h2>🔬 OFFLINE AI-POWERED PCAP RECONNAISSANCE FORENSICS</h2>
+            <div class="lab-subtitle">Post-capture Wireshark forensic investigation & anomalous behavioral intelligence laboratory</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # 1. PCAP Upload Center
+        if navigation == "PCAP Upload Center":
+            st.markdown("<div class='cyber-panel'><h4>1. WIRESHARK PCAP FORENSIC LOAD PANEL</h4>", unsafe_allow_html=True)
+            st.markdown("<p style='color:#94A3B8;'>Drag and drop any standard packet capture file (.pcap or .pcapng) below to execute feature preprocessing, scale standardizations, and multi-model machine learning scans.</p>", unsafe_allow_html=True)
+            
+            uploaded_file = st.file_uploader("Drop your security captures (.pcap / .pcapng / .cap)", type=["pcap", "pcapng", "cap"])
+            st.markdown("</div>", unsafe_allow_html=True)
+            
+            if uploaded_file is not None:
+                temp_pcap_path = os.path.join(self.project_root, "pcaps", "uploaded_temp.pcap")
+                os.makedirs(os.path.dirname(temp_pcap_path), exist_ok=True)
+                with open(temp_pcap_path, "wb") as f:
+                    f.write(uploaded_file.getbuffer())
+                    
+                st.success("PCAP Capture File Loaded successfully! Switch to the 'Forensic Overview' or 'MITRE ATT&CK Mapping' tabs in the sidebar to review details.")
+                st.session_state["loaded_pcap_path"] = temp_pcap_path
+                st.session_state["loaded_filename"] = uploaded_file.name
+            else:
+                st.info("Drag and load a network capture to launch forensic analytics.")
+                
+        # Load and Cache PCAP analysis
+        pcap_path = st.session_state.get("loaded_pcap_path")
+        filename = st.session_state.get("loaded_filename", "No PCAP Loaded")
+        
+        if pcap_path and os.path.exists(pcap_path):
+            with st.spinner("Decoding packets and extracting connection sessions..."):
+                # Static load & cached analysis
+                if "cached_reports" not in st.session_state or st.session_state.get("cached_pcap_path") != pcap_path or st.session_state.get("cached_model") != active_model:
+                    try:
+                        packets, metadata = PCAPParser.load_pcap(pcap_path)
+                        flows = StaticFlowTracker.track_flows(packets)
+                        
+                        extractor = FeatureExtractor()
+                        df_features = extractor.extract_features(flows)
+                        
+                        analyzer = ThreatAnalyzer(model_name=active_model)
+                        reports = analyzer.analyze_flows(flows, df_features)
+                        
+                        st.session_state["cached_reports"] = reports
+                        st.session_state["cached_metadata"] = metadata
+                        st.session_state["cached_pcap_path"] = pcap_path
+                        st.session_state["cached_model"] = active_model
+                    except Exception as e:
+                        st.error(f"Failed parsing connection sessions: {e}")
+                        return
+                        
+            reports = st.session_state["cached_reports"]
+            metadata = st.session_state["cached_metadata"]
+            
+            anomalies = [r for r in reports if r.ml_prediction == 1 or r.severity in ["CRITICAL", "HIGH", "MEDIUM"]]
+            anom_count = len(anomalies)
+            
+            # Draw HUD HUD bar
+            self.draw_hud_bar(filename, metadata.get("total_packets", 0), anom_count, metadata.get("duration_seconds", 0.0))
+            
+            if navigation == "Forensic Overview":
+                # High-level statistics counts
+                c1, c2, c3, c4 = st.columns(4)
+                with c1:
+                    st.markdown(f"""
+                    <div class="cyber-panel">
+                        <div class="hud-label">TOTAL PACKETS PARSED</div>
+                        <div class="hud-value-large val-cyan">{metadata.get('total_packets', 0)}</div>
+                        <div style="font-size:0.75rem; color:#64748B;">Reconstructed offline packets</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                with c2:
+                    st.markdown(f"""
+                    <div class="cyber-panel">
+                        <div class="hud-label">SESSIONS EXTRAS</div>
+                        <div class="hud-value-large val-purple">{len(reports)}</div>
+                        <div style="font-size:0.75rem; color:#64748B;">Bidirectional flow sessions</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                with c3:
+                    st.markdown(f"""
+                    <div class="cyber-panel panel-critical">
+                        <div class="hud-label">RECON ANOMALIES</div>
+                        <div class="hud-value-large val-red">{anom_count}</div>
+                        <div style="font-size:0.75rem; color:#EF4444;">Host scan events resolved</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                with c4:
+                    rate = (anom_count / len(reports)) * 100 if len(reports) > 0 else 0.0
+                    st.markdown(f"""
+                    <div class="cyber-panel">
+                        <div class="hud-label">ANOMALOUS RATIO</div>
+                        <div class="hud-value-large val-gold">{rate:.1f}%</div>
+                        <div style="font-size:0.75rem; color:#64748B;">Proportion of scanning profiles</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                st.markdown("<div class='tech-line'></div>", unsafe_allow_html=True)
+                
+                # Visual charts
+                g1, g2, g3 = st.columns([2, 2, 3])
+                with g1:
+                    st.markdown("<div class='cyber-panel'><h4 style='margin-bottom:15px; text-align:center;'>RECON VECTORS</h4>", unsafe_allow_html=True)
+                    st.pyplot(self.generate_radar_sweep_plot(reports))
+                    st.markdown("</div>", unsafe_allow_html=True)
+                with g2:
+                    st.markdown("<div class='cyber-panel'><h4>PROTOCOL RATIO BREAKDOWN</h4>", unsafe_allow_html=True)
+                    fig, ax = plt.subplots(figsize=(5, 4.3))
+                    fig.patch.set_facecolor('none')
+                    ax.set_facecolor('none')
+                    
+                    p_data = metadata.get("protocols", {"TCP": 0, "UDP": 0, "Other": 0})
+                    ax.pie(p_data.values(), labels=p_data.keys(), colors=["#EF4444", "#00F2FE", "#8B5CF6"], autopct='%1.1f%%', textprops={'color': '#F8FAFC', 'fontsize': 8}, wedgeprops={'edgecolor': 'none'})
+                    ax.set_title("Decoded Protocol Volume", color='#F8FAFC', fontname='Orbitron', fontsize=10, fontweight='bold')
+                    plt.tight_layout()
+                    st.pyplot(fig)
+                    st.markdown("</div>", unsafe_allow_html=True)
+                with g3:
+                    st.markdown("<div class='cyber-panel'>", unsafe_allow_html=True)
+                    st.pyplot(self.generate_anomaly_timeline_plot(reports))
+                    st.markdown("</div>", unsafe_allow_html=True)
+                    
+                # Threat Feed Details
+                st.markdown("<div class='tech-line'></div>", unsafe_allow_html=True)
+                mc1, mc2 = st.columns([3, 1])
+                with mc1:
+                    st.markdown("<h3>Detailed Forensic Threat Feed</h3>", unsafe_allow_html=True)
+                    st.markdown("<div class='forensic-alerts-feed'>", unsafe_allow_html=True)
+                    if anomalies:
+                        for a in anomalies:
+                            sev = a.severity
+                            card_class = "card-crit" if sev == "CRITICAL" else ("card-high" if sev == "HIGH" else "card-med")
+                            tag_class = "tag-crit" if sev == "CRITICAL" else ("tag-high" if sev == "HIGH" else "tag-med")
+                            
+                            ev_list = "".join([f"<li style='margin-bottom:2px;'>{ev}</li>" for ev in a.evidence])
+                            
+                            st.markdown(f"""
+                            <div class="alert-card {card_class}">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                    <div>
+                                        <span class="tag-sec {tag_class}">{sev} RISK</span>
+                                        <span style="font-family:'Orbitron'; font-size:0.95rem; font-weight:700; color:#F8FAFC; margin-left:12px;">
+                                            {a.scan_category}
+                                        </span>
+                                    </div>
+                                    <span style="font-family:'JetBrains Mono'; font-size:0.75rem; color:#64748B;">{a.timestamp}</span>
+                                </div>
+                                <div style="font-family:'JetBrains Mono'; font-size:0.82rem; color:#E2E8F0; margin-bottom:10px; background:rgba(0,0,0,0.22); padding:8px 12px; border-radius:4px;">
+                                    SOURCE IP: <span style="color:#00F2FE; font-weight:700;">{a.src_ip}</span> // 
+                                    DESTINATION IP: <span style="color:#FBBF24; font-weight:700;">{a.dst_ip}:{a.dst_port}</span> // 
+                                    PROTO: <span style="color:#A78BFA; font-weight:700;">{a.proto}</span>
+                                </div>
+                                <div style="font-size:0.8rem;">
+                                    <span style="color:#EF4444; font-weight:700; font-family:'Orbitron';">FORENSIC TELEMETRY EVIDENCE:</span>
+                                    <ul style="margin:4px 0 0 16px; padding:0; color:#94A3B8; list-style-type:square;">
+                                        {ev_list}
+                                    </ul>
+                                </div>
+                                <div style="margin-top:8px; text-align:right; font-family:'Orbitron'; font-size:0.72rem; color:#38BDF8; letter-spacing:0.05em;">
+                                    SCORING METHOD: <span style="font-weight:700;">ML CLASSIFICATION [CONF: {a.ml_confidence*100:.1f}%] // COMPOSITE THREAT SCORE: {a.threat_score:.1f}%</span>
+                                </div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                    else:
+                        st.success("Perimeter Secure! No suspicious stealth reconnaissance behaviors identified in this capture.")
+                    st.markdown("</div>", unsafe_allow_html=True)
+                    
+                with mc2:
+                    st.markdown("<div class='cyber-panel'><h4>SUSPICIOUS HOST TRACKING</h4>", unsafe_allow_html=True)
+                    if anomalies:
+                        df_anom = pd.DataFrame([a.to_dict() for a in anomalies])
+                        st.markdown("📈 **Top Scan Vectors**")
+                        st.dataframe(df_anom["scan_category"].value_counts(), use_container_width=True)
+                        
+                        st.markdown("🌐 **Top Suspect IPs**")
+                        st.dataframe(df_anom["src_ip"].value_counts(), use_container_width=True)
+                    else:
+                        st.info("No host anomalies detected.")
+                    st.markdown("</div>", unsafe_allow_html=True)
+                    
+            elif navigation == "MITRE ATT&CK Mapping":
+                st.markdown("<h3>Forensic MITRE ATT&CK Matrix Mapping</h3>", unsafe_allow_html=True)
+                st.markdown("<p style='color:#94A3B8; margin-bottom:20px;'>Reconstructed scan events mapped directly to standard enterprise MITRE ATT&CK tactics.</p>", unsafe_allow_html=True)
+                
+                # Dynamic compilation of MITRE counts
+                mitre_counts = {}
+                for a in anomalies:
+                    for m in a.mitre_mappings:
+                        mitre_counts[m] = mitre_counts.get(m, 0) + 1
+                        
+                st.markdown("<div class='cyber-panel'>", unsafe_allow_html=True)
+                if mitre_counts:
+                    st.markdown("<div class='mitre-grid'>", unsafe_allow_html=True)
+                    for tech, count in mitre_counts.items():
+                        tech_id = tech.split(" ")[0]
+                        tech_name = tech.replace(tech_id, "").strip()
+                        st.markdown(f"""
+                        <div class="mitre-card">
+                            <div class="mitre-id">{tech_id}</div>
+                            <div class="mitre-name">{tech_name}</div>
+                            <div style="font-size:0.75rem; color:#64748B; margin-top:8px;">Observed in <b>{count}</b> sessions</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+                else:
+                    st.info("No network reconnaissance sessions flagged to map to MITRE ATT&CK matrices.")
+                st.markdown("</div>", unsafe_allow_html=True)
+                
+                # Interactive export panel
+                st.markdown("<div class='tech-line'></div>", unsafe_allow_html=True)
+                st.markdown("<h3>Forensic dossier summary center</h3>", unsafe_allow_html=True)
+                
+                ec1, ec2, ec3 = st.columns(3)
+                
+                report_md = ForensicReporter.generate_markdown_summary(reports, metadata, active_model)
+                
+                with ec1:
+                    st.markdown("<div class='cyber-panel'>", unsafe_allow_html=True)
+                    st.markdown("📥 **FORENSIC DOSSIER**")
+                    st.download_button(
+                        label="Download Forensic dossier (TXT)",
+                        data=report_md,
+                        file_name="Forensic_Dossier_Report.txt",
+                        mime="text/plain"
+                    )
+                    st.markdown("</div>", unsafe_allow_html=True)
+                with ec2:
+                    st.markdown("<div class='cyber-panel'>", unsafe_allow_html=True)
+                    st.markdown("📊 **FLOW FEATURES (CSV)**")
+                    # Build CSV payload
+                    csv_rows = []
+                    for r in reports:
+                        row = r.to_dict()
+                        row["mitre_mappings"] = ", ".join(row["mitre_mappings"])
+                        row["evidence"] = "; ".join(row["evidence"])
+                        csv_rows.append(row)
+                    df_csv = pd.DataFrame(csv_rows)
+                    st.download_button(
+                        label="Download Threat CSV Data",
+                        data=df_csv.to_csv(index=False).encode('utf-8'),
+                        file_name="Forensic_Threat_Metrics.csv",
+                        mime="text/csv"
+                    )
+                    st.markdown("</div>", unsafe_allow_html=True)
+                with ec3:
+                    st.markdown("<div class='cyber-panel'>", unsafe_allow_html=True)
+                    st.markdown("🔌 **ALERTS LOG (JSON-L)**")
+                    json_lines = "\n".join([json.dumps(r.to_dict()) for r in reports])
+                    st.download_button(
+                        label="Download JSON Alerts Log",
+                        data=json_lines,
+                        file_name="Forensic_Alerts.json",
+                        mime="application/json"
+                    )
+                    st.markdown("</div>", unsafe_allow_html=True)
+                    
+            elif navigation == "ML Analysis Diagnostics":
+                st.markdown("<h3>ML Multi-Classifier Forensic Diagnostics</h3>", unsafe_allow_html=True)
+                
+                metrics = self.load_metrics()
+                if not metrics:
+                    st.warning("No model evaluation metrics database found. Run validate.py first to train models.")
+                else:
+                    st.markdown("<div class='cyber-panel'><h4>MULTI-MODEL CONFUSION SCORING MATRIX</h4>", unsafe_allow_html=True)
+                    metric_rows = []
+                    for name, data in metrics.items():
+                        metric_rows.append({
+                            "Classifier Model": name.replace('_', ' ').upper(),
+                            "Accuracy Score": f"{data.get('accuracy', 0.0)*100:.2f}%",
+                            "Precision Index": f"{data.get('precision', 0.0)*100:.2f}%",
+                            "Recall (Detection Rate)": f"{data.get('recall', 0.0)*100:.2f}%",
+                            "F1-Score Profile": f"{data.get('f1_score', 0.0)*100:.2f}%",
+                            "ROC-AUC Parameter": f"{data.get('auc', 0.0):.4f}" if "auc" in data else "N/A"
+                        })
+                    st.table(pd.DataFrame(metric_rows))
+                    st.markdown("</div>", unsafe_allow_html=True)
+                    
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.markdown("<div class='cyber-panel'><h4>RECEIVER OPERATING CHARACTERISTIC (ROC) SHAPES</h4>", unsafe_allow_html=True)
+                    roc_img_path = os.path.join(self.project_root, "results", "roc_curves.png")
+                    if os.path.exists(roc_img_path):
+                        st.markdown("<div class='cyber-image-frame'>", unsafe_allow_html=True)
+                        st.image(roc_img_path, caption="Comparative ROC curves")
+                        st.markdown("</div>", unsafe_allow_html=True)
+                    else:
+                        st.info("No ROC diagrams generated yet.")
+                    st.markdown("</div>", unsafe_allow_html=True)
+                with col2:
+                    st.markdown("<div class='cyber-panel'><h4>INFORMATION GAIN SIGNIFICANCE RATIOS</h4>", unsafe_allow_html=True)
+                    fi_img_path = os.path.join(self.project_root, "results", "random_forest_feature_importance.png")
+                    if os.path.exists(fi_img_path):
+                        st.markdown("<div class='cyber-image-frame'>", unsafe_allow_html=True)
+                        st.image(fi_img_path, caption="Ensemble information gain metrics")
+                        st.markdown("</div>", unsafe_allow_html=True)
+                    else:
+                        st.info("No feature importance diagrams generated yet.")
+                    st.markdown("</div>", unsafe_allow_html=True)
+                    
+            elif navigation == "Settings & Utilities":
+                st.markdown("<h3>Forensic Laboratory Utilities</h3>", unsafe_allow_html=True)
+                
+                st.markdown("<div class='cyber-panel'><h4>ACCUMULATION WINDOW ADJUSTMENT</h4>", unsafe_allow_html=True)
+                st.slider("Flow temporal window (seconds)", 5, 120, 30)
+                st.markdown("</div>", unsafe_allow_html=True)
+                
+                st.markdown("<div class='cyber-panel'><h4>SYNTHETIC PCAP GENERATOR</h4>", unsafe_allow_html=True)
+                st.markdown("<p style='color:#94A3B8;'>Generate a sample stealth TCP scan capture file containing 12 normal TCP handshake sessions and 25 half-open stealth reconnaissance probes targetingports 20-45.</p>", unsafe_allow_html=True)
+                if st.button("CREATE SYNTHETIC ATTACK PCAP"):
+                    self.create_mock_pcap_file()
+                    st.success("Successfully generated synthetic capture file inside 'pcaps/synthetic_scan.pcap'! You can now load this file in the PCAP Upload Center to visualize anomalies.")
+                st.markdown("</div>", unsafe_allow_html=True)
+        else:
+            st.info("🔬 Please navigate to the 'PCAP Upload Center' in the sidebar to drop your Wireshark capture package and begin forensic analysis.")
             
         st.markdown("""
-        <div class='footer'>
-            🛡️ AEGIS AI Cyber Defense Platform — Real-Time Streaming Reconnaissance Intrusion Detection System<br>
-            Developed using Python, Streamlit, Scapy, & Scikit-Learn
+        <div style="text-align: center; padding: 25px; color: #64748B; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; border-top: 1px dashed rgba(255,255,255,0.05); margin-top:40px;">
+            👻 PhantomTrace Digital Forensics Command Deck // SECURED OPERATOR SYSTEM // CLASSIFIED INTEL
         </div>
         """, unsafe_allow_html=True)
 
+def main():
+    app = ForensicWorkstationApp()
+    app.run()
 
 if __name__ == "__main__":
-    app = DashboardApp()
-    app.run()
+    main()

@@ -152,7 +152,7 @@ class RealTimeDetectorSystem:
         Coordinates and starts the packet sniffers and model evaluation threads.
         """
         logger.info("==========================================================")
-        logger.info("🛡️ Aegis AI - Running Real-Time Intrusion Detection System")
+        logger.info("👻 PhantomTrace - Running Real-Time Intrusion Detection System")
         logger.info(f"   Listening Interface: {self.interface} | Model: {self.model_name}")
         logger.info("==========================================================")
         
@@ -193,11 +193,11 @@ class RealTimeDetectorSystem:
             
             # Wait for consumer thread to flush pending packet queue elements
             analyzer_thread.join(timeout=2.0)
-            logger.info("Aegis AI System closed.")
+            logger.info("PhantomTrace System closed.")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Aegis AI - Real-time Network Intrusion Detection System CLI Launcher")
+    parser = argparse.ArgumentParser(description="PhantomTrace - Real-time Network Intrusion Detection System CLI Launcher")
     parser.add_argument("-i", "--interface", default="any", help="Network interface to capture live traffic (default: any)")
     parser.add_argument("-m", "--model", default="random_forest", choices=["random_forest", "xgboost", "svm", "isolation_forest"], help="Machine learning model to use (default: random_forest)")
     parser.add_argument("-d", "--duration", type=int, default=0, help="Run duration limit in seconds (default: 0 for continuous execution)")
