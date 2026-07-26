@@ -16,6 +16,7 @@ from flows.tracker import FlowTracker, FlowSession
 from features.extractor import FeatureExtractor
 from detection.engine import MLInferenceEngine
 from alerts.engine import AlertEngine
+from threat_analysis.behavioral_profile_engine import BehavioralProfileEngine
 
 logger = setup_logger("RealTimeDetectorSystem")
 
@@ -44,6 +45,7 @@ class RealTimeDetectorSystem:
         self.extractor = FeatureExtractor()
         self.inference_engine = MLInferenceEngine(model_name=self.model_name)
         self.alert_engine = AlertEngine()
+        self.behavioral_engine = BehavioralProfileEngine()
         
         # Configuration limits
         self.min_packets = self.config.get("features", {}).get("min_packets_per_flow", 3)
@@ -101,7 +103,17 @@ class RealTimeDetectorSystem:
             try:
                 # Retrieve parsed packet from queue
                 pkt = self.packet_queue.get(timeout=1.0)
-                self.tracker.handle_packet(pkt)
+                session = self.tracker.handle_packet(pkt)
+                self.behavioral_engine.update_profile(
+                    src_ip=pkt.src_ip,
+                    dst_ip=pkt.dst_ip,
+                    dst_port=pkt.dst_port,
+                    protocol=str(pkt.proto),
+                    bytes_len=pkt.payload_len,
+                    session_id=str(session.flow_key),
+                    timestamp=pkt.timestamp,
+                    session_duration=session.duration
+                )
             except queue.Empty:
                 # Perform periodic evaluations when no packets arrive
                 if (time.time() - last_eval_time) > self.eval_interval:
@@ -138,13 +150,20 @@ class RealTimeDetectorSystem:
             # Predict scanning behavior using machine learning / fallback heuristics
             prediction, confidence = self.inference_engine.predict(raw_features)
             
+            # Fetch drift score and behavioral explanations
+            profile = self.behavioral_engine.retrieve_profile(flow.src_ip)
+            drift_score = profile.get("drift_score", 0.0) if profile else 0.0
+            drift_explanations = self.behavioral_engine.retrieve_drift_explanation(flow.src_ip)
+            
             # Formulate structured threat incident alerts
             self.alert_engine.generate_alert(
                 flow=flow,
                 raw_features=raw_features,
                 ml_prediction=prediction,
                 ml_confidence=confidence,
-                detection_method=self.model_name
+                detection_method=self.model_name,
+                drift_score=drift_score,
+                drift_explanations=drift_explanations
             )
 
     def start(self, duration: int = 0) -> None:

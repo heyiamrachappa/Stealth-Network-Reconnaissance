@@ -24,7 +24,8 @@ class AlertEngine:
     def calculate_hybrid_threat_score(self, 
                                       ml_prediction: int, 
                                       ml_confidence: float, 
-                                      raw_features: Dict[str, float]) -> Tuple[float, List[str], str]:
+                                      raw_features: Dict[str, float],
+                                      drift_score: float = 0.0) -> Tuple[float, List[str], str]:
         """
         Correlates machine learning inferences with behavioral evidence to produce
         an explainable, weighted threat score and severity rating.
@@ -67,6 +68,14 @@ class AlertEngine:
             score += 0.08
             evidence.append(f"Moderate Subnet Target Diversity ({int(dst_diversity)} hosts)")
             
+        # 5. Behavioral Drift Contribution
+        if drift_score > 75.0:
+            score += 0.20
+            evidence.append(f"Severe Behavioral Drift Score ({drift_score:.1f}/100)")
+        elif drift_score > 40.0:
+            score += 0.10
+            evidence.append(f"Moderate Behavioral Drift Score ({drift_score:.1f}/100)")
+            
         # Bound score between 0.0 and 1.0
         final_score = float(min(1.0, max(0.0, score)))
         
@@ -85,14 +94,20 @@ class AlertEngine:
                        raw_features: Dict[str, float], 
                        ml_prediction: int, 
                        ml_confidence: float, 
-                       detection_method: str) -> Optional[Dict[str, Any]]:
+                       detection_method: str,
+                       drift_score: float = 0.0,
+                       drift_explanations: List[str] = None) -> Optional[Dict[str, Any]]:
         """
         Analyzes connection flow, generates hybrid scores, writes structured JSON logs,
         and outputs high-severity incidents to the stderr console stream.
         """
         threat_score, evidence, severity = self.calculate_hybrid_threat_score(
-            ml_prediction, ml_confidence, raw_features
+            ml_prediction, ml_confidence, raw_features, drift_score
         )
+        
+        # Merge behavioral drift explanations into evidence
+        if drift_explanations:
+            evidence.extend(drift_explanations)
         
         # Suppress alerts for negligible/low-score events to keep alert noise clean
         if severity == "LOW":
@@ -121,6 +136,8 @@ class AlertEngine:
                 "failed_flow_ratio": round(raw_features.get("host_failed_flow_ratio", 0.0), 2)
             },
             "threat_confidence": round(threat_score, 4),
+            "behavioral_drift_score": round(drift_score, 2),
+            "behavioral_explanation": drift_explanations or [],
             "trigger_evidence": evidence
         }
 
@@ -135,12 +152,19 @@ class AlertEngine:
         color = "\033[91m" if severity == "HIGH" else "\033[93m"  # Red for High, Yellow for Medium
         reset = "\033[0m"
         
+        # Format behavioral explanations block for console
+        behavior_block = ""
+        if drift_explanations:
+            behavior_lines = "\n".join(f"     • {line}" for line in drift_explanations)
+            behavior_block = f"\n   Behavioral Analysis:\n{behavior_lines}"
+        
         logger.warning(
             f"\n{color}🚨 [THREAT DETECTED - {severity} SEVERITY]{reset}"
             f"\n   Source IP:  {alert_record['source_ip']} -> Target: {alert_record['destination_ip']}:{alert_record['target_port']} ({alert_record['protocol']})"
             f"\n   Confidence: {alert_record['threat_confidence']*100:.2f}% | Method: {alert_record['detection_method']}"
-            f"\n   Evidence:   {', '.join(evidence)}"
-            f"\n   Port Entropy: {alert_record['host_context']['port_entropy']} | Active Targets: {alert_record['host_context']['destination_diversity']}\n"
+            f"\n   Evidence:   {', '.join(e for e in evidence if e not in (drift_explanations or []))}"
+            f"\n   Port Entropy: {alert_record['host_context']['port_entropy']} | Active Targets: {alert_record['host_context']['destination_diversity']} | Drift: {alert_record['behavioral_drift_score']}/100"
+            f"{behavior_block}\n"
         )
         
         return alert_record
