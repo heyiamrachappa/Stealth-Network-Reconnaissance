@@ -66,7 +66,14 @@ class MLInferenceEngine:
             return self._heuristic_fallback(raw_features)
 
         try:
+            # Maintain compatibility by ensuring all expected features are present
+            for fn in self.feature_names:
+                if fn not in raw_features:
+                    raw_features[fn] = 0.0
+                    
             df_inf = pd.DataFrame([raw_features])[self.feature_names]
+            df_inf.fillna(0.0, inplace=True)
+            
             df_scaled = pd.DataFrame(self.scaler.transform(df_inf), columns=self.feature_names)
             
             if self.model_name == "isolation_forest":

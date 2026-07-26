@@ -165,15 +165,15 @@ def detection_thread_loop(tracker, active_model, realtime_alerts, triggered_aler
             
             with state_lock:
                 for r in reports:
-                    if r.ml_prediction == 1 or r.severity in ["CRITICAL", "HIGH", "MEDIUM"]:
-                        # Prevent duplicate alerts for the same scanning session within a 10s window
-                        alert_key = (r.src_ip, r.dst_ip, r.dst_port, r.scan_category)
+                    if r.ml_prediction == 1 or r.severity in ["CRITICAL", "HIGH", "MEDIUM", "LOW"]:
+                        # Prevent duplicate incident rendering within a rolling window
+                        alert_key = (r.src_ip, r.dst_ip, r.scan_category)
                         
                         if alert_key not in triggered_alerts:
                             triggered_alerts[alert_key] = time.time()
                             realtime_alerts.append(r)
                         else:
-                            if time.time() - triggered_alerts[alert_key] > 10.0:
+                            if time.time() - triggered_alerts[alert_key] > 60.0:
                                 triggered_alerts[alert_key] = time.time()
                                 realtime_alerts.append(r)
                                 
@@ -442,6 +442,7 @@ st.markdown("""
     .card-high { border-left-color: #FF5E62; box-shadow: inset 4px 0 20px rgba(255, 94, 98, 0.04); }
     .card-med { border-left-color: #FBBF24; box-shadow: inset 4px 0 20px rgba(251, 191, 36, 0.04); }
     .card-low { border-left-color: #06B6D4; box-shadow: inset 4px 0 20px rgba(6, 182, 212, 0.04); }
+    .card-safe { border-left-color: #10B981; box-shadow: inset 4px 0 20px rgba(16, 185, 129, 0.04); }
 
     .tag-sec {
         font-family: 'Orbitron', sans-serif;
@@ -458,6 +459,7 @@ st.markdown("""
     .tag-high { color: #FF9900; background: rgba(255, 153, 0, 0.08); }
     .tag-med { color: #FBBF24; background: rgba(251, 191, 36, 0.08); }
     .tag-low { color: #06B6D4; background: rgba(6, 182, 212, 0.08); }
+    .tag-safe { color: #10B981; background: rgba(16, 185, 129, 0.08); }
 
     /* MITRE ATT&CK visual grids */
     .mitre-grid {
@@ -595,10 +597,20 @@ class ForensicWorkstationApp:
         
         # Compile threat anomalies
         anomalies = [r for r in reports if r.severity in ["CRITICAL", "HIGH", "MEDIUM"]]
+        import re
         for i, a in enumerate(anomalies[:40]):  # Limit to 40 polar elements
-            # Generate polar coordinates dynamically based on target ports
-            r = min(90.0, 15.0 + (a.dst_port % 75.0))
-            t = (hash(a.src_ip) % 360) * (np.pi / 180.0)
+            # Extract numerical port safely
+            port_match = re.search(r'\d+', str(a.dst_port))
+            first_port = int(port_match.group()) if port_match else 0
+            
+            # Logarithmic distribution for ports (0-65535) -> (15-90) radius
+            port_scaled = (np.log10(first_port + 1) / 4.8) * 75.0 if first_port > 0 else 0.0
+            r = min(90.0, 15.0 + port_scaled)
+            
+            # Jitter angle based on time to prevent perfectly overlapping dots
+            jitter = (hash(a.timestamp) % 20) - 10
+            base_angle = hash(a.src_ip) % 360
+            t = ((base_angle + jitter) % 360) * (np.pi / 180.0)
             
             r_blips.append(r)
             theta_blips.append(t)
@@ -617,8 +629,8 @@ class ForensicWorkstationApp:
         plt.tight_layout()
         return fig
 
-    def generate_anomaly_timeline_plot(self, reports: List[ForensicThreatReport]) -> plt.Figure:
-        fig, ax = plt.subplots(figsize=(6, 3.5))
+    def generate_anomaly_timeline_plot(self, reports: List[Any], figsize=(6, 3.5)) -> plt.Figure:
+        fig, ax = plt.subplots(figsize=figsize)
         fig.patch.set_facecolor('none')
         ax.set_facecolor('none')
         
@@ -630,15 +642,24 @@ class ForensicWorkstationApp:
         ax.grid(True, color=(1.0, 1.0, 1.0, 0.04), linestyle='solid')
         
         if reports:
-            # Group anomalies chronologically in chunks
             df = pd.DataFrame([r.to_dict() for r in reports])
             df["time"] = pd.to_datetime(df["timestamp"])
-            df = df.sort_values("time")
-            # Build rolling count
-            df["anomaly_cum"] = (df["ml_confidence"] > 0.5).astype(int).cumsum()
             
-            ax.plot(df["time"], df["anomaly_cum"], color='#8B5CF6', linewidth=2.5, label='Recon Infiltration Vector')
-            ax.fill_between(df["time"], 0, df["anomaly_cum"], color=(0.545, 0.361, 0.965, 0.12))
+            # Group by exact time and compute max threat score
+            trend_df = df.groupby("time")["threat_score"].max().reset_index()
+            trend_df = trend_df.sort_values("time")
+            
+            ax.plot(trend_df["time"], trend_df["threat_score"], color='#8B5CF6', linewidth=2.5, label='Max Threat Score')
+            ax.fill_between(trend_df["time"], 0, trend_df["threat_score"], color=(0.545, 0.361, 0.965, 0.12))
+            
+            # Set Y-axis for accurate 0-100 severity scaling
+            ax.set_ylim(0, 100)
+            
+            # Add severity horizontal threshold lines
+            ax.axhline(y=91, color='#EF4444', linestyle='--', alpha=0.3, linewidth=1)
+            ax.axhline(y=71, color='#FF5E62', linestyle='--', alpha=0.3, linewidth=1)
+            ax.axhline(y=51, color='#FBBF24', linestyle='--', alpha=0.3, linewidth=1)
+            ax.axhline(y=26, color='#06B6D4', linestyle='--', alpha=0.3, linewidth=1)
             
         ax.legend(facecolor='#060913', edgecolor=(1.0, 1.0, 1.0, 0.1), labelcolor='#E2E8F0', fontsize=8)
         ax.set_title("Chronological Behavioral Escalation", color='#F8FAFC', fontname='Orbitron', fontsize=10, fontweight='bold')
@@ -934,8 +955,10 @@ class ForensicWorkstationApp:
                     bin_sec = int(p.timestamp)
                     time_bins[bin_sec] += 1
             
-            sec_keys = sorted(list(time_bins.keys()))
-            pps_vals = [time_bins[s] for s in sec_keys]
+            # Ensure complete 30 second window without broken gaps
+            now_sec = int(now)
+            sec_keys = list(range(now_sec - 30, now_sec + 1))
+            pps_vals = [time_bins.get(s, 0) for s in sec_keys]
             
             if len(pps_vals) < 5:
                 pps_vals = [0] * 30
@@ -1035,8 +1058,8 @@ class ForensicWorkstationApp:
             if alerts_copy:
                 st.markdown("<div class='forensic-alerts-feed'>", unsafe_allow_html=True)
                 for alert in reversed(alerts_copy):
-                    sev_class = "card-low"
-                    sev_badge = "tag-low"
+                    sev_class = "card-safe"
+                    sev_badge = "tag-safe"
                     if alert.severity == "CRITICAL":
                         sev_class = "card-crit"
                         sev_badge = "tag-crit"
@@ -1046,6 +1069,9 @@ class ForensicWorkstationApp:
                     elif alert.severity == "MEDIUM":
                         sev_class = "card-med"
                         sev_badge = "tag-med"
+                    elif alert.severity == "LOW":
+                        sev_class = "card-low"
+                        sev_badge = "tag-low"
                         
                     t_str = time.strftime("%H:%M:%S", time.localtime(alert.start_epoch))
                     
@@ -1057,13 +1083,14 @@ class ForensicWorkstationApp:
                         </div>
                         <h5 style="color:#F8FAFC; margin:0 0 6px 0; font-family:'Orbitron';">{alert.scan_category}</h5>
                         <p style="margin:0 0 8px 0; font-size:0.85rem; color:#94A3B8;">
-                            Attacker Source IP <b>{alert.src_ip}</b> triggered alert targeting port range on host <b>{alert.dst_ip}:{alert.dst_port}</b> ({alert.proto}).
+                            Source <b>{alert.src_ip}</b> triggered alert targeting <b>{alert.dst_ip}</b> (Ports: {alert.dst_port}) over {alert.proto}.
+                            <br><span style="color:#00F2FE;">Aggregated Incident: {alert.flow_count} flows / {alert.packet_count} packets.</span>
                         </p>
                         <div style="margin-top:6px; padding:6px; background:rgba(0,0,0,0.25); border-radius:3px;">
                             <span style="font-family:'JetBrains Mono'; font-size:0.7rem; color:#00F2FE;">MITRE MAPPINGS: {", ".join(alert.mitre_mappings)}</span>
                         </div>
                         <div style="margin-top:4px;">
-                            <span style="font-family:'JetBrains Mono'; font-size:0.7rem; color:#A78BFA;">AI Predict Confidence: {alert.ml_confidence*100:.1f}% // Target Port: {alert.dst_port}</span>
+                            <span style="font-family:'JetBrains Mono'; font-size:0.7rem; color:#A78BFA;">AI Confidence: {alert.ml_confidence*100:.1f}% // Sub-scores: Flow={alert.flow_score:.1f}, Behavior={alert.behavior_score:.1f}</span>
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
@@ -1344,7 +1371,7 @@ class ForensicWorkstationApp:
                 reports = st.session_state["cached_reports"]
                 metadata = st.session_state["cached_metadata"]
             
-                anomalies = [r for r in reports if r.ml_prediction == 1 or r.severity in ["CRITICAL", "HIGH", "MEDIUM"]]
+                anomalies = [r for r in reports if r.ml_prediction == 1 or r.severity in ["CRITICAL", "HIGH", "MEDIUM", "LOW"]]
                 anom_count = len(anomalies)
             
                 # Draw HUD HUD bar
@@ -1390,27 +1417,9 @@ class ForensicWorkstationApp:
                     st.markdown("<div class='tech-line'></div>", unsafe_allow_html=True)
                 
                     # Visual charts
-                    g1, g2, g3 = st.columns([2, 2, 3])
-                    with g1:
-                        st.markdown("<div class='cyber-panel'><h4 style='margin-bottom:15px; text-align:center;'>RECON VECTORS</h4>", unsafe_allow_html=True)
-                        st.pyplot(self.generate_radar_sweep_plot(reports))
-                        st.markdown("</div>", unsafe_allow_html=True)
-                    with g2:
-                        st.markdown("<div class='cyber-panel'><h4>PROTOCOL RATIO BREAKDOWN</h4>", unsafe_allow_html=True)
-                        fig, ax = plt.subplots(figsize=(5, 4.3))
-                        fig.patch.set_facecolor('none')
-                        ax.set_facecolor('none')
-                    
-                        p_data = metadata.get("protocols", {"TCP": 0, "UDP": 0, "Other": 0})
-                        ax.pie(p_data.values(), labels=p_data.keys(), colors=["#EF4444", "#00F2FE", "#8B5CF6"], autopct='%1.1f%%', textprops={'color': '#F8FAFC', 'fontsize': 8}, wedgeprops={'edgecolor': 'none'})
-                        ax.set_title("Decoded Protocol Volume", color='#F8FAFC', fontname='Orbitron', fontsize=10, fontweight='bold')
-                        plt.tight_layout()
-                        st.pyplot(fig)
-                        st.markdown("</div>", unsafe_allow_html=True)
-                    with g3:
-                        st.markdown("<div class='cyber-panel'>", unsafe_allow_html=True)
-                        st.pyplot(self.generate_anomaly_timeline_plot(reports))
-                        st.markdown("</div>", unsafe_allow_html=True)
+                    st.markdown("<div class='cyber-panel'>", unsafe_allow_html=True)
+                    st.pyplot(self.generate_anomaly_timeline_plot(reports, figsize=(12, 4)))
+                    st.markdown("</div>", unsafe_allow_html=True)
                     
                     # Threat Feed Details
                     st.markdown("<div class='tech-line'></div>", unsafe_allow_html=True)
@@ -1421,8 +1430,8 @@ class ForensicWorkstationApp:
                         if anomalies:
                             for a in anomalies:
                                 sev = a.severity
-                                card_class = "card-crit" if sev == "CRITICAL" else ("card-high" if sev == "HIGH" else "card-med")
-                                tag_class = "tag-crit" if sev == "CRITICAL" else ("tag-high" if sev == "HIGH" else "tag-med")
+                                card_class = "card-crit" if sev == "CRITICAL" else ("card-high" if sev == "HIGH" else ("card-med" if sev == "MEDIUM" else ("card-low" if sev == "LOW" else "card-safe")))
+                                tag_class = "tag-crit" if sev == "CRITICAL" else ("tag-high" if sev == "HIGH" else ("tag-med" if sev == "MEDIUM" else ("tag-low" if sev == "LOW" else "tag-safe")))
                             
                                 ev_list = "".join([f"<li style='margin-bottom:2px;'>{ev}</li>" for ev in a.evidence])
                             
@@ -1439,8 +1448,10 @@ class ForensicWorkstationApp:
                                     </div>
                                     <div style="font-family:'JetBrains Mono'; font-size:0.82rem; color:#E2E8F0; margin-bottom:10px; background:rgba(0,0,0,0.22); padding:8px 12px; border-radius:4px;">
                                         SOURCE IP: <span style="color:#00F2FE; font-weight:700;">{a.src_ip}</span> // 
-                                        DESTINATION IP: <span style="color:#FBBF24; font-weight:700;">{a.dst_ip}:{a.dst_port}</span> // 
+                                        DESTINATION IP: <span style="color:#FBBF24; font-weight:700;">{a.dst_ip}</span> // 
+                                        TARGET PORTS: <span style="color:#F8FAFC;">{a.dst_port}</span> // 
                                         PROTO: <span style="color:#A78BFA; font-weight:700;">{a.proto}</span>
+                                        <br><span style="color:#10B981;">INCIDENT VOLUME: {a.flow_count} flows / {a.packet_count} pkts</span>
                                     </div>
                                     <div style="font-size:0.8rem;">
                                         <span style="color:#EF4444; font-weight:700; font-family:'Orbitron';">FORENSIC TELEMETRY EVIDENCE:</span>
