@@ -147,16 +147,41 @@ class RealTimeDetectorSystem:
             # Compute real-time rolling feature vector
             raw_features = self.extractor.extract_single_flow_vector(flow, host_profiles)
             
-            # Predict scanning behavior using machine learning / fallback heuristics
-            prediction, confidence = self.inference_engine.predict(raw_features)
-            
             # Fetch drift score and behavioral explanations
             profile = self.behavioral_engine.retrieve_profile(flow.src_ip)
             drift_score = profile.get("drift_score", 0.0) if profile else 0.0
-            drift_explanations = self.behavioral_engine.retrieve_drift_explanation(flow.src_ip)
+            
+            # Augment raw_features with behavioral stats for the AI pipeline
+            if profile:
+                baselines = profile.get("baselines", {})
+                raw_features["behavioral_drift_score"] = drift_score
+                raw_features["historical_packet_rate"] = baselines.get("packet_rate", 0.0)
+                raw_features["historical_destination_diversity"] = baselines.get("destination_diversity", 0.0)
+                raw_features["historical_protocol_usage"] = float(len(baselines.get("protocol_usage", {})))
+                raw_features["historical_session_count"] = baselines.get("session_count", 0.0)
+                raw_features["historical_threat_score"] = profile.get("historical_threat_score", 0.0)
+            else:
+                raw_features["behavioral_drift_score"] = 0.0
+                raw_features["historical_packet_rate"] = 0.0
+                raw_features["historical_destination_diversity"] = 0.0
+                raw_features["historical_protocol_usage"] = 0.0
+                raw_features["historical_session_count"] = 0.0
+                raw_features["historical_threat_score"] = 0.0
+            
+            # Predict scanning behavior using machine learning / fallback heuristics
+            prediction, confidence = self.inference_engine.predict(raw_features)
+            
+            # Adjust confidence based on behavioral profile
+            if prediction == 1:
+                if drift_score < 30.0:  # ML predicts attack but behavioral profile is normal
+                    confidence = max(0.0, confidence - 0.15)
+                elif drift_score > 60.0:  # Both ML and behavioral profile indicate suspicious activity
+                    confidence = min(1.0, confidence + 0.15)
+                    
+            drift_explanations = self.behavioral_engine.retrieve_drift_explanation(flow.src_ip, raw_features=raw_features)
             
             # Formulate structured threat incident alerts
-            self.alert_engine.generate_alert(
+            alert_record = self.alert_engine.generate_alert(
                 flow=flow,
                 raw_features=raw_features,
                 ml_prediction=prediction,
@@ -165,6 +190,10 @@ class RealTimeDetectorSystem:
                 drift_score=drift_score,
                 drift_explanations=drift_explanations
             )
+            
+            if alert_record:
+                threat_score = alert_record.get("threat_confidence", 0.0)
+                self.behavioral_engine.update_threat_score(flow.src_ip, threat_score)
 
     def start(self, duration: int = 0) -> None:
         """

@@ -1699,6 +1699,54 @@ class ForensicWorkstationApp:
                                     c2.metric("Port Diversity", w5m.get("destination_port_count", 0), f"Baseline: {base.get('port_diversity', 0.0):.1f}", delta_color="inverse")
                                     c3.metric("Pkt Rate (pkts/sec)", f"{w5m.get('packet_count', 0)/300.0:.2f}", f"Baseline: {base.get('packet_rate', 0.0):.2f}", delta_color="inverse")
                                     c4.metric("Mean Session Duration", f"{w5m.get('mean_session_duration', 0.0):.2f}s", f"Baseline: {base.get('session_duration', 0.0):.2f}s", delta_color="inverse")
+                                    
+                                    # Interactive Timeline Charts
+                                    snapshots = host_data.get("snapshots", [])
+                                    if snapshots:
+                                        st.markdown("<h5 style='margin-top: 20px;'>Host Behavioral Timeline</h5>", unsafe_allow_html=True)
+                                        df_snap = pd.DataFrame(snapshots)
+                                        df_snap["time"] = pd.to_datetime(df_snap["timestamp"], unit='s')
+                                        df_snap.set_index("time", inplace=True)
+                                        
+                                        st.markdown("**Traffic & Diversity Metrics**")
+                                        st.line_chart(df_snap[["packet_rate", "destination_diversity", "port_diversity"]])
+                                        
+                                        st.markdown("**Behavioral & Threat Scores**")
+                                        st.line_chart(df_snap[["drift_score", "threat_score"]])
+                                    else:
+                                        st.info("No timeline snapshots available yet. Requires longer capture.")
+                        st.markdown("</div>", unsafe_allow_html=True)
+
+                        st.markdown("<div class='cyber-panel'><h4>CROSS-HOST BEHAVIORAL CORRELATION</h4>", unsafe_allow_html=True)
+                        if ranked_hosts:
+                            correlation_data = []
+                            seen_pairs = set()
+                            curr_t = time.time()
+                            for host_a in ranked_hosts:
+                                ip_a = host_a["src_ip"]
+                                correlated = engine.find_correlated_hosts(ip_a, curr_t, min_correlation=0.6)
+                                for c in correlated:
+                                    ip_b = c["host"]
+                                    pair = tuple(sorted([ip_a, ip_b]))
+                                    if pair not in seen_pairs:
+                                        seen_pairs.add(pair)
+                                        correlation_data.append({
+                                            "Host A": ip_a,
+                                            "Host B": ip_b,
+                                            "Correlation Score": round(c["correlation_score"], 2),
+                                            "Shared Target IPs": c["shared_dest_ips"],
+                                            "Shared Target Ports": c["shared_ports"],
+                                            "Joint Threat Intensity": round((host_a.get("historical_threat_score", 0.0) + c["threat"]) / 2, 2)
+                                        })
+                                        
+                            if correlation_data:
+                                df_corr = pd.DataFrame(correlation_data).sort_values("Correlation Score", ascending=False)
+                                st.markdown("<p style='color:#94A3B8;'>Detected synchronized behaviors, target sharing, or coordinated reconnaissance across these hosts:</p>", unsafe_allow_html=True)
+                                st.dataframe(df_corr, use_container_width=True, hide_index=True)
+                            else:
+                                st.info("No highly correlated suspicious behaviors detected across hosts.")
+                        else:
+                            st.info("No host profiles available for correlation.")
                         st.markdown("</div>", unsafe_allow_html=True)
 
                 elif navigation == "Settings & Utilities":

@@ -24,6 +24,10 @@ class HostBehavioralProfile:
     def __init__(self, src_ip: str):
         self.src_ip = src_ip
         
+        self.historical_threat_score: float = 0.0
+        self.threat_score_samples: int = 0
+        self.snapshots = []
+        
         # Overall (unbounded) stats
         self.packet_count: int = 0
         self.bytes_transferred: int = 0
@@ -133,6 +137,16 @@ class HostBehavioralProfile:
                 if proto_sum > 0:
                     for proto in self.baselines["protocol_usage"]:
                         self.baselines["protocol_usage"][proto] /= proto_sum
+            
+            # Capture periodic snapshot
+            self.snapshots.append({
+                "timestamp": current_time,
+                "packet_rate": packet_rate,
+                "destination_diversity": dst_diversity,
+                "port_diversity": port_diversity,
+                "drift_score": self.calculate_drift(current_time),
+                "threat_score": self.historical_threat_score
+            })
             
             # Update last baseline time
             self.last_baseline_time = current_time
@@ -245,7 +259,7 @@ class HostBehavioralProfile:
         
         return float(min(100.0, score))
 
-    def generate_drift_explanation(self, current_time: float) -> list:
+    def generate_drift_explanation(self, current_time: float, raw_features: Optional[Dict[str, float]] = None) -> list:
         """
         Produces analyst-friendly, plain-English explanations of how the host's
         current behavior deviates from its historical baseline.
@@ -262,76 +276,63 @@ class HostBehavioralProfile:
         curr_packet_rate = current["packet_count"] / elapsed
         curr_dst_div = current["destination_ip_count"]
         curr_port_div = current["destination_port_count"]
-        curr_sess_dur = current["mean_session_duration"]
 
-        # --- Helper: describe a metric change in plain language ---
-        def describe_change(metric_name: str, current_val: float, baseline_val: float, unit: str = ""):
+        def describe_change(metric_name: str, current_val: float, baseline_val: float, is_int: bool = False):
             if baseline_val == 0:
                 if current_val > 0:
-                    explanations.append(
-                        f"{metric_name} appeared for the first time (current: {current_val:.1f}{unit}, no prior baseline)."
-                    )
+                    explanations.append(f"{metric_name} appeared for the first time (currently {int(current_val) if is_int else f'{current_val:.1f}'}).")
                 return
+
             ratio = current_val / baseline_val
             pct = abs(ratio - 1.0) * 100.0
+
             if pct < 20.0:
-                return  # Within normal range, nothing to report
+                return
 
             if ratio > 1.0:
-                if ratio >= 10.0:
-                    explanations.append(f"{metric_name} surged by {ratio:.0f}x above baseline ({current_val:.1f}{unit} vs baseline {baseline_val:.1f}{unit}).")
-                elif ratio >= 2.0:
-                    explanations.append(f"{metric_name} increased by {pct:.0f}% ({current_val:.1f}{unit} vs baseline {baseline_val:.1f}{unit}).")
+                if is_int:
+                    explanations.append(f"{metric_name} increased from {int(baseline_val)} to {int(current_val)}.")
                 else:
-                    explanations.append(f"{metric_name} elevated by {pct:.0f}% above normal ({current_val:.1f}{unit} vs baseline {baseline_val:.1f}{unit}).")
+                    explanations.append(f"{metric_name} increased by {pct:.0f}%.")
             else:
-                if ratio <= 0.1:
-                    explanations.append(f"{metric_name} dropped to near zero ({current_val:.1f}{unit} vs baseline {baseline_val:.1f}{unit}).")
+                if is_int:
+                    explanations.append(f"{metric_name} decreased from {int(baseline_val)} to {int(current_val)}.")
                 else:
-                    explanations.append(f"{metric_name} decreased by {pct:.0f}% ({current_val:.1f}{unit} vs baseline {baseline_val:.1f}{unit}).")
+                    explanations.append(f"{metric_name} decreased by {pct:.0f}%.")
 
-        # 1. Packet rate
-        describe_change("Packet rate", curr_packet_rate, self.baselines["packet_rate"], " pkts/sec")
+        describe_change("Packet rate", curr_packet_rate, self.baselines["packet_rate"], is_int=False)
+        describe_change("Destination diversity", curr_dst_div, self.baselines["destination_diversity"], is_int=True)
+        describe_change("Port diversity", curr_port_div, self.baselines["port_diversity"], is_int=True)
 
-        # 2. Destination diversity
-        describe_change("Destination diversity", curr_dst_div, self.baselines["destination_diversity"], " hosts")
-
-        # 3. Port diversity
-        describe_change("Port diversity", curr_port_div, self.baselines["port_diversity"], " ports")
-
-        # 4. Session duration
-        describe_change("Average session duration", curr_sess_dur, self.baselines["session_duration"], "s")
-
-        # 5. Protocol mix shift
-        curr_total_proto = sum(current["protocol_usage"].values())
-        if curr_total_proto > 0 and self.baselines["protocol_usage"]:
-            curr_proto_dist = {p: c / curr_total_proto for p, c in current["protocol_usage"].items()}
-            all_protos = set(curr_proto_dist.keys()).union(set(self.baselines["protocol_usage"].keys()))
-            tvd = 0.5 * sum(
-                abs(curr_proto_dist.get(p, 0.0) - self.baselines["protocol_usage"].get(p, 0.0))
-                for p in all_protos
-            )
-            if tvd > 0.15:
-                # Build a short description of what changed
-                new_protos = [p for p in curr_proto_dist if p not in self.baselines["protocol_usage"]]
-                vanished = [p for p in self.baselines["protocol_usage"] if p not in curr_proto_dist]
-                parts = []
-                if new_protos:
-                    parts.append(f"new protocol(s) {', '.join(new_protos)} appeared")
-                if vanished:
-                    parts.append(f"protocol(s) {', '.join(vanished)} disappeared")
-                if not parts:
-                    parts.append("protocol distribution shifted significantly")
-                explanations.append(f"Protocol usage anomaly — {'; '.join(parts)}.")
-
-        # 6. Overall summary sentence
+        if raw_features:
+            syn_ratio = raw_features.get("host_syn_ratio", 0.0)
+            if syn_ratio > 0.6:  # Considering >60% as significant
+                explanations.append("SYN ratio increased significantly.")
+        
         drift = self.calculate_drift(current_time)
-        if drift > 60.0:
-            explanations.append("Host behavior deviates significantly from its historical baseline.")
-        elif drift > 30.0:
-            explanations.append("Host behavior shows moderate deviation from its historical baseline.")
+        if drift > 0:
+            max_ratio = 1.0
+            if self.baselines["packet_rate"] > 0:
+                max_ratio = max(max_ratio, curr_packet_rate / self.baselines["packet_rate"])
+            if self.baselines["destination_diversity"] > 0:
+                max_ratio = max(max_ratio, curr_dst_div / self.baselines["destination_diversity"])
+            if self.baselines["port_diversity"] > 0:
+                max_ratio = max(max_ratio, curr_port_div / self.baselines["port_diversity"])
+                
+            if max_ratio > 2.0:
+                explanations.append(f"Host behavior deviates {max_ratio:.1f}x from its historical baseline.")
+            elif drift > 30.0:
+                explanations.append(f"Host behavior deviates {(drift/10.0):.1f}x from its historical baseline.")
 
         return explanations
+
+    def update_threat_score(self, score: float):
+        """
+        Updates the exponentially weighted moving average of the host's threat score.
+        """
+        self.threat_score_samples += 1
+        alpha = 1.0 / min(self.threat_score_samples, 1000)
+        self.historical_threat_score += alpha * (score - self.historical_threat_score)
 
     def to_dict(self) -> Dict[str, Any]:
         """
@@ -361,7 +362,9 @@ class HostBehavioralProfile:
             # Baseline statistics
             "baseline_samples": self.baseline_samples,
             "baselines": self.baselines,
-            "drift_score": self.calculate_drift(current_time)
+            "drift_score": self.calculate_drift(current_time),
+            "historical_threat_score": self.historical_threat_score,
+            "snapshots": self.snapshots
         }
 
 
@@ -406,6 +409,13 @@ class BehavioralProfileEngine:
             session_duration=session_duration
         )
 
+    def update_threat_score(self, src_ip: str, score: float):
+        """
+        Updates the historical threat score for a given source IP.
+        """
+        profile = self.get_or_create_profile(src_ip)
+        profile.update_threat_score(score)
+
     def retrieve_profile(self, src_ip: str) -> Optional[Dict[str, Any]]:
         """
         Retrieves the profile statistics for a given source IP.
@@ -414,16 +424,114 @@ class BehavioralProfileEngine:
             return self._profiles[src_ip].to_dict()
         return None
 
-    def retrieve_drift_explanation(self, src_ip: str, current_time: Optional[float] = None) -> list:
+    def calculate_correlation(self, profile_a: HostBehavioralProfile, profile_b: HostBehavioralProfile, current_time: float) -> float:
         """
-        Returns a list of analyst-friendly explanation strings describing how
-        the given host's current behavior deviates from its historical baseline.
+        Calculates a correlation score (0.0 to 1.0) between two host profiles.
+        Evaluates target overlap, protocol similarity, and metric intensity matching.
+        """
+        stats_a = profile_a.get_window_stats(current_time, 300)
+        stats_b = profile_b.get_window_stats(current_time, 300)
+        
+        # 1. Target Overlap (Jaccard on Destination IPs)
+        dest_a = profile_a.destination_ips
+        dest_b = profile_b.destination_ips
+        if dest_a and dest_b:
+            dest_overlap = len(dest_a.intersection(dest_b)) / len(dest_a.union(dest_b))
+        else:
+            dest_overlap = 0.0
+            
+        # 2. Port Overlap
+        port_a = profile_a.destination_ports
+        port_b = profile_b.destination_ports
+        if port_a and port_b:
+            port_overlap = len(port_a.intersection(port_b)) / len(port_a.union(port_b))
+        else:
+            port_overlap = 0.0
+            
+        # 3. Protocol Similarity
+        proto_a = stats_a["protocol_usage"]
+        proto_b = stats_b["protocol_usage"]
+        tot_a = sum(proto_a.values())
+        tot_b = sum(proto_b.values())
+        proto_sim = 0.0
+        if tot_a > 0 and tot_b > 0:
+            dist_a = {p: c/tot_a for p, c in proto_a.items()}
+            dist_b = {p: c/tot_b for p, c in proto_b.items()}
+            all_protos = set(dist_a.keys()).union(set(dist_b.keys()))
+            tvd = 0.5 * sum(abs(dist_a.get(p, 0.0) - dist_b.get(p, 0.0)) for p in all_protos)
+            proto_sim = 1.0 - tvd
+            
+        # 4. Metric Intensity Similarity (Relative difference)
+        def relative_sim(val1, val2):
+            m = max(val1, val2)
+            return 1.0 - (abs(val1 - val2) / m) if m > 0 else 1.0
+            
+        rate_sim = relative_sim(stats_a["packet_count"], stats_b["packet_count"])
+        port_div_sim = relative_sim(stats_a["destination_port_count"], stats_b["destination_port_count"])
+        dest_div_sim = relative_sim(stats_a["destination_ip_count"], stats_b["destination_ip_count"])
+        
+        # 5. Threat / Drift Score Similarity
+        drift_sim = relative_sim(profile_a.calculate_drift(current_time), profile_b.calculate_drift(current_time))
+        
+        # Weighted Score
+        score = (
+            dest_overlap * 0.3 +
+            port_overlap * 0.2 +
+            proto_sim * 0.1 +
+            rate_sim * 0.1 +
+            port_div_sim * 0.1 +
+            dest_div_sim * 0.1 +
+            drift_sim * 0.1
+        )
+        return float(score)
+
+    def find_correlated_hosts(self, src_ip: str, current_time: float, min_correlation: float = 0.6) -> list:
+        """
+        Finds hosts that exhibit highly correlated behavioral patterns to the given source IP.
+        """
+        profile_a = self._profiles.get(src_ip)
+        if not profile_a:
+            return []
+            
+        results = []
+        for other_ip, profile_b in self._profiles.items():
+            if other_ip == src_ip:
+                continue
+                
+            score = self.calculate_correlation(profile_a, profile_b, current_time)
+            if score >= min_correlation:
+                results.append({
+                    "host": other_ip,
+                    "correlation_score": score,
+                    "drift": profile_b.calculate_drift(current_time),
+                    "threat": profile_b.historical_threat_score,
+                    "shared_dest_ips": len(profile_a.destination_ips.intersection(profile_b.destination_ips)),
+                    "shared_ports": len(profile_a.destination_ports.intersection(profile_b.destination_ports))
+                })
+                
+        return sorted(results, key=lambda x: x["correlation_score"], reverse=True)
+
+    def retrieve_drift_explanation(self, src_ip: str, current_time: Optional[float] = None, raw_features: Optional[Dict[str, float]] = None) -> list:
+        """
+        Retrieves the explanation for why a host is behaving abnormally.
         """
         if src_ip not in self._profiles:
             return []
+            
         if current_time is None:
             current_time = time.time()
-        return self._profiles[src_ip].generate_drift_explanation(current_time)
+            
+        explanations = self._profiles[src_ip].generate_drift_explanation(current_time, raw_features=raw_features)
+        
+        # Inject correlation logic
+        correlated = self.find_correlated_hosts(src_ip, current_time, min_correlation=0.6)
+        if correlated:
+            hosts_str = ", ".join([c["host"] for c in correlated[:3]])
+            if len(correlated) > 3:
+                hosts_str += f" and {len(correlated)-3} others"
+            explanations.append(f"Suspicious behavior is highly correlated with {len(correlated)} other host(s) (e.g., {hosts_str}), indicating coordinated activity.")
+            
+        return explanations
 
     def retrieve_all_profiles(self) -> Dict[str, Dict[str, Any]]:
         """

@@ -453,3 +453,136 @@
 2026-07-26 23:07:52,680 [INFO] (tracker.py:140) - Session pruner thread started.
 2026-07-26 23:07:52,771 [INFO] (engine.py:31) - Loading StandardScaler from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/scaler.joblib
 2026-07-26 23:07:52,772 [INFO] (engine.py:42) - Loading ML classifier: 'xgboost' from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/xgboost_model.joblib
+2026-07-27 13:00:36,549 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-27 13:00:36,549 [INFO] (engine.py:31) - Loading StandardScaler from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/scaler.joblib
+2026-07-27 13:00:36,886 [INFO] (engine.py:42) - Loading ML classifier: 'random_forest' from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/random_forest_model.joblib
+2026-07-27 13:00:36,980 [INFO] (realtime_detector.py:202) - ==========================================================
+2026-07-27 13:00:36,981 [INFO] (realtime_detector.py:203) - 👻 PhantomTrace - Running Real-Time Intrusion Detection System
+2026-07-27 13:00:36,981 [INFO] (realtime_detector.py:204) -    Listening Interface: any | Model: random_forest
+2026-07-27 13:00:36,981 [INFO] (realtime_detector.py:205) - ==========================================================
+2026-07-27 13:00:36,981 [INFO] (realtime_detector.py:59) - PCAP Simulation Mode active: Streaming from pcaps/synthetic_scan.pcap...
+2026-07-27 13:00:36,981 [INFO] (realtime_detector.py:99) - Analyzer Engine Consumer thread started.
+2026-07-27 13:00:40,240 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:20 (TCP)
+   Confidence: 64.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Moderate Destination Port Entropy (3.000), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.0 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:40,248 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:21 (TCP)
+   Confidence: 64.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Moderate Destination Port Entropy (3.000), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.0 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:40,256 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:22 (TCP)
+   Confidence: 64.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Moderate Destination Port Entropy (3.000), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.0 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:40,264 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:23 (TCP)
+   Confidence: 64.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Moderate Destination Port Entropy (3.000), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.0 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:40,273 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:24 (TCP)
+   Confidence: 64.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Moderate Destination Port Entropy (3.000), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.0 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:40,281 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:25 (TCP)
+   Confidence: 64.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Moderate Destination Port Entropy (3.000), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.0 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:40,289 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:26 (TCP)
+   Confidence: 64.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Moderate Destination Port Entropy (3.000), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.0 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:40,298 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:27 (TCP)
+   Confidence: 64.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Moderate Destination Port Entropy (3.000), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.0 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:43,339 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:35 (TCP)
+   Confidence: 74.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Critical Destination Port Entropy (3.170), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.17 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:43,348 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:36 (TCP)
+   Confidence: 74.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Critical Destination Port Entropy (3.170), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.17 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:43,356 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:37 (TCP)
+   Confidence: 74.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Critical Destination Port Entropy (3.170), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.17 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:43,365 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:38 (TCP)
+   Confidence: 74.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Critical Destination Port Entropy (3.170), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.17 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:43,375 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:39 (TCP)
+   Confidence: 74.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Critical Destination Port Entropy (3.170), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.17 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:43,384 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:40 (TCP)
+   Confidence: 74.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Critical Destination Port Entropy (3.170), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.17 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:43,393 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:41 (TCP)
+   Confidence: 74.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Critical Destination Port Entropy (3.170), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.17 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:43,402 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:42 (TCP)
+   Confidence: 74.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Critical Destination Port Entropy (3.170), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.17 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:43,411 [WARNING] (engine.py:161) - 
+[93m🚨 [THREAT DETECTED - MEDIUM SEVERITY][0m
+   Source IP:  192.168.1.187 -> Target: 192.168.1.5:43 (TCP)
+   Confidence: 74.20% | Method: ML Inference (random_forest)
+   Evidence:   ML Model Classification (Confidence: 76.0%), Critical Destination Port Entropy (3.170), Severe Failed Connection Rate (100.0%)
+   Port Entropy: 3.17 | Active Targets: 1 | Drift: 0.0/100
+
+2026-07-27 13:00:43,717 [INFO] (realtime_detector.py:89) - PCAP Simulation Stream complete.
+2026-07-27 13:00:44,518 [INFO] (realtime_detector.py:129) - Analyzer Engine Consumer thread stopped.
+2026-07-27 13:00:44,518 [INFO] (realtime_detector.py:244) - PhantomTrace System closed.
+2026-07-27 14:15:28,241 [INFO] (engine.py:31) - Loading StandardScaler from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/scaler.joblib
+2026-07-27 14:15:28,410 [INFO] (engine.py:42) - Loading ML classifier: 'random_forest' from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/random_forest_model.joblib
