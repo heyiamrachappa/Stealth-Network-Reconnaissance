@@ -1,0 +1,194 @@
+{
+  "synthetic_raw": {
+    "path": "/home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/raw_features.csv",
+    "sha256": "9239af6f75af2093813cb178b38cad3043d7df899dc12d6af489902af30211fe",
+    "rows": 102,
+    "columns": 28,
+    "null_count": 0,
+    "duplicate_rows": 0,
+    "label_distribution": {
+      "1": 84,
+      "0": 18
+    },
+    "attack_types_from_pcap_col": [
+      "benign_traffic",
+      "tcp_syn_scan",
+      "tcp_fin_scan",
+      "tcp_null_scan",
+      "tcp_xmas_scan",
+      "udp_scan",
+      "subnet_sweep",
+      "slow_rate_scan",
+      "distributed_scan"
+    ],
+    "has_required_syn_scan": true,
+    "has_required_fin_scan": true,
+    "has_required_null_scan": true,
+    "has_required_xmas_scan": true,
+    "has_required_udp_scan": true,
+    "has_required_sweep": true,
+    "note": "Synthetic corpus \u2014 programmatically generated, not real captured traffic"
+  },
+  "synthetic_train": {
+    "path": "/home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/train_features.csv",
+    "sha256": "7d0c107e7edc3fb4cf68815f39b41a82ed490616628fb851e64ade5d45251600",
+    "rows": 100,
+    "columns": 21,
+    "null_count": 0,
+    "duplicate_rows": 89,
+    "label_distribution": {
+      "1": 84,
+      "0": 16
+    },
+    "attack_types_from_pcap_col": [],
+    "has_required_syn_scan": false,
+    "has_required_fin_scan": false,
+    "has_required_null_scan": false,
+    "has_required_xmas_scan": false,
+    "has_required_udp_scan": false,
+    "has_required_sweep": false,
+    "note": "Synthetic corpus \u2014 programmatically generated, not real captured traffic"
+  },
+  "synthetic_test": {
+    "path": "/home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/test_features.csv",
+    "sha256": "b55f16bf7b54509fb9fc0420c084d873ac010ef2ab33f2581486e122c8cba21e",
+    "rows": 2,
+    "columns": 21,
+    "null_count": 0,
+    "duplicate_rows": 0,
+    "label_distribution": {
+      "0": 2
+    },
+    "attack_types_from_pcap_col": [],
+    "has_required_syn_scan": false,
+    "has_required_fin_scan": false,
+    "has_required_null_scan": false,
+    "has_required_xmas_scan": false,
+    "has_required_udp_scan": false,
+    "has_required_sweep": false,
+    "note": "Synthetic corpus \u2014 programmatically generated, not real captured traffic"
+  },
+  "cic_tuesday_parquet": {
+    "path": "/home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/public/cic-ids-2017/Tuesday-WorkingHours.pcap_ISCX.csv.parquet",
+    "sha256": "9fda00044283648f09ce6257a6bddc39c4e3a967d7a609ff808247727a4fcabb",
+    "dataset": "CIC-IDS-2017 Tuesday (FTP/SSH Brute Force)",
+    "rows": 445909,
+    "columns": 79,
+    "null_count": 201,
+    "duplicate_rows": 24065,
+    "label_distribution": {
+      "BENIGN": 432074,
+      "FTP-Patator": 7938,
+      "SSH-Patator": 5897
+    },
+    "has_port_scan_class": false,
+    "has_any_attack": true,
+    "feature_schema": "CIC-79-column flow-level features (CICFlowMeter output)",
+    "note_host_features": "host_port_entropy, host_dst_entropy, host_dst_diversity, host_syn_ratio, host_failed_flow_ratio, host_packet_rate, host_interval_mean, host_interval_var, host_packet_size_var are NOT present \u2014 dataset is per-flow only; host aggregation requires raw pcap"
+  },
+  "cic_friday_portscan_parquet": {
+    "path": "/home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/public/cic-ids-2017/Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv.parquet",
+    "sha256": "a49a5f5230ef15fbd60079a93db12c5a549913dfed66a142592c27c7264b08d7",
+    "dataset": "CIC-IDS-2017 Friday (PortScan)",
+    "rows": 286467,
+    "columns": 79,
+    "null_count": 15,
+    "duplicate_rows": 72353,
+    "label_distribution": {
+      "PortScan": 158930,
+      "BENIGN": 127537
+    },
+    "has_port_scan_class": true,
+    "has_any_attack": true,
+    "feature_schema": "CIC-79-column flow-level features (CICFlowMeter output)",
+    "note_host_features": "host_port_entropy, host_dst_entropy, host_dst_diversity, host_syn_ratio, host_failed_flow_ratio, host_packet_rate, host_interval_mean, host_interval_var, host_packet_size_var are NOT present \u2014 dataset is per-flow only; host aggregation requires raw pcap"
+  },
+  "cic_tuesday_csv": {
+    "path": "/home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/public/cic-ids-2017/Tuesday-WorkingHours.pcap_ISCX.csv",
+    "status": "CORRUPTED_HTML_DOWNLOAD",
+    "first_20_bytes": "<!DOCTYPE html>\n<htm",
+    "action": "Excluded from all experiments \u2014 parquet version used instead"
+  },
+  "unsw_nb15_partition1": {
+    "path": "/home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/public/unsw-nb15/UNSW-NB15_1.csv",
+    "sha256": "7d851bbeabd27894ce39c8e78835c73341fc946652fb7743b9eff193b55eb511",
+    "dataset": "UNSW-NB15 partition 1",
+    "rows": 700001,
+    "columns": 49,
+    "null_count": 677786,
+    "duplicate_rows": 59213,
+    "label_distribution_binary": {
+      "0": 677786,
+      "1": 22215
+    },
+    "attack_category_distribution": {
+      "Generic": 7522,
+      "Exploits": 5409,
+      "Fuzzers": 5051,
+      "Reconnaissance": 1759,
+      "DoS": 1167,
+      "Backdoors": 534,
+      "Analysis": 526,
+      "Shellcode": 223,
+      "Worms": 24
+    },
+    "has_reconnaissance_class": true,
+    "reconnaissance_count": 1759,
+    "feature_schema": "UNSW-NB15 49-column flow-level features (Argus + Bro output)",
+    "note_host_features": "host_port_entropy, host_dst_entropy, host_dst_diversity and 6 other host-aggregated features are NOT available. FIN/RST flag ratios approximate only.",
+    "note_scan_subtype": "UNSW-NB15 does not provide SYN/FIN/NULL/XMAS/UDP scan subtypes \u2014 only coarse 'Reconnaissance' category label available"
+  },
+  "attack_class_coverage_summary": {
+    "syn_scan": {
+      "source": "synthetic_corpus",
+      "real_data": false,
+      "count": 10
+    },
+    "fin_scan": {
+      "source": "synthetic_corpus",
+      "real_data": false,
+      "count": 10
+    },
+    "null_scan": {
+      "source": "synthetic_corpus",
+      "real_data": false,
+      "count": 10
+    },
+    "xmas_scan": {
+      "source": "synthetic_corpus",
+      "real_data": false,
+      "count": 10
+    },
+    "udp_scan": {
+      "source": "synthetic_corpus",
+      "real_data": false,
+      "count": 10
+    },
+    "subnet_sweep": {
+      "source": "synthetic_corpus",
+      "real_data": false,
+      "count": 14
+    },
+    "slow_rate_scan": {
+      "source": "synthetic_corpus",
+      "real_data": false,
+      "count": 10
+    },
+    "distributed_scan": {
+      "source": "synthetic_corpus",
+      "real_data": false,
+      "count": 10
+    },
+    "port_scan_nmap": {
+      "source": "cic_ids_2017_friday",
+      "real_data": true,
+      "count": 158930
+    },
+    "reconnaissance_generic": {
+      "source": "unsw_nb15_partition1",
+      "real_data": true,
+      "count": 1759
+    },
+    "limitation": "SYN/FIN/NULL/XMAS/UDP scan subtypes are present only in the synthetic corpus (103 total flows). CIC-IDS-2017 provides real nmap PortScan flows (158,930). UNSW-NB15 provides real Reconnaissance flows (1,759) without subtype labels. Per-class detection rates for FIN/NULL/XMAS/UDP scan are therefore evaluated on synthetic data only \u2014 this limitation is stated in the manuscript."
+  }
+}

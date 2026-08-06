@@ -1,0 +1,48 @@
+{
+  "strategy": "cross_dataset",
+  "model": "mlp",
+  "seed": 42,
+  "hyperparameters": {
+    "max_iter": 200,
+    "random_state": 42,
+    "alpha": 0.0001,
+    "hidden_layer_sizes": [
+      200
+    ]
+  },
+  "validation_f1": 0.9840425531914894,
+  "test_metrics": {
+    "accuracy": 0.1729059373705085,
+    "precision": 0.8983121137975366,
+    "recall": 0.13629270748128106,
+    "f1": 0.2366766278961774,
+    "mcc": -0.0734724474316063,
+    "roc_auc": 0.7297196020260494,
+    "pr_auc": 0.9390524235088413,
+    "confusion_matrix": [
+      [
+        7548,
+        2452
+      ],
+      [
+        137269,
+        21661
+      ]
+    ]
+  },
+  "meta": {
+    "seed": 42,
+    "timestamp": "2026-08-01 12:57:53",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.17.0-40-generic-x86_64-with-glibc2.39",
+    "cpu_count": 16,
+    "memory_gb": 16.44,
+    "library_versions": {
+      "numpy": "2.4.6",
+      "pandas": "3.0.3",
+      "scikit-learn": "1.8.0",
+      "xgboost": "3.2.0",
+      "shap": "0.52.0"
+    }
+  }
+}

@@ -136,6 +136,11 @@ class RealTimeDetectorSystem:
         if not active_sessions:
             return
             
+        import psutil
+        start_eval_time = time.perf_counter()
+        cpu_usage = psutil.cpu_percent()
+        mem_usage = psutil.Process(os.getpid()).memory_info().rss / 1024 / 1024
+        
         # Compute sliding temporal behavioral profiles for initiating hosts
         host_profiles = self.extractor.compute_host_features(active_sessions)
         
@@ -194,6 +199,10 @@ class RealTimeDetectorSystem:
             if alert_record:
                 threat_score = alert_record.get("threat_confidence", 0.0)
                 self.behavioral_engine.update_threat_score(flow.src_ip, threat_score)
+
+        end_eval_time = time.perf_counter()
+        latency_ms = (end_eval_time - start_eval_time) * 1000
+        logger.info(f"[Perf] Flows={len(active_sessions)} | Latency={latency_ms:.2f}ms | CPU={cpu_usage}% | RAM={mem_usage:.2f}MB")
 
     def start(self, duration: int = 0) -> None:
         """

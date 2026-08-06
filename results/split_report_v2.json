@@ -1,0 +1,178 @@
+{
+  "pcap_wise": {
+    "description": "Train: synthetic corpus; Val: synthetic holdout; Test: CIC-IDS-2017 Friday PortScan",
+    "train": {
+      "total": 86,
+      "benign": 15,
+      "recon": 71,
+      "class_balance_ratio": 4.733,
+      "duplicate_feature_rows": 74,
+      "missing_values": 0,
+      "dataset_sources": {
+        "synthetic": 86
+      }
+    },
+    "val": {
+      "total": 16,
+      "benign": 3,
+      "recon": 13,
+      "class_balance_ratio": 4.333,
+      "duplicate_feature_rows": 8,
+      "missing_values": 0,
+      "dataset_sources": {
+        "synthetic": 16
+      }
+    },
+    "test": {
+      "total": 168930,
+      "benign": 10000,
+      "recon": 158930,
+      "class_balance_ratio": 15.893,
+      "duplicate_feature_rows": 158219,
+      "missing_values": 0,
+      "dataset_sources": {
+        "cic_ids_2017_friday_portscan": 168930
+      }
+    }
+  },
+  "time_wise": {
+    "description": "Temporal split 70/10/20 on combined synthetic+CIC sample; row order approximates capture time",
+    "train": {
+      "total": 7071,
+      "benign": 3455,
+      "recon": 3616,
+      "class_balance_ratio": 1.047,
+      "duplicate_feature_rows": 3638,
+      "missing_values": 0,
+      "dataset_sources": {
+        "cic_ids_2017_friday_portscan": 6969,
+        "synthetic": 102
+      }
+    },
+    "val": {
+      "total": 1010,
+      "benign": 533,
+      "recon": 477,
+      "class_balance_ratio": 0.895,
+      "duplicate_feature_rows": 330,
+      "missing_values": 0,
+      "dataset_sources": {
+        "cic_ids_2017_friday_portscan": 1010
+      }
+    },
+    "test": {
+      "total": 2021,
+      "benign": 1030,
+      "recon": 991,
+      "class_balance_ratio": 0.962,
+      "duplicate_feature_rows": 843,
+      "missing_values": 0,
+      "dataset_sources": {
+        "cic_ids_2017_friday_portscan": 2021
+      }
+    }
+  },
+  "host_wise": {
+    "description": "Train: synthetic+CIC sample; Val: CIC holdout; Test: UNSW-NB15 Reconnaissance (unseen source)",
+    "train": {
+      "total": 5186,
+      "benign": 2565,
+      "recon": 2621,
+      "class_balance_ratio": 1.022,
+      "duplicate_feature_rows": 2532,
+      "missing_values": 0,
+      "dataset_sources": {
+        "cic_ids_2017_friday_portscan": 5099,
+        "synthetic": 87
+      }
+    },
+    "val": {
+      "total": 916,
+      "benign": 453,
+      "recon": 463,
+      "class_balance_ratio": 1.022,
+      "duplicate_feature_rows": 315,
+      "missing_values": 0,
+      "dataset_sources": {
+        "cic_ids_2017_friday_portscan": 901,
+        "synthetic": 15
+      }
+    },
+    "test": {
+      "total": 5277,
+      "benign": 3518,
+      "recon": 1759,
+      "class_balance_ratio": 0.5,
+      "duplicate_feature_rows": 754,
+      "missing_values": 0,
+      "dataset_sources": {
+        "unsw_nb15": 5277
+      }
+    }
+  },
+  "cross_dataset": {
+    "description": "Train: synthetic+UNSW-NB15; Val: holdout from same; Test: CIC-IDS-2017 Friday PortScan",
+    "train": {
+      "total": 4303,
+      "benign": 2829,
+      "recon": 1474,
+      "class_balance_ratio": 0.521,
+      "duplicate_feature_rows": 666,
+      "missing_values": 0,
+      "dataset_sources": {
+        "unsw_nb15": 4225,
+        "synthetic": 78
+      }
+    },
+    "val": {
+      "total": 538,
+      "benign": 353,
+      "recon": 185,
+      "class_balance_ratio": 0.524,
+      "duplicate_feature_rows": 49,
+      "missing_values": 0,
+      "dataset_sources": {
+        "unsw_nb15": 526,
+        "synthetic": 12
+      }
+    },
+    "test": {
+      "total": 168930,
+      "benign": 10000,
+      "recon": 158930,
+      "class_balance_ratio": 15.893,
+      "duplicate_feature_rows": 158219,
+      "missing_values": 0,
+      "dataset_sources": {
+        "cic_ids_2017_friday_portscan": 168930
+      }
+    }
+  },
+  "metadata": {
+    "random_state": 42,
+    "feature_schema": [
+      "flow_duration",
+      "flow_packet_count",
+      "flow_bytes",
+      "flow_syn_ratio",
+      "flow_ack_ratio",
+      "flow_rst_ratio",
+      "flow_fin_ratio",
+      "flow_size_mean",
+      "flow_size_var",
+      "flow_interval_mean",
+      "flow_interval_var",
+      "host_port_entropy",
+      "host_dst_entropy",
+      "host_dst_diversity",
+      "host_syn_ratio",
+      "host_failed_flow_ratio",
+      "host_packet_rate",
+      "host_interval_mean",
+      "host_interval_var",
+      "host_packet_size_var"
+    ],
+    "schema_size": 20,
+    "note_host_features_in_public_data": "9 host-aggregated features are set to 0.0 in CIC and UNSW splits. These features are only populated in the synthetic corpus where per-host statistics were computed during flow extraction."
+  }
+}

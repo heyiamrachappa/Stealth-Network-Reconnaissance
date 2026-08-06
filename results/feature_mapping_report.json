@@ -1,0 +1,274 @@
+{
+  "canonical_schema": [
+    "flow_duration",
+    "flow_packet_count",
+    "flow_bytes",
+    "flow_syn_ratio",
+    "flow_ack_ratio",
+    "flow_rst_ratio",
+    "flow_fin_ratio",
+    "flow_size_mean",
+    "flow_size_var",
+    "flow_interval_mean",
+    "flow_interval_var",
+    "host_port_entropy",
+    "host_dst_entropy",
+    "host_dst_diversity",
+    "host_syn_ratio",
+    "host_failed_flow_ratio",
+    "host_packet_rate",
+    "host_interval_mean",
+    "host_interval_var",
+    "host_packet_size_var"
+  ],
+  "schema_size": 20,
+  "unavailable_in_public_datasets": [
+    "host_port_entropy",
+    "host_dst_entropy",
+    "host_dst_diversity",
+    "host_syn_ratio",
+    "host_failed_flow_ratio",
+    "host_packet_rate",
+    "host_interval_mean",
+    "host_interval_var",
+    "host_packet_size_var"
+  ],
+  "cic_ids_2017_mapping": {
+    "flow_duration": {
+      "source_col": "Flow Duration",
+      "type": "direct",
+      "note": "microseconds \u2192 seconds: divide by 1e6"
+    },
+    "flow_packet_count": {
+      "source_col": "Total Fwd Packets+Total Backward Packets",
+      "type": "computed",
+      "note": "sum fwd+bwd packet counts"
+    },
+    "flow_bytes": {
+      "source_col": "Total Length of Fwd Packets+Total Length of Bwd Packets",
+      "type": "computed",
+      "note": "sum fwd+bwd byte counts"
+    },
+    "flow_syn_ratio": {
+      "source_col": "SYN Flag Count/flow_packet_count",
+      "type": "computed",
+      "note": "flag count / total packets"
+    },
+    "flow_ack_ratio": {
+      "source_col": "ACK Flag Count/flow_packet_count",
+      "type": "computed",
+      "note": "flag count / total packets"
+    },
+    "flow_rst_ratio": {
+      "source_col": "RST Flag Count/flow_packet_count",
+      "type": "computed",
+      "note": "flag count / total packets"
+    },
+    "flow_fin_ratio": {
+      "source_col": "FIN Flag Count/flow_packet_count",
+      "type": "computed",
+      "note": "flag count / total packets"
+    },
+    "flow_size_mean": {
+      "source_col": "Packet Length Mean",
+      "type": "direct",
+      "note": "mean packet size"
+    },
+    "flow_size_var": {
+      "source_col": "Packet Length Variance",
+      "type": "direct",
+      "note": "variance of packet sizes"
+    },
+    "flow_interval_mean": {
+      "source_col": "Flow IAT Mean",
+      "type": "direct",
+      "note": "mean inter-arrival time in microseconds"
+    },
+    "flow_interval_var": {
+      "source_col": "Flow IAT Std",
+      "type": "approximated",
+      "note": "using std^2; CIC reports std not variance"
+    },
+    "host_port_entropy": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset; host aggregation requires raw pcap \u2192 set to 0.0"
+    },
+    "host_dst_entropy": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_dst_diversity": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_syn_ratio": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_failed_flow_ratio": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_packet_rate": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_interval_mean": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_interval_var": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_packet_size_var": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    }
+  },
+  "unsw_nb15_mapping": {
+    "flow_duration": {
+      "source_col": "dur",
+      "type": "direct",
+      "note": "seconds"
+    },
+    "flow_packet_count": {
+      "source_col": "spkts+dpkts",
+      "type": "computed",
+      "note": "sum of source and destination packet counts"
+    },
+    "flow_bytes": {
+      "source_col": "sbytes+dbytes",
+      "type": "computed",
+      "note": "sum of source and destination bytes"
+    },
+    "flow_syn_ratio": {
+      "source_col": "state=='SYN' or state=='S0'",
+      "type": "approximated",
+      "note": "binary: 1.0 if state indicates SYN-only flow, else 0.0"
+    },
+    "flow_ack_ratio": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "UNSW-NB15 provides state string, not per-flag counts \u2192 set to 0.0"
+    },
+    "flow_rst_ratio": {
+      "source_col": "state=='RST'",
+      "type": "approximated",
+      "note": "binary: 1.0 if state=RST, else 0.0"
+    },
+    "flow_fin_ratio": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "not distinguishable from state field \u2192 set to 0.0"
+    },
+    "flow_size_mean": {
+      "source_col": "(sbytes+dbytes)/(spkts+dpkts)",
+      "type": "computed",
+      "note": "total bytes / total packets; approximate mean"
+    },
+    "flow_size_var": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "UNSW-NB15 has no per-packet size distribution \u2192 set to 0.0"
+    },
+    "flow_interval_mean": {
+      "source_col": "(sintpkt+dintpkt)/2",
+      "type": "approximated",
+      "note": "average of mean source and destination inter-packet times"
+    },
+    "flow_interval_var": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "UNSW-NB15 provides mean inter-packet time only \u2192 set to 0.0"
+    },
+    "host_port_entropy": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_dst_entropy": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_dst_diversity": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_syn_ratio": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_failed_flow_ratio": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_packet_rate": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_interval_mean": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_interval_var": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    },
+    "host_packet_size_var": {
+      "source_col": "N/A",
+      "type": "unavailable",
+      "note": "per-flow dataset \u2192 set to 0.0"
+    }
+  },
+  "mapping_stats": {
+    "cic_direct_mappings": 4,
+    "cic_computed_mappings": 6,
+    "cic_approximated_mappings": 1,
+    "cic_unavailable_mappings": 9,
+    "unsw_direct_mappings": 1,
+    "unsw_computed_mappings": 3,
+    "unsw_approximated_mappings": 3,
+    "unsw_unavailable_mappings": 13
+  },
+  "cic_mapped_output": {
+    "path": "/home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/mapped/cic_mapped.parquet",
+    "rows": 286467,
+    "label_distribution": {
+      "1": 158930,
+      "0": 127537
+    },
+    "attack_type_distribution": {
+      "PortScan": 158930,
+      "BENIGN": 127537
+    }
+  },
+  "unsw_mapped_output": {
+    "path": "/home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/mapped/unsw_mapped.parquet",
+    "rows": 5277,
+    "label_distribution": {
+      "0": 3518,
+      "1": 1759
+    },
+    "attack_type_distribution": {
+      "benign": 3518,
+      "Reconnaissance": 1759
+    }
+  }
+}

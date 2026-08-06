@@ -1,0 +1,1155 @@
+{
+  "preflight": {
+    "synthetic-to-CIC": {
+      "expected_rows": 168930,
+      "found_rows": 168930,
+      "pass": true,
+      "source_path": "dataset/splits/pcap_wise/test.parquet",
+      "detail": "Columns: ['flow_duration', 'flow_packet_count', 'flow_bytes']..."
+    },
+    "temporal-holdout": {
+      "expected_rows": 2021,
+      "found_rows": 2021,
+      "pass": true,
+      "source_path": "dataset/splits/time_wise/test.parquet",
+      "detail": "Columns: ['flow_duration', 'flow_packet_count', 'flow_bytes']..."
+    },
+    "CIC-to-UNSW": {
+      "expected_rows": 5277,
+      "found_rows": 5277,
+      "pass": true,
+      "source_path": "dataset/splits/host_wise/test.parquet",
+      "detail": "Columns: ['flow_duration', 'flow_packet_count', 'flow_bytes']..."
+    },
+    "UNSW-to-CIC": {
+      "expected_rows": 168930,
+      "found_rows": 168930,
+      "pass": true,
+      "source_path": "dataset/splits/cross_dataset/test.parquet",
+      "detail": "Columns: ['flow_duration', 'flow_packet_count', 'flow_bytes']..."
+    }
+  },
+  "dedup_sensitivity": [
+    {
+      "strategy": "synthetic-to-CIC",
+      "test_set_original_rows": 168930,
+      "test_set_dedup_rows": 10711,
+      "duplicate_rate_pct": 93.65950393654177,
+      "class_balance_original": {
+        "recon": 158930,
+        "benign": 10000
+      },
+      "class_balance_dedup": {
+        "recon": 1921,
+        "benign": 8790
+      },
+      "per_model": [
+        {
+          "model": "RF",
+          "f1_mean": 0.4994936002548326,
+          "f1_std": 0.2803187543182651,
+          "mcc_mean": 0.48351010506696024,
+          "mcc_std": 0.24599908569347376,
+          "roc_auc_mean": 0.9279202740324738,
+          "roc_auc_std": 0.0045647025241914345,
+          "pr_auc_mean": 0.810051247595144,
+          "pr_auc_std": 0.011475186626289487
+        },
+        {
+          "model": "XGB",
+          "f1_mean": 0.6866601752677702,
+          "f1_std": 0.0,
+          "mcc_mean": 0.6300865404867493,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 0.876338611798581,
+          "roc_auc_std": 0.0,
+          "pr_auc_mean": 0.5181722591080867,
+          "pr_auc_std": 0.0
+        },
+        {
+          "model": "SVM",
+          "f1_mean": 0.07132667617689016,
+          "f1_std": 0.0,
+          "mcc_mean": 0.07975984000694097,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 0.5764471599748662,
+          "roc_auc_std": 0.00032990435358305894,
+          "pr_auc_mean": 0.23115153555768647,
+          "pr_auc_std": 0.00030672055932823284
+        },
+        {
+          "model": "IF",
+          "f1_mean": 0.3039037136748753,
+          "f1_std": 0.0,
+          "mcc_mean": -0.021261362665859602,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 0.12060986320288483,
+          "roc_auc_std": 0.023186661791717543,
+          "pr_auc_mean": 0.1188731426564256,
+          "pr_auc_std": 0.0022835019688382894
+        },
+        {
+          "model": "MLP",
+          "f1_mean": 0.15919907820713,
+          "f1_std": 0.12143048183709337,
+          "mcc_mean": -0.006580419483611212,
+          "mcc_std": 0.02808922706056368,
+          "roc_auc_mean": 0.505953093732585,
+          "roc_auc_std": 0.04925347865963516,
+          "pr_auc_mean": 0.19481185965796582,
+          "pr_auc_std": 0.03199148199099488
+        }
+      ]
+    },
+    {
+      "strategy": "temporal-holdout",
+      "test_set_original_rows": 2021,
+      "test_set_dedup_rows": 1178,
+      "duplicate_rate_pct": 41.712023750618506,
+      "class_balance_original": {
+        "recon": 991,
+        "benign": 1030
+      },
+      "class_balance_dedup": {
+        "recon": 199,
+        "benign": 979
+      },
+      "per_model": [
+        {
+          "model": "RF",
+          "f1_mean": 0.994949494949495,
+          "f1_std": 1.1102230246251565e-16,
+          "mcc_mean": 0.993947434509949,
+          "mcc_std": 1.1102230246251565e-16,
+          "roc_auc_mean": 0.9993845632657671,
+          "roc_auc_std": 0.0009859054695502349,
+          "pr_auc_mean": 0.9986063679259761,
+          "pr_auc_std": 0.0013960631455867793
+        },
+        {
+          "model": "XGB",
+          "f1_mean": 0.994949494949495,
+          "f1_std": 1.1102230246251565e-16,
+          "mcc_mean": 0.993947434509949,
+          "mcc_std": 1.1102230246251565e-16,
+          "roc_auc_mean": 0.9995944995662684,
+          "roc_auc_std": 0.0,
+          "pr_auc_mean": 0.9985347314188271,
+          "pr_auc_std": 0.0
+        },
+        {
+          "model": "SVM",
+          "f1_mean": 0.324856439704676,
+          "f1_std": 0.0,
+          "mcc_mean": 0.17079683351014696,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 0.8185282900713989,
+          "roc_auc_std": 0.0,
+          "pr_auc_mean": 0.3737558823852804,
+          "pr_auc_std": 0.0
+        },
+        {
+          "model": "IF",
+          "f1_mean": 0.010669143988709206,
+          "f1_std": 0.0001622228856998867,
+          "mcc_mean": -0.17622566739074733,
+          "mcc_std": 0.0037800770360756695,
+          "roc_auc_mean": 0.013282962308991331,
+          "roc_auc_std": 0.0007927616893688335,
+          "pr_auc_mean": 0.1204092276583957,
+          "pr_auc_std": 0.006016349303832214
+        },
+        {
+          "model": "MLP",
+          "f1_mean": 0.9737459840110796,
+          "f1_std": 0.006755376050785954,
+          "mcc_mean": 0.9689639953563869,
+          "mcc_std": 0.007866678052539716,
+          "roc_auc_mean": 0.9780264961169485,
+          "roc_auc_std": 0.0036244893818664307,
+          "pr_auc_mean": 0.9593115377732762,
+          "pr_auc_std": 0.012467514759192354
+        }
+      ]
+    },
+    {
+      "strategy": "CIC-to-UNSW",
+      "test_set_original_rows": 5277,
+      "test_set_dedup_rows": 4523,
+      "duplicate_rate_pct": 14.28842145158234,
+      "class_balance_original": {
+        "recon": 1759,
+        "benign": 3518
+      },
+      "class_balance_dedup": {
+        "recon": 1075,
+        "benign": 3448
+      },
+      "per_model": [
+        {
+          "model": "RF",
+          "f1_mean": 0.0,
+          "f1_std": 0.0,
+          "mcc_mean": 0.0,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 0.45237495278692064,
+          "roc_auc_std": 0.07914502694394276,
+          "pr_auc_mean": 0.23609459756010667,
+          "pr_auc_std": 0.027457993944404954
+        },
+        {
+          "model": "XGB",
+          "f1_mean": 0.0018587360594795536,
+          "f1_std": 2.168404344971009e-19,
+          "mcc_mean": 0.026632633793250628,
+          "mcc_std": 3.469446951953614e-18,
+          "roc_auc_mean": 0.07662817676576915,
+          "roc_auc_std": 0.0,
+          "pr_auc_mean": 0.20894516358845502,
+          "pr_auc_std": 0.0
+        },
+        {
+          "model": "SVM",
+          "f1_mean": 0.38406573776348696,
+          "f1_std": 0.0,
+          "mcc_mean": 0.0,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 0.5009280742459397,
+          "roc_auc_std": 0.00046403712296982924,
+          "pr_auc_mean": 0.23801101249697315,
+          "pr_auc_std": 0.00016845119652989516
+        },
+        {
+          "model": "IF",
+          "f1_mean": 0.0016455012960973827,
+          "f1_std": 0.0004788640886313327,
+          "mcc_mean": -0.3585302049285011,
+          "mcc_std": 0.019908670467487424,
+          "roc_auc_mean": 0.25215129768521016,
+          "roc_auc_std": 0.002794452303809882,
+          "pr_auc_mean": 0.19550451895780432,
+          "pr_auc_std": 0.008312144164441327
+        },
+        {
+          "model": "MLP",
+          "f1_mean": 0.0,
+          "f1_std": 0.0,
+          "mcc_mean": 0.0,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 0.7557959585604059,
+          "roc_auc_std": 0.05078909004778243,
+          "pr_auc_mean": 0.3821033723860103,
+          "pr_auc_std": 0.039439608399134386
+        }
+      ]
+    },
+    {
+      "strategy": "UNSW-to-CIC",
+      "test_set_original_rows": 168930,
+      "test_set_dedup_rows": 10711,
+      "duplicate_rate_pct": 93.65950393654177,
+      "class_balance_original": {
+        "recon": 158930,
+        "benign": 10000
+      },
+      "class_balance_dedup": {
+        "recon": 1921,
+        "benign": 8790
+      },
+      "per_model": [
+        {
+          "model": "RF",
+          "f1_mean": 0.0052627355274159696,
+          "f1_std": 0.009267428104210206,
+          "mcc_mean": -0.16903481252562674,
+          "mcc_std": 0.005992760795589394,
+          "roc_auc_mean": 0.42616625181589746,
+          "roc_auc_std": 0.051429777130099,
+          "pr_auc_mean": 0.16276166268879516,
+          "pr_auc_std": 0.014389679811149546
+        },
+        {
+          "model": "XGB",
+          "f1_mean": 0.04047058823529412,
+          "f1_std": 0.0,
+          "mcc_mean": -0.19568690692735552,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 0.6074568907571486,
+          "roc_auc_std": 0.0,
+          "pr_auc_mean": 0.2266060847687485,
+          "pr_auc_std": 2.7755575615628914e-17
+        },
+        {
+          "model": "SVM",
+          "f1_mean": 0.39154732797764585,
+          "f1_std": 0.0,
+          "mcc_mean": 0.2230127535927137,
+          "mcc_std": 0.0,
+          "roc_auc_mean": 0.6833866509846562,
+          "roc_auc_std": 6.336442656703251e-05,
+          "pr_auc_mean": 0.27425499783631996,
+          "pr_auc_std": 2.9885370307593972e-05
+        },
+        {
+          "model": "IF",
+          "f1_mean": 0.1317809702022475,
+          "f1_std": 0.016587472924767067,
+          "mcc_mean": -0.3275908361227172,
+          "mcc_std": 0.029012445174090698,
+          "roc_auc_mean": 0.3622647180228822,
+          "roc_auc_std": 0.010057424169566287,
+          "pr_auc_mean": 0.1500974644785435,
+          "pr_auc_std": 0.008971938705789332
+        },
+        {
+          "model": "MLP",
+          "f1_mean": 0.03460830707535553,
+          "f1_std": 0.009854797285420143,
+          "mcc_mean": -0.07512536270218337,
+          "mcc_std": 0.08369595131235878,
+          "roc_auc_mean": 0.6296469770970397,
+          "roc_auc_std": 0.046261061413032746,
+          "pr_auc_mean": 0.21454547021475193,
+          "pr_auc_std": 0.004759198921268075
+        }
+      ]
+    }
+  ],
+  "synthetic_to_cic_full": {
+    "strategy": "synthetic-to-CIC",
+    "models": {
+      "SVM": {
+        "accuracy": 0.44566388444918015,
+        "precision": 0.9903265539099347,
+        "recall": 0.41483672056880383,
+        "f1_mean": 0.5847346388534128,
+        "f1_std": 0.0,
+        "mcc_mean": 0.16924021584313662,
+        "mcc_std": 0.0,
+        "roc_auc_mean": 0.9229682531303091,
+        "roc_auc_std": 4.652264679114522e-06,
+        "pr_auc_mean": 0.9824808746969638,
+        "pr_auc_std": 7.674407505314187e-07
+      },
+      "MLP": {
+        "accuracy": 0.2080636950216066,
+        "precision": 0.5666256223391092,
+        "recall": 0.17895803183791606,
+        "f1_mean": 0.19774360786506745,
+        "f1_std": 0.35727859970421455,
+        "mcc_mean": -0.23052880128981826,
+        "mcc_std": 0.3825657536244751,
+        "roc_auc_mean": 0.621824613980998,
+        "roc_auc_std": 0.2738638726928888,
+        "pr_auc_mean": 0.9226493103514066,
+        "pr_auc_std": 0.050562458413449106
+      }
+    },
+    "were_missing_from_original_100": false
+  },
+  "statistical_tests_v2": [
+    {
+      "strategy": "synthetic-to-CIC",
+      "correction_method": "bonferroni",
+      "bootstrap_ci": {
+        "RF": {
+          "f1": [
+            0.9937278946796202,
+            0.9939660623488897
+          ],
+          "mcc": [
+            0.0,
+            47.44621235526367
+          ]
+        },
+        "XGB": {
+          "f1": [
+            0.9912579494980011,
+            0.9915459970231133
+          ],
+          "mcc": [
+            0.0,
+            36.305868707178874
+          ]
+        },
+        "SVM": {
+          "f1": [
+            0.5836835859007018,
+            0.5858456300971182
+          ],
+          "mcc": [
+            0.0,
+            20.86284199471497
+          ]
+        },
+        "IF": {
+          "f1": [
+            0.0014588619032393057,
+            0.0017078506234674143
+          ],
+          "mcc": [
+            0.013061767985346707,
+            0.023527666289767216
+          ]
+        },
+        "MLP": {
+          "f1": [
+            0.2971215985119694,
+            0.29956033292470785
+          ],
+          "mcc": [
+            -8.523388861896366,
+            0.0
+          ]
+        }
+      },
+      "mcnemar": [
+        {
+          "pair": [
+            "RF",
+            "XGB"
+          ],
+          "chi2": 2182.356028961292,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "RF",
+            "SVM"
+          ],
+          "chi2": 447976.1996951577,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "RF",
+            "IF"
+          ],
+          "chi2": 769694.0994583351,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "RF",
+            "MLP"
+          ],
+          "chi2": 646669.0751217668,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "SVM"
+          ],
+          "chi2": 435746.17981496523,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "IF"
+          ],
+          "chi2": 755152.700422972,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "MLP"
+          ],
+          "chi2": 636124.5986527945,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "SVM",
+            "IF"
+          ],
+          "chi2": 319497.4834559875,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "SVM",
+            "MLP"
+          ],
+          "chi2": 102235.23571205555,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "IF",
+            "MLP"
+          ],
+          "chi2": 98959.20715748749,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        }
+      ],
+      "delong": []
+    },
+    {
+      "strategy": "temporal-holdout",
+      "correction_method": "bonferroni",
+      "bootstrap_ci": {
+        "RF": {
+          "f1": [
+            0.998288162629448,
+            0.9995080067256082
+          ],
+          "mcc": [
+            0.9966399837219782,
+            0.9990157713834821
+          ]
+        },
+        "XGB": {
+          "f1": [
+            0.9982812397162455,
+            0.999591522006356
+          ],
+          "mcc": [
+            0.9966394732614929,
+            0.9992078683992341
+          ]
+        },
+        "SVM": {
+          "f1": [
+            0.702744423311051,
+            0.7198800435968451
+          ],
+          "mcc": [
+            0.3356179525406947,
+            0.35716140680279546
+          ]
+        },
+        "IF": {
+          "f1": [
+            0.6907207908353775,
+            0.7077820116200663
+          ],
+          "mcc": [
+            0.291247246247124,
+            0.3128484192239559
+          ]
+        },
+        "MLP": {
+          "f1": [
+            0.9928229540648149,
+            0.9958009865678623
+          ],
+          "mcc": [
+            0.9860288095252381,
+            0.9917166180376138
+          ]
+        }
+      },
+      "mcnemar": [
+        {
+          "pair": [
+            "RF",
+            "XGB"
+          ],
+          "chi2": 0,
+          "p_value": 0.5,
+          "p_corrected": 1.0,
+          "significant": false
+        },
+        {
+          "pair": [
+            "RF",
+            "SVM"
+          ],
+          "chi2": 3993.0301369863014,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "RF",
+            "IF"
+          ],
+          "chi2": 4235.02842377261,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "RF",
+            "MLP"
+          ],
+          "chi2": 44.02173913043478,
+          "p_value": 1.6237455824352764e-11,
+          "p_corrected": 1.6237455824352764e-10,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "SVM"
+          ],
+          "chi2": 3993.0301369863014,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "IF"
+          ],
+          "chi2": 4235.02842377261,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "MLP"
+          ],
+          "chi2": 44.02173913043478,
+          "p_value": 1.6237455824352764e-11,
+          "p_corrected": 1.6237455824352764e-10,
+          "significant": true
+        },
+        {
+          "pair": [
+            "SVM",
+            "IF"
+          ],
+          "chi2": 91.32232704402516,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "SVM",
+            "MLP"
+          ],
+          "chi2": 3872.8711990111246,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "IF",
+            "MLP"
+          ],
+          "chi2": 4112.846817439962,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        }
+      ],
+      "delong": []
+    },
+    {
+      "strategy": "CIC-to-UNSW",
+      "correction_method": "bonferroni",
+      "bootstrap_ci": {
+        "RF": {
+          "f1": [
+            0.0,
+            0.0
+          ],
+          "mcc": [
+            0.0,
+            0.0
+          ]
+        },
+        "XGB": {
+          "f1": [
+            0.00022854204641182036,
+            0.0022583941941114326
+          ],
+          "mcc": [
+            0.008739945946696167,
+            0.02741815668480997
+          ]
+        },
+        "SVM": {
+          "f1": [
+            0.4938338379038149,
+            0.5062839673913043
+          ],
+          "mcc": [
+            0.0,
+            0.0
+          ]
+        },
+        "IF": {
+          "f1": [
+            0.6096084899101525,
+            0.6229846717526398
+          ],
+          "mcc": [
+            0.4026074222882651,
+            0.4148472908304838
+          ]
+        },
+        "MLP": {
+          "f1": [
+            0.0,
+            0.0
+          ],
+          "mcc": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "mcnemar": [
+        {
+          "pair": [
+            "RF",
+            "XGB"
+          ],
+          "chi2": 3.2,
+          "p_value": 0.03681913506015133,
+          "p_corrected": 0.3681913506015133,
+          "significant": false
+        },
+        {
+          "pair": [
+            "RF",
+            "SVM"
+          ],
+          "chi2": 2931.0000379003222,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "RF",
+            "IF"
+          ],
+          "chi2": 232.57325681783556,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "RF",
+            "MLP"
+          ],
+          "chi2": 0,
+          "p_value": 0.5,
+          "p_corrected": 1.0,
+          "significant": false
+        },
+        {
+          "pair": [
+            "XGB",
+            "SVM"
+          ],
+          "chi2": 2934.890106141016,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "IF"
+          ],
+          "chi2": 233.72066443157573,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "MLP"
+          ],
+          "chi2": 3.2,
+          "p_value": 0.03681913506015133,
+          "p_corrected": 0.3681913506015133,
+          "significant": false
+        },
+        {
+          "pair": [
+            "SVM",
+            "IF"
+          ],
+          "chi2": 6612.251120406334,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "SVM",
+            "MLP"
+          ],
+          "chi2": 2931.0000379003222,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "IF",
+            "MLP"
+          ],
+          "chi2": 232.57325681783556,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        }
+      ],
+      "delong": []
+    },
+    {
+      "strategy": "UNSW-to-CIC",
+      "correction_method": "bonferroni",
+      "bootstrap_ci": {
+        "RF": {
+          "f1": [
+            0.08919968778629983,
+            0.09085633133444367
+          ],
+          "mcc": [
+            -5.039748669775205,
+            0.0
+          ]
+        },
+        "XGB": {
+          "f1": [
+            0.22531816010502445,
+            0.22760583983665475
+          ],
+          "mcc": [
+            -9.0496984842106,
+            0.0
+          ]
+        },
+        "SVM": {
+          "f1": [
+            0.9843266549497329,
+            0.9847066509823632
+          ],
+          "mcc": [
+            0.0,
+            33.75344406495563
+          ]
+        },
+        "IF": {
+          "f1": [
+            0.9864541408928666,
+            0.9867975446446511
+          ],
+          "mcc": [
+            0.0,
+            43.64800626245366
+          ]
+        },
+        "MLP": {
+          "f1": [
+            0.19301605217530338,
+            0.1952367684114372
+          ],
+          "mcc": [
+            -1.8810953916374584,
+            0.0
+          ]
+        }
+      },
+      "mcnemar": [
+        {
+          "pair": [
+            "RF",
+            "XGB"
+          ],
+          "chi2": 30869.22645086957,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "RF",
+            "SVM"
+          ],
+          "chi2": 706737.4030969522,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "RF",
+            "IF"
+          ],
+          "chi2": 710573.7869285682,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "RF",
+            "MLP"
+          ],
+          "chi2": 23927.334429746155,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "SVM"
+          ],
+          "chi2": 654458.1027047419,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "IF"
+          ],
+          "chi2": 658138.3517394987,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "XGB",
+            "MLP"
+          ],
+          "chi2": 3046.704823369565,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "SVM",
+            "IF"
+          ],
+          "chi2": 2486.553001562151,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "SVM",
+            "MLP"
+          ],
+          "chi2": 667043.2686133491,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        },
+        {
+          "pair": [
+            "IF",
+            "MLP"
+          ],
+          "chi2": 670815.5730450582,
+          "p_value": 0.0,
+          "p_corrected": 0.0,
+          "significant": true
+        }
+      ],
+      "delong": []
+    }
+  ],
+  "third_dataset": {
+    "dataset_chosen": null,
+    "attempted": [
+      "BoT-IoT",
+      "CSE-CIC-IDS2018",
+      "TON_IoT"
+    ],
+    "blocked_reason": "None of the third datasets were found locally in dataset/public/, and no download scripts/network access is provided in the repository.",
+    "results": null,
+    "if_resilience_holds": null
+  },
+  "shap_directionality": [
+    {
+      "strategy": "UNSW-to-CIC",
+      "model": "Isolation Forest",
+      "features": [
+        {
+          "feature": "flow_interval_mean",
+          "direction": "low values push toward reconnaissance",
+          "monotonic": false
+        },
+        {
+          "feature": "flow_packet_count",
+          "direction": "low values push toward reconnaissance",
+          "monotonic": true
+        },
+        {
+          "feature": "flow_duration",
+          "direction": "low values push toward reconnaissance",
+          "monotonic": true
+        },
+        {
+          "feature": "flow_bytes",
+          "direction": "low values push toward reconnaissance",
+          "monotonic": false
+        },
+        {
+          "feature": "flow_size_mean",
+          "direction": "low values push toward reconnaissance",
+          "monotonic": false
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Task 0 Model Check: Confirmed loading real .joblib models.",
+    "Model synthetic-to-CIC RF: <class 'sklearn.ensemble._forest.RandomForestClassifier'>, n_features_in_ = 20",
+    "Model synthetic-to-CIC XGB: <class 'xgboost.sklearn.XGBClassifier'>, n_features_in_ = 20",
+    "Model synthetic-to-CIC SVM: <class 'sklearn.svm._classes.SVC'>, n_features_in_ = 20",
+    "Model synthetic-to-CIC IF: <class 'sklearn.ensemble._iforest.IsolationForest'>, n_features_in_ = 20",
+    "Model synthetic-to-CIC MLP: <class 'sklearn.neural_network._multilayer_perceptron.MLPClassifier'>, n_features_in_ = 20",
+    "Model temporal-holdout RF: <class 'sklearn.ensemble._forest.RandomForestClassifier'>, n_features_in_ = 20",
+    "Model temporal-holdout XGB: <class 'xgboost.sklearn.XGBClassifier'>, n_features_in_ = 20",
+    "Model temporal-holdout SVM: <class 'sklearn.svm._classes.SVC'>, n_features_in_ = 20",
+    "Model temporal-holdout IF: <class 'sklearn.ensemble._iforest.IsolationForest'>, n_features_in_ = 20",
+    "Model temporal-holdout MLP: <class 'sklearn.neural_network._multilayer_perceptron.MLPClassifier'>, n_features_in_ = 20",
+    "Model CIC-to-UNSW RF: <class 'sklearn.ensemble._forest.RandomForestClassifier'>, n_features_in_ = 20",
+    "Model CIC-to-UNSW XGB: <class 'xgboost.sklearn.XGBClassifier'>, n_features_in_ = 20",
+    "Model CIC-to-UNSW SVM: <class 'sklearn.svm._classes.SVC'>, n_features_in_ = 20",
+    "Model CIC-to-UNSW IF: <class 'sklearn.ensemble._iforest.IsolationForest'>, n_features_in_ = 20",
+    "Model CIC-to-UNSW MLP: <class 'sklearn.neural_network._multilayer_perceptron.MLPClassifier'>, n_features_in_ = 20",
+    "Model UNSW-to-CIC RF: <class 'sklearn.ensemble._forest.RandomForestClassifier'>, n_features_in_ = 20",
+    "Model UNSW-to-CIC XGB: <class 'xgboost.sklearn.XGBClassifier'>, n_features_in_ = 20",
+    "Model UNSW-to-CIC SVM: <class 'sklearn.svm._classes.SVC'>, n_features_in_ = 20",
+    "Model UNSW-to-CIC IF: <class 'sklearn.ensemble._iforest.IsolationForest'>, n_features_in_ = 20",
+    "Model UNSW-to-CIC MLP: <class 'sklearn.neural_network._multilayer_perceptron.MLPClassifier'>, n_features_in_ = 20",
+    "Task 1: Duplicate rate for synthetic-to-CIC is 93.66%.",
+    "Task 1: Duplicate rate for temporal-holdout is 41.71%.",
+    "Task 1: Duplicate rate for CIC-to-UNSW is 14.29%.",
+    "Task 1: Duplicate rate for UNSW-to-CIC is 93.66%.",
+    "Task 3 Bootstrap: Using n=2000 iterations due to runtime constraints instead of 10000.",
+    "Task 3 DeLong: Real Fast DeLong not available in standard scipy/sklearn. Using bootstrap-based AUC CIs instead of mislabeled DeLong.",
+    "Task 3 McNemar z-stat = 388.6244865825754 for RF vs XGB in synthetic-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 175.57720051410715 for RF vs SVM in synthetic-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 361.7397552274928 for RF vs IF in synthetic-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 18.33137207632929 for RF vs MLP in synthetic-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 346.69904749663556 for XGB vs SVM in synthetic-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 84.05493977078302 for XGB vs IF in synthetic-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 388.316830234731 for XGB vs MLP in synthetic-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 316.73110867943313 for SVM vs IF in synthetic-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 174.2041006460971 for SVM vs MLP in synthetic-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 361.59615045190804 for IF vs MLP in synthetic-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 29.428362829297612 for RF vs SVM in temporal-holdout. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 34.23459712144882 for RF vs IF in temporal-holdout. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 29.428362829297612 for XGB vs SVM in temporal-holdout. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 34.23459712144882 for XGB vs IF in temporal-holdout. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 29.058721531618595 for SVM vs MLP in temporal-holdout. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 34.088433977788135 for IF vs MLP in temporal-holdout. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 24.20055487314862 for RF vs SVM in CIC-to-UNSW. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 33.63066919650474 for RF vs IF in CIC-to-UNSW. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 24.21661548408798 for XGB vs SVM in CIC-to-UNSW. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 33.645533008388554 for XGB vs IF in CIC-to-UNSW. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 24.20055487314862 for SVM vs MLP in CIC-to-UNSW. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 33.63066919650474 for IF vs MLP in CIC-to-UNSW. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 128.3226870753647 for RF vs XGB in UNSW-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 385.93320644039045 for RF vs SVM in UNSW-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 56.62446691740175 for RF vs IF in UNSW-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 130.52095554729306 for RF vs MLP in UNSW-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 361.8786252272597 for XGB vs SVM in UNSW-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 145.41825714564933 for XGB vs IF in UNSW-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 20.80434097703939 for XGB vs MLP in UNSW-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 390.35709484888525 for SVM vs IF in UNSW-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 363.5425496955648 for SVM vs MLP in UNSW-to-CIC. Highly correlated outputs.",
+    "Task 3 McNemar z-stat = 143.14113874312275 for IF vs MLP in UNSW-to-CIC. Highly correlated outputs.",
+    "Task 4: Third datasets not found, emitted blocked reason.",
+    "Task 5: Created results/shap/signed/UNSW-to-CIC_IF_beeswarm.png",
+    "Task 5: Created results/shap/signed/CIC-to-UNSW_IF_beeswarm.png",
+    "Task 5: Created results/shap/signed/synthetic-to-CIC_RF_beeswarm.png",
+    "Task 5: Created results/shap/signed/temporal-holdout_RF_beeswarm.png",
+    "Task 3 validation gate failed. Check extraction logic."
+  ],
+  "task3_validation_gate": {
+    "synthetic-to-CIC": {
+      "RF": {
+        "published_f1": 0.994,
+        "recomputed_f1": 0.993858466435124,
+        "within_tolerance": true
+      },
+      "XGB": {
+        "published_f1": 0.991,
+        "recomputed_f1": 0.9914048523713926,
+        "within_tolerance": true
+      },
+      "IF": {
+        "published_f1": 0.002,
+        "recomputed_f1": 0.0015843376902619816,
+        "within_tolerance": true
+      }
+    },
+    "UNSW-to-CIC": {
+      "RF": {
+        "published_f1": 0.077,
+        "recomputed_f1": 0.07719642734499217,
+        "within_tolerance": true
+      },
+      "IF": {
+        "published_f1": 0.987,
+        "recomputed_f1": 0.9866295924933489,
+        "within_tolerance": true
+      },
+      "SVM": {
+        "published_f1": 0.985,
+        "recomputed_f1": 0.984523323603373,
+        "within_tolerance": true
+      }
+    }
+  },
+  "task2_task3_reconciliation": {
+    "synthetic-to-CIC": {
+      "SVM": {
+        "task2_f1_mean": 0.5847346388534128,
+        "task3_bootstrap_f1_ci": [
+          0.5836835859007018,
+          0.5858456300971182
+        ],
+        "reconciled": true
+      },
+      "MLP": {
+        "task2_f1_mean": 0.19774360786506745,
+        "task3_bootstrap_f1_ci": [
+          0.2971215985119694,
+          0.29956033292470785
+        ],
+        "reconciled": false
+      }
+    }
+  }
+}

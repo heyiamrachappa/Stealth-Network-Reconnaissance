@@ -1,0 +1,34 @@
+{
+    "pcap_wise": {
+        "train_size": 100,
+        "test_size": 2,
+        "train_benign": 16,
+        "train_recon": 84,
+        "test_benign": 2,
+        "test_recon": 0
+    },
+    "time_wise": {
+        "train_size": 81,
+        "test_size": 21,
+        "train_benign": 16,
+        "train_recon": 65,
+        "test_benign": 2,
+        "test_recon": 19
+    },
+    "host_wise": {
+        "train_size": 93,
+        "test_size": 9,
+        "train_benign": 9,
+        "train_recon": 84,
+        "test_benign": 9,
+        "test_recon": 0
+    },
+    "cross_dataset": {
+        "train_size": 81,
+        "test_size": 21,
+        "train_benign": 13,
+        "train_recon": 68,
+        "test_benign": 5,
+        "test_recon": 16
+    }
+}

@@ -1,13 +1,14 @@
 {
-  "project_root": "/home/yi/Stealth System",
+  "project_root": ".",
+  "version": "2.0.0",
   "directories": {
-    "pcaps": "/home/yi/Stealth System/pcaps",
-    "dataset": "/home/yi/Stealth System/dataset",
-    "models": "/home/yi/Stealth System/models",
-    "dashboard": "/home/yi/Stealth System/dashboard",
-    "results": "/home/yi/Stealth System/results",
-    "logs": "/home/yi/Stealth System/logs",
-    "configs": "/home/yi/Stealth System/configs"
+    "pcaps": "pcaps",
+    "dataset": "dataset",
+    "models": "models",
+    "dashboard": "dashboard",
+    "results": "results",
+    "logs": "logs",
+    "configs": "configs"
   },
   "capture": {
     "default_interface": "any",
@@ -18,18 +19,21 @@
   "features": {
     "flow_timeout_seconds": 60,
     "sliding_window_seconds": 30,
+    "window_sizes": [5, 15, 30, 60, 120],
     "min_packets_per_flow": 1
   },
   "ml": {
     "random_state": 42,
+    "seeds": [42, 7, 13, 99, 2024],
     "test_size": 0.2,
+    "val_size": 0.1,
     "rf_n_estimators": 100,
     "xgboost_max_depth": 5,
-    "models_to_train": ["random_forest", "isolation_forest", "xgboost"]
+    "models_to_train": ["random_forest", "xgboost", "svm", "isolation_forest", "mlp", "rule_based"]
   },
   "alerts": {
-    "alert_log_file": "/home/yi/Stealth System/logs/alerts.log",
-    "log_file": "/home/yi/Stealth System/logs/system.log",
+    "alert_log_file": "logs/alerts.log",
+    "log_file": "logs/system.log",
     "entropy_threshold": 3.0,
     "syn_ratio_threshold": 5.0
   }

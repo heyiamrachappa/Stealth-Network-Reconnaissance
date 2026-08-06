@@ -174,11 +174,11 @@ class FeatureExtractor:
             "host_packet_size_var": host_feat["host_packet_size_var"]
         }
 
-    def extract_features(self, flows: List[FlowSession]) -> pd.DataFrame:
+    def extract_features(self, flows: List[FlowSession], window_size: Optional[int] = None) -> pd.DataFrame:
         """
         Converts a list of flow sessions into a pandas DataFrame representing feature matrices.
         """
-        host_profiles = self.compute_host_features(flows)
+        host_profiles = self.compute_host_features(flows, sliding_window_seconds=window_size)
         feature_rows = []
         
         for flow in flows:

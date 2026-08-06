@@ -78,14 +78,20 @@ class MLInferenceEngine:
             
             if self.model_name == "isolation_forest":
                 raw_pred = self.model.predict(df_scaled)[0]
-                prediction = 1 if raw_pred == -1 else 0
-                confidence = -self.model.decision_function(df_scaled)[0]
-                confidence = float(min(1.0, max(0.0, (confidence + 0.5) / 1.0)))
+                ml_prediction = 1 if raw_pred == -1 else 0
+                ml_confidence = -self.model.decision_function(df_scaled)[0]
+                ml_confidence = float(min(1.0, max(0.0, (ml_confidence + 0.5) / 1.0)))
             else:
-                prediction = int(self.model.predict(df_scaled)[0])
-                confidence = float(self.model.predict_proba(df_scaled)[0][1])
+                ml_prediction = int(self.model.predict(df_scaled)[0])
+                ml_confidence = float(self.model.predict_proba(df_scaled)[0][1])
                 
-            return prediction, confidence
+            # Threat Score Fusion (Fixed Weight: 70% ML, 30% Rules)
+            rule_prediction, rule_confidence = self._heuristic_fallback(raw_features)
+            
+            fused_confidence = (0.7 * ml_confidence) + (0.3 * rule_confidence)
+            fused_prediction = 1 if fused_confidence >= 0.5 else 0
+            
+            return fused_prediction, fused_confidence
             
         except Exception as e:
             logger.error(f"ML inference failed: {e}. Using heuristic fallback.")

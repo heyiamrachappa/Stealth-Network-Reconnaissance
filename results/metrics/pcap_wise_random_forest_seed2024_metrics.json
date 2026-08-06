@@ -1,0 +1,46 @@
+{
+  "strategy": "pcap_wise",
+  "model": "random_forest",
+  "seed": 2024,
+  "hyperparameters": {
+    "random_state": 2024,
+    "class_weight": "balanced",
+    "max_depth": null,
+    "n_estimators": 100
+  },
+  "validation_f1": 1.0,
+  "test_metrics": {
+    "accuracy": 0.9957497188184455,
+    "precision": 0.9982490174342437,
+    "recall": 0.9972314855596803,
+    "f1": 0.9977399920679387,
+    "mcc": 0.962163726925693,
+    "roc_auc": 0.9955407717234004,
+    "pr_auc": 0.9994771272829822,
+    "confusion_matrix": [
+      [
+        9722,
+        278
+      ],
+      [
+        440,
+        158490
+      ]
+    ]
+  },
+  "meta": {
+    "seed": 2024,
+    "timestamp": "2026-08-01 12:30:41",
+    "python_version": "3.12.3",
+    "platform": "Linux-6.17.0-40-generic-x86_64-with-glibc2.39",
+    "cpu_count": 16,
+    "memory_gb": 16.44,
+    "library_versions": {
+      "numpy": "2.4.6",
+      "pandas": "3.0.3",
+      "scikit-learn": "1.8.0",
+      "xgboost": "3.2.0",
+      "shap": "0.52.0"
+    }
+  }
+}

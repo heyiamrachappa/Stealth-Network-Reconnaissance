@@ -1,0 +1,2463 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NML9V78');</script>
+
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-NML9V78" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+
+<meta content="Datasets; Cybersecurity; Malware" name="keywords"/>
+<meta content="Cybersecurity datasets compiled by CIC, ISCX and partners. Used globally for security testing and malware prevention by universities, industry and researchers." name="description"/>
+<title>Datasets | Research | Canadian Institute for Cybersecurity | UNB</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="True" name="HandheldFriendly"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<link href="//www.unb.ca/webcomps/_css/bootstrap.min.css" rel="stylesheet"/>
+<link href="//www.unb.ca/webcomps/_css/styles.css" rel="stylesheet"/>
+<link href="//www.unb.ca/webcomps/_css/color-theme.css" rel="stylesheet"/>
+<link href="//www.unb.ca/webcomps/_css/webslidemenu.css" rel="stylesheet"/>
+<link href="//www.unb.ca/webcomps/_font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+<script type="text/javascript">
+document.documentElement.className += " js";
+</script>
+<script src="//www.unb.ca/webcomps/_js/jquery.js" type="text/javascript"></script>
+<script src="//www.unb.ca/webcomps/_js/menu-subsite.js" type="text/javascript"></script>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+  
+  _st('install','f7VCMvPPsKpZJqwZ4TFr','2.0.0');
+</script>
+		<link href="//www.unb.ca/webcomps/_css/globalmenustyles-sub-sites.css" rel="stylesheet"/>
+		<style>
+
+.st-default-search-input, .st-ui-search-input {
+   
+	font-family: 'ProximaNovaA-Regular', 'Century Gothic', AppleGothic, Arial, sans-serif;
+    background: #fff 8px 8px;
+width: 95%;
+	height:100%;
+}
+.btn-search{
+	color:#fff;
+}
+
+#q {
+    position: relative;
+    background-image:none!important;
+   width: 95%;
+	height:100%;
+}
+</style>
+
+
+
+
+
+           <meta class="swiftype" content="Cybersecurity datasets compiled by CIC, ISCX and partners. Used globally for security testing and malware prevention by universities, industry and researchers." data-type="string" name="description"/>
+    
+<meta content="https://www.unb.ca/cic/datasets/index.html" property="og:url"/>
+
+<meta content="Webpage" property="og:type"/>
+
+</head>
+<body>
+<nav class="scrnread" role="navigation">
+<ul class="accessibility-links" role="menu">
+<li><a href="#mcontent">Skip to Main Content</a></li>
+<li><a href="#navigation">Skip to Global Navigation</a></li>
+<li><a href="#audnav">Skip to navigation links</a></li>
+<li><a href="https://phonebook.unb.ca">UNB Phone Directory</a></li>
+</ul>
+</nav>
+<!--/*skipto -->
+
+
+
+
+
+<meta content="https://www.unb.ca/cic/datasets/index.html" property="og:url"/>
+
+<meta content="Webpage" property="og:type"/>
+
+<!--<link href="${cssSitePath.value}" rel="stylesheet"/>-->
+
+
+
+
+
+
+ 
+
+   
+            
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+           
+                
+                
+    
+        
+    
+ 
+
+
+
+
+
+
+
+
+<div class="persona-nav-container" style="background-color:#000;  z-index: 10;width: 100%;">
+<div class="container persona-nav">
+                <ul class="nav navbar-nav visible-desktop hidden-xs hidden-sm">
+<li><a href="//www.unb.ca/"><img src="//www.unb.ca/webcomps/_css/unb_logo_140.png"/></a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right hidden-sm hidden-xs subsite-right-persona">
+<li><a href="//www.unb.ca/donations/" title="Development &amp; Donor Relations">Give to UNB</a></li>
+<li><a href="https://apply.unb.ca/" title="Start your application"><strong>Apply</strong></a></li>
+<li><button class="btn btn-sm" data-target=".bs-example-modal-lg" data-toggle="modal" type="button"><em class="fa fa-search fa-lg"> </em><span class="scrnread">Search</span></button></li>
+</ul>
+     <!--/*search -->
+    <div aria-hidden="true" class="modal fade bs-example-modal-lg" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content search">
+                <button class="btn btn-close" data-dismiss="modal" type="button"><span class="fa fa-times"></span> Close</button><br clear="all"/>
+                <h1>Search UNB</h1>
+                <form action="" class="navbar-form formzlla" enctype="multipart/form-data" method="get" name="search">
+                    <div class="fieldcontainer">
+                    
+                    <div class="form-group">
+                        <div class="searchspace">
+                            <input class="form-control search sw st-default-search-input" id="q" name="q" placeholder="Search for people or pages" type="search"/>
+                           
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button class="btn btn-search" id="modalSearch" name="modalSearch" type="submit"><span class="fa fa-search"></span> Search</button>
+                    </div>
+                    
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+        </div>
+</div>    
+    <!--/*search close -->
+  <h2 class="scrnread">Global Site Navigation (use tab and down arrow)</h2>
+  <div></div> 
+  <!--Menu HTML Code-->
+  
+<style>
+@media only screen and (min-width : 768px) {
+            
+ .persona-nav-container{randomNum}{
+        height: 90px;
+    }
+
+}
+
+</style>
+<div class="subsite-section">
+    <a class="homelink mobile-home-logo  hidden-desktop" href="https://www.unb.ca" style="display:none;">
+        <img alt="University of New Brunswick est.1785" src="//www.unb.ca/webcomps/_img/unbmobile_logo.png" style="float:left;"/>
+    </a>
+    <div class="container desktop-sectiontitle"><span class="subsite-section-title"><a href="//www.unb.ca/cic/">Canadian Institute for Cybersecurity</a></span></div>
+</div>
+<nav class="subsite-nav" role="navigation">
+  <div class="container condensed navbar-fixed-top"> 
+    <div class="navbar-header">
+        <a class="homelink desktop-home-logo" href="//www.unb.ca/alumni">
+        <img alt="University of New Brunswick est.1785" src="//www.unb.ca/webcomps/_img/unbmobile_logo.png" style="float:left;"/>
+        </a>
+        <div class="container mobile-sectiontitle"><span class="subsite-section-title"><a href="//www.unb.ca/cic/">CIC</a></span></div>
+      <button class="navbar-toggle" id="mobilemainmenu" type="button"> 
+          <span class="sr-only">Toggle navigation</span> 
+          <span class="icon-bar"></span> 
+          <span class="icon-bar"></span> 
+          <span class="icon-bar"></span>
+      </button>
+       </div>
+  
+    
+    <div class="condensed-inner">
+      <ul class="nav navbar-nav">
+        <li class="logoImg visible-desktop hidden-s hidden-xs">
+            <a class="homelink" href="//www.unb.ca/canadian-institute-for-cybersecurity/"><span class="fa fa-home  fa-2x sectionhome-condensed"></span></a>
+        </li>
+        <li class="moibilesearcharea visible-xs visible-s hidden-desktop">
+          <form action="" class="navbar-form formzlla" enctype="multipart/form-data" method="get" name="search">
+            <input class="search st-default-search-input" id="q" name="q" placeholder="Search for people or pages" type="search"/>
+           
+          </form>
+        </li>
+        <li>
+            <a class="main-nav about" href="//www.unb.ca/cic/about/index.html" thesection="about">About</a>
+            <span class="fa fa-lg fa-chevron-down mobilenav-icon"></span> 
+        </li>
+        <div class="submenu-condensed top1">
+          <div class="col-md-6">
+               <h5>Research and innovation</h5>
+            <ul class="list-unstyled">
+              <li><a href="//www.unb.ca/cic/about/hub.html">Canada's Cybersecurity Hub</a></li>
+            </ul>
+          </div>
+        </div> 
+        <li> 
+            <a class="main-nav research" href="//www.unb.ca/cic/research/index.html" thesection="research">Research </a>
+            <span class="fa fa-lg fa-chevron-down mobilenav-icon"></span>
+        </li>
+        <div class="submenu-condensed top1">
+          <div class="col-md-6">
+            <h5>Cutting edge research in cybersecurity</h5>
+            <ul class="list-unstyled">
+              <li><a href="//www.unb.ca/cic/research/applications.html">Applications</a></li>
+              <li><a href="//www.unb.ca/cic/datasets/android-validation.html">Honeynet Project</a></li>
+              <li><a href="//www.unb.ca/cic/research/pst-conference.html">PST Conference</a></li>
+              <li><a href="//www.unb.ca/cic/research/publications.html">Publications</a></li>
+              
+            </ul>
+          </div>
+         
+        </div>
+        <li> 
+            <a class="main-nav membership" href="//www.unb.ca/cic/membership/index.html" thesection="membership">Members</a>
+            <span class="fa fa-lg fa-chevron-down mobilenav-icon"></span> 
+        </li>
+        <div class="submenu-condensed top1">
+          <div class="col-md-6">
+              <h5>Pioneering cybersecurity research</h5>
+            <ul class="list-unstyled">
+              <li><a href="//www.unb.ca/cic/membership/researchers.html">Researchers</a></li>
+              <li><a href="//www.unb.ca/cic/membership/job-opportunities.html">Job Opportunities</a></li>
+             
+            </ul>
+          </div>
+          
+        </div>
+        
+        <li> 
+            <a class="main-nav datasets" href="//www.unb.ca/cic/datasets/index.html" thesection="datasets">Datasets</a>
+            <span class="fa fa-lg fa-chevron-down mobilenav-icon"></span>
+        </li>
+        
+                <li> 
+            <a class="main-nav datasets" href="//www.unb.ca/cic/about/contact.html" thesection="contact">Contact Us</a>
+            <span class="fa fa-lg fa-chevron-down mobilenav-icon"></span>
+        </li>
+        
+      </ul>
+      <ul class="nav navbar-nav right-menu">
+        <li> <a class="main-nav" href="//www.unb.ca/">UNB Home</a> </li>
+        <li> <a class="main-nav" href="//www.unb.ca/give/">Give</a> </li>
+        <li> <a class="main-nav" href="https://apply.unb.ca/">Apply</a> </li>
+        <li>
+          <button class="btn btn-sm" data-target=".bs-example-modal-lg" data-toggle="modal" type="button"> <em class="fa fa-search fa-lg"> </em> <span class="scrnread">Search</span> </button>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+  <div class="container uncondensed"> 
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a class="homelink" href="//www.unb.ca/cic/"><span class="fa fa-home  fa-2x sectionhome"></span></a></li>
+        <li>
+            <a class="main-nav about" href="//www.unb.ca/cic/about/index.html" thesection="about">About</a>
+            <span class="fa fa-lg fa-chevron-down mobilenav-icon"></span> 
+        </li>
+        <div class="submenu top1">
+          <div class="col-md-6">
+           	<h5>Research and innovation</h5>
+            <ul class="list-unstyled">
+              <li><a href="//www.unb.ca/cic/about/hub.html">Canada's Cybersecurity Hub</a></li>
+             
+            </ul>
+          </div>
+        </div>
+         <li> 
+            <a class="main-nav research" href="//www.unb.ca/cic/research/index.html" thesection="research">Research </a>
+            <span class="fa fa-lg fa-chevron-down mobilenav-icon"></span>
+        </li>
+        <div class="submenu top1">
+          <div class="col-md-6">
+            <h5>Cutting edge research in cybersecurity</h5>
+            <ul class="list-unstyled">
+              <li><a href="//www.unb.ca/cic/research/applications.html">Applications</a></li>
+              <li><a href="//www.unb.ca/cic/research/honeynet.html">Honeynet Project</a></li>
+              <li><a href="//www.unb.ca/cic/research/pst-conference.html">PST Conference</a></li>
+              <li><a href="//www.unb.ca/cic/research/publications.html">Publications</a></li>
+            </ul>
+          </div>
+         
+        </div>
+        <li> 
+            <a class="main-nav membership" href="//www.unb.ca/cic/membership/index.html" thesection="membership">Members</a>
+            <span class="fa fa-lg fa-chevron-down mobilenav-icon"></span> 
+        </li>
+        <div class="submenu top1">
+          <div class="col-md-6">
+          	<h5>Pioneering cybersecurity research</h5>
+            <ul class="list-unstyled">
+              <li><a href="//www.unb.ca/cic/membership/researchers.html">Researchers</a></li>
+              <li><a href="//www.unb.ca/cic/membership/job-opportunities.html">Job Opportunities</a></li>
+             
+            </ul>
+          </div>
+          
+        </div>
+       
+        <li> 
+            <a class="main-nav datasets" href="//www.unb.ca/cic/datasets/index.html" thesection="datasets">Datasets</a>
+            <span class="fa fa-lg fa-chevron-down mobilenav-icon"></span>
+        </li>
+                    <li> 
+            <a class="main-nav datasets" href="//www.unb.ca/cic/about/contact.html" thesection="contact">Contact Us</a>
+            <span class="fa fa-lg fa-chevron-down mobilenav-icon"></span>
+        </li>
+        
+      </ul>
+    </div> 
+  </div> 
+</nav>
+
+<style>
+@media (max-width: 500px){
+    #element {
+        padding-top: 0;
+    }
+}
+</style>
+
+
+
+
+
+<!-- if we have a large image, we didplay it here -->
+
+ 
+
+
+
+
+<!-- End Large Image -->
+
+<!-- BreadCrumbs -->
+ 
+
+
+
+
+
+
+
+
+
+  <!-- End Bread Crumbs -->
+<div class="container">
+<!-- Only display on desktop -->
+     <div class="row">
+        <div id="sidebardesktopholder">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 visible-desktop hidden-xs hidden-sm" id="sidebar">
+                
+
+
+
+
+
+
+            
+        
+    
+                    
+        
+                    <ul id="sidenav">
+                    <li class="homelink"><a href="../index.html"> CIC </a></li>
+                
+                                                       
+                <ul class="childsub">
+                                                             
+    
+                
+                </ul>
+                
+            
+                                
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                                                                                             
+                                                                                                                            <li><a class="sub" href="../about/index.html">About the CIC <span class="fa fa-chevron-right menuicon"></span></a></li>
+                                            
+                    
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                                                                                             
+                                                                                                                            <li><a class="sub" href="../membership/index.html">Membership <span class="fa fa-chevron-right menuicon"></span></a></li>
+                                            
+                    
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                                                                                             
+                                                                                                                            <li><a class="sub" href="../research/index.html">Research <span class="fa fa-chevron-right menuicon"></span></a></li>
+                                            
+                    
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                          
+                                                 
+                                                                                <li class="currentfolder"><a class="sub on parentfolder" href="index.html">Datasets <span class="fa fa-chevron-down menuicon"></span></a>
+                            <ul class="childpages">
+                                                                                       
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                            </ul>
+                        </li>
+                        
+                                                
+                        
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                                                                                             
+                                                                                                                            <li><a class="sub" href="../webinars.html">Webinars <span class="fa fa-chevron-right menuicon"></span></a></li>
+                        
+                                            
+                    
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                             
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                                                                                             
+                                                                                                                            <li><a class="sub" href="../cybersecurity-101.html">Cybersecurity Workshop <span class="fa fa-chevron-right menuicon"></span></a></li>
+                        
+                                            
+                    
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                             
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                             
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                             
+    
+                
+                </ul>
+                
+            
+                
+        
+        </ul>
+        
+
+
+
+
+
+
+
+
+              </div>
+            
+        </div>
+        <div id="sidebarmobileholder">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 visible-sm visible-xs hidden-desktop" id="sidebarmobile">
+                
+
+
+
+
+
+
+
+
+<div class="mobilecontainer navbar">
+
+
+
+
+            
+        
+    
+                    
+        
+                    <div class="navbar-header">
+                    <span class="sectionMenuTitle"><a class="sub" href="../index.html">CIC </a></span>
+              <button class="navbar-toggle" id="sidenavtoggle" type="button">
+                  <span class="sr-only">Toggle navigation</span> 
+                  <span class="icon-bar"></span> 
+                  <span class="icon-bar"></span> 
+                  <span class="icon-bar"></span>
+                </button>
+        </div>
+        <ul class="mobilemenuoptions" id="sidenav">
+                                    
+                                                       
+                <ul class="childsub">
+                                                             
+    
+                
+                </ul>
+                
+            
+                                
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                                                                                             
+                                                                                                                            <li><a class="sub" href="../about/index.html">About the CIC <span class="fa fa-chevron-right menuicon"></span></a></li>
+                                            
+                    
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                                                                                             
+                                                                                                                            <li><a class="sub" href="../membership/index.html">Membership <span class="fa fa-chevron-right menuicon"></span></a></li>
+                                            
+                    
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                                                                                             
+                                                                                                                            <li><a class="sub" href="../research/index.html">Research <span class="fa fa-chevron-right menuicon"></span></a></li>
+                                            
+                    
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                          
+                                                 
+                                                                                <li class="currentfolder"><a class="sub on parentfolder" href="index.html">Datasets <span class="fa fa-chevron-down menuicon"></span></a>
+                            <ul class="childpages">
+                                                                                       
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                                                                                                                                                                                                                   
+                                
+                                                            </ul>
+                        </li>
+                        
+                                                
+                        
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                                                                                             
+                                                                                                                            <li><a class="sub" href="../webinars.html">Webinars <span class="fa fa-chevron-right menuicon"></span></a></li>
+                        
+                                            
+                    
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                             
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                               
+                  
+                                        
+                                                                                                             
+                                                                                                                            <li><a class="sub" href="../cybersecurity-101.html">Cybersecurity Workshop <span class="fa fa-chevron-right menuicon"></span></a></li>
+                        
+                                            
+                    
+                        
+                                       
+  
+                              
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                             
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                             
+    
+                
+                </ul>
+                
+            
+                                               
+                <ul class="childsub">
+                                                             
+    
+                
+                </ul>
+                
+            
+                
+        
+        </ul>
+        
+
+
+
+
+
+
+
+
+
+</div>
+<script>
+
+    $(document).ready(function() {
+        $('.mobilemenuoptions').hide();
+         
+    });
+
+</script>              </div>
+        </div>
+       <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+           
+            
+
+
+        
+                
+                        
+                                    
+            <div class="bkgrblank">        
+        
+            
+                                    <div class="row onecol">
+                        
+                                    
+                
+                                <div id="contentOne"></div>
+                <script>
+        
+                    $(document).ready(function() {
+                      
+                        $('#contentOne').parent().removeClass('row');
+                       
+     
+                    });
+                
+                </script>
+                            
+            
+            
+            
+                                                               
+                                                
+                
+                                                
+                                	                    <h1>Datasets</h1>
+<p>Canadian Institute for Cybersecurity datasets are used around the world by universities, private industry, and independent researchers. We maintain an interactive <a href="http://205.174.165.80/map.html" rel="noopener" target="_blank">map indicating datasets downloaded by country</a>.</p>
+                    
+                    
+                                                
+                        
+                        
+            
+            
+                        
+                        
+                
+                
+    </div>        </div>
+        
+                
+                        
+                                    
+            <div class="bkgrblank">        
+        
+            
+                                    <div class="row onecol">
+                        
+                                    
+                
+                            
+            
+            
+            
+                                                               
+                                                
+                
+                                                	                                                                                
+                                       
+                                                           
+                                        
+                    
+                        
+                                                            
+                                                                      
+                                                                                                                                           
+
+                          
+                        
+                                                    
+        
+         
+        
+    
+    
+            <h2>Available datasets</h2>
+            <p></p>
+       
+                
+                <div class="accordion">
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> IoT datasets</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="ynu-iot-2026.html">CIC-YNU-IoTMal 2026</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/iiot-dataset-2025.html">Datasense IIoT&#160;(IoT) 2025</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/iiot-dataset-2024.html">APT IIoT formerly known as the CICADA-IIoT (IoT) 2024</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/tabular-iot-attack-2024.html">CIC-BCCC-NRC Tabular IoT Attack&#160;(IoT) 2024</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/iomt-dataset-2024.html">CICIoMT2024&#160;(IoT) 2024</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/iov-dataset-2024.html">CICIoV2024&#160;(IoT) 2024</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/iot-diad-2024.html">IoT-DIAD&#160;(IoT) 2024</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/iov-dataset-2024.html">IoV dataset&#160;(IoT) 2024</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/evse-dataset-2024.html">EVSE&#160;(IoT) 2024</a></li>
+<li><a href="//www.unb.ca/cic/datasets/iotdataset-2023.html">CIC IoT Attack Dataset 2023</a></li>
+<li><a href="//www.unb.ca/cic/datasets/iotdataset-2022.html">CIC IoT Profiling Dataset 2022</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/enricheddataset.html">Enriching IoT Datasets</a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> Ground-truth dataset real/fake</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="//www.unb.ca/cic/datasets/truthseeker-2023.html">Truth seeker dataset 2023</a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> Dark web</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="//www.unb.ca/cic/datasets/darknet2020.html">Darknet 2020</a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> DNS datasets</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="//www.unb.ca/cic/datasets/dns-exf-2021.html">CIC Bell DNS EXF 2021</a></li>
+<li><a href="//www.unb.ca/cic/datasets/dns-2021.html">CIC Bell DNS 2021</a></li>
+<li><a href="//www.unb.ca/cic/datasets/dohbrw-2020.html">DNS over HTTPS (CIRA-CIC-DoHBrw2020)</a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> IDS datasets</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="https://www.unb.ca/cic/datasets/cic-unsw-nb15.html">UNSW-NB15 2024</a></li>
+<li><a href="//www.unb.ca/cic/datasets/cicev2023.html">DDoS Attack Dataset (CICEV 2023)</a></li>
+<li><a href="//www.unb.ca/cic/datasets/ddos-2019.html">DDoS Evaluation Dataset (CIC-DDoS 2019)</a></li>
+<li><a href="//www.unb.ca/cic/datasets/ids-2018.html">IPS/IDS dataset on AWS (CSE-CIC-IDS 2018)</a></li>
+<li><a href="//www.unb.ca/cic/datasets/ids-2017.html">Intrusion Detection Evaluation Dataset (CIC-IDS 2017)</a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> ISCX datasets, 2009-2016</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="//www.unb.ca/cic/datasets/vpn.html">VPN-nonVPN traffic dataset (ISCXVPN2016)</a></li>
+<li><a href="//www.unb.ca/cic/datasets/tor.html">Tor-nonTor dataset (ISCXTor2016)</a></li>
+<li><a href="//www.unb.ca/cic/datasets/url-2016.html">URL dataset (ISCX-URL2016)</a></li>
+<li><a href="//www.unb.ca/cic/datasets/android-botnet.html">ISCX Android Botnet dataset 2015</a></li>
+<li><a href="//www.unb.ca/cic/datasets/ids.html">ISCX IDS dataset 2012</a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> Large Language Models</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="https://www.unb.ca/cic/datasets/sban-dataset-2025.html">SBAN datasets 2025</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/triple-r-dataset-2024.html">Triple-R 2024</a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> Graph learning</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="https://www.unb.ca/cic/datasets/cic-dgg-2025.html">CIC-DGG 2025</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/sgg-dataset-2024.html">CIC-SGG 2024</a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> Malware</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="ynu-iot-2026.html">CIC-YNU-IoTMal 2026</a></li>
+<li><a href="//www.unb.ca/cic/datasets/malmem-2022.html">CIC MalMem 2022</a></li>
+<li><a href="//www.unb.ca/cic/datasets/pdfmal-2022.html">Evasive-PDF Mal 2022</a></li>
+<li><a href="//www.unb.ca/cic/datasets/andmal2020.html">CCCS-CIC-AndMal2020</a></li>
+<li><a href="//www.unb.ca/cic/datasets/maldroid-2020.html">CICMalDroid 2020</a></li>
+<li><a href="//www.unb.ca/cic/datasets/andmal2017.html">Android Malware Dataset (CIC-AndMal2017)</a></li>
+<li><a href="//www.unb.ca/cic/datasets/android-adware.html">Android Adware and General Malware Dataset (CIC-AAGM2017)</a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> Operational technology</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="//www.unb.ca/cic/datasets/modbus-2023.html">Modbus 2023 </a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> Phishing</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li><a href="https://www.unb.ca/cic/datasets/pqc-oav-dataset-2025.html">CIC-PQC_OAV v1 2025</a></li>
+<li><a href="https://www.unb.ca/cic/datasets/trap4phish2025.html">CIC-Trap4Phish 2025</a></li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                    </div>
+ 
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+
+<script>
+     
+</script>
+<style>
+
+
+
+.accordion .expandable {
+  margin-bottom:0;
+  padding-bottom:5px;
+  cursor: pointer;
+  }
+
+.accordion h3.expandable {
+  font-size:20px;
+  line-height:1.4;
+  padding:7px 5px;
+  background-color:#F5F5F5; /* Same as breadcrumb background */
+  color: #007fa3;
+}
+
+.accordion h3.expandable:last-child {
+  margin-bottom:20px;
+}
+
+.expandable .toggleicon {
+  font-size:20px;
+  color:#D72E3A; /* Our red */
+  top:0;
+  margin-right:5px;
+}
+
+.subSectionContent {
+  background-color:#F5F5F5;
+  margin-bottom:0;
+  margin-top:0;
+}
+
+.subSectionContent h4 {
+  margin-top:5px;
+  padding:10px 15px;
+}
+</style>
+
+                            
+                                                    
+                        
+                                               
+                                              
+                       
+                       
+                        
+                                       
+                    
+                  
+                    
+                    
+                                
+                                                
+                        
+                        
+            
+            
+                        
+                        
+                
+                
+    </div>        </div>
+        
+                
+                        
+                                    
+            <div class="bkgrblank">        
+        
+            
+                                    <div class="row onecol">
+                        
+                                    
+                
+                            
+            
+            
+            
+                                                               
+                                                
+                
+                                                
+                                	                    <h2>Understanding a dataset</h2>
+<p>Here are three to four things that you can do to help better understand the dataset you are using:</p>
+<ol>
+<li>Read the information that is provided on the dataset and the published paper cited at the bottom of the dataset webpage. The citation is frequently linked to the article&#8217;s download page. If the link does not work, Google the article or look for it on your university or college research library database.</li>
+<li>Read articles that other researchers who have used the datasets wrote and published. These can be found by searching for the dataset by name.</li>
+<li>If you still have questions about the dataset, reach out a member of the researcher team who worked on the project. Frequently, they have moved on to other projects and organizations and are no longer with the Institute.</li>
+<li>Some of the datasets have a video that helps explain either how they were created or how they were used. If there is a video, then a link will be included on the dataset's webpage.</li>
+</ol>
+                    
+                    
+                                                
+                        
+                        
+            
+            
+                        
+                        
+                
+                
+    </div>        </div>
+        
+                
+                        
+                                    
+            <div class="bkgrblank">        
+        
+            
+                                    <div class="row onecol">
+                        
+                                    
+                
+                            
+            
+            
+            
+                                                               
+                                                
+                
+                                                	                                                                                
+                                       
+                                                           
+                                        
+                    
+                        
+                                                            
+                                                                      
+                                                                                                                                                                     
+                        
+                                                    
+        
+         
+        
+    
+    
+            <h2>Companies, research centres and universities that have downloaded our datasets</h2>
+            <p></p>
+       
+                
+                <div class="accordion">
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> A to L</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li>Aalborg University</li>
+<li>Aalto university</li>
+<li>Abdullah Gul University (AGU)</li>
+<li>Acharya Nagarjuna university</li>
+<li>Adhiyamaan College of Engineering</li>
+<li>Advanced Technologies Application Center</li>
+<li>Al-Aqsa University</li>
+<li>Alexandrian Technological Institute of Thessaloniki</li>
+<li>American University of Beirut</li>
+<li>Amrita School of Engineering, Bengaluru</li>
+<li>Andhra University</li>
+<li>APJ Abdul Kalam Technological University</li>
+<li>Beijing University</li>
+<li>Beijing University of Posts and Telecommunications</li>
+<li>Birla Institute of Technology and Science, Pilani</li>
+<li>Bo&#287;azi&#231;i University</li>
+<li>Bournemouth University</li>
+<li>Brandeis University</li>
+<li>California State University, Fullerton</li>
+<li>Canara Engineering College</li>
+<li>Carnegie Mellon University</li>
+<li>Central Connecticut State University</li>
+<li>Chandigarh University</li>
+<li>Chinese Academy of Sciences</li>
+<li>Chongoing University</li>
+<li>College of Charleston</li>
+<li>COMSATS Institute of IT</li>
+<li>Council for Scientific and Industrial Research (CSIR)</li>
+<li>Dalhousie University</li>
+<li>DAV University</li>
+<li>Deakin University Australia</li>
+<li>Federal University of Technology Akure</li>
+<li>Federal University of Par&#225; (UFPA)</li>
+<li>Fulda University of Applied Sciences</li>
+<li>Gazi University</li>
+<li>George Mason University</li>
+<li>George Washington University</li>
+<li>Georgia Tech University</li>
+<li>G H Patel College of Engineering &amp; Technology</li>
+<li>Gitam University</li>
+<li>Hacettepe University</li>
+<li>Hanoi University of Science and Technology</li>
+<li>Helwan University</li>
+<li>Hewlett-Packard</li>
+<li>Hillstonenet Co.</li>
+<li>Hitech Solutions (Pvt) Ltd.</li>
+<li>Hochschule Fulda, University of Applied Sciences</li>
+<li>Hochschule f&#252;r Telekommunikation Leipzig (HfTL)</li>
+<li>Ibn Tofail University</li>
+<li>ICAR-CNR (ITALY)</li>
+<li>Imperial College London</li>
+<li>Indian Institute of Technology Guwahati</li>
+<li>Innopolis University</li>
+<li>Institute for Infocomm Research (I2R)</li>
+<li>Instituto Militar de Engenharia</li>
+<li>Johns Hopkins University</li>
+<li>Karunya University</li>
+<li>Khalifa University</li>
+<li>King AbdulAziz University</li>
+<li>King Fahad University</li>
+<li>King Fahad University of Petroleum and Minerals</li>
+<li>King Mongkut's Institute of Technology Ladkrabang</li>
+<li>Kyushu University</li>
+<li>Lancaster University</li>
+<li>Lanzhou University</li>
+<li>Lebanese University</li>
+<li>Le Quy Don Technical University</li>
+<li>Loughborough University</li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> M to Z</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <ul>
+<li>Malaviya National institute of technology</li>
+<li>Malta College of Arts, Science and Technology (MCAST)</li>
+<li>Middle East Technical University in Ankara</li>
+<li>Mississippi State University</li>
+<li>MIT College of Engineering (India)</li>
+<li>MIT Lincoln Laboratory</li>
+<li>MITRE.org</li>
+<li>Morgan State University</li>
+<li>Moscow Institute of Physics and Technology</li>
+<li>National Chiao Tung University</li>
+<li>National Chung Cheng University</li>
+<li>National Institute of Technology (NIT)</li>
+<li>National University of Defense Technology (NUDT)</li>
+<li>National University Singapore (NUS)</li>
+<li>Necmettin Erbakan University</li>
+<li>NEHEMIAH Security Co.</li>
+<li>Nigeria Federal University of Technology</li>
+<li>NIIT University</li>
+<li>Nitte Meenakshi Institute of Technology (NMIT)</li>
+<li>Novasibirsk State University</li>
+<li>Northumbria University</li>
+<li>Norwegian University of Science and Technology (NTNU)</li>
+<li>NOVETTA</li>
+<li>OAKLAND Univeristy</li>
+<li>Oak Ridge National Laboratory</li>
+<li>Open University of Netherlands</li>
+<li>Oracle Lab (Canada)</li>
+<li>Packetwerk</li>
+<li>Penn State University</li>
+<li>Political Elektronika Negeri Surabaya (PENS)</li>
+<li>Princeton University</li>
+<li>Punjab University</li>
+<li>Purdue University</li>
+<li>Qatar University</li>
+<li>Rochester Institute of Technology</li>
+<li>Royal Military College of Canada</li>
+<li>Sabanci University</li>
+<li>Sakarya University</li>
+<li>Sejong University</li>
+<li>Shahid Bahonar University of Kerman</li>
+<li>Shandong Normal University</li>
+<li>Shanghai Jiao Tong University</li>
+<li>Sharif University of Technology</li>
+<li>Sheffield Hallam University</li>
+<li>Shiraz University</li>
+<li>Sichuan University</li>
+<li>Sistan and Baluchestan Univerisity</li>
+<li>Slovak University of Technology</li>
+<li>Soongsil University</li>
+<li>St. Polten University of Applied Sciences</li>
+<li>State University of Londrina</li>
+<li>Sun Yat-sen University</li>
+<li>Surabaya State Polytechnics</li>
+<li>Technical University of Madrid</li>
+<li>Telecom Bretagne</li>
+<li>Telkon University</li>
+<li>Tennessee State University</li>
+<li>Texas A&amp;M University Kingsville</li>
+<li>Tianjin University</li>
+<li>Tsinghua University</li>
+<li>United Technologies Research Center (UTRC)</li>
+<li>Universidad del Cauca</li>
+<li>Universidad Nacional de Asunci&#243;n</li>
+<li>Universidade da Coruna</li>
+<li>Universidade Federal Fluminense</li>
+<li>Universit&#224; degli Studi di Napoli Federico II</li>
+<li>Universit&#224; degli Studi Roma Tre</li>
+<li>Universita Della Calabria</li>
+<li>Universit&#233; Bretagne Loire</li>
+<li>Universiti Putra Malaysia</li>
+<li>Universiti Technology Malaysia</li>
+<li>University Cobur of Germany</li>
+<li>University Kasdi Merban Ouargla</li>
+<li>University Malaysia Pahang</li>
+<li>University of Aizu</li>
+<li>University of Alcal&#225; de Henares</li>
+<li>University of Amsterdam</li>
+<li>University of Applied Sciences Wedel</li>
+<li>University of Calgary</li>
+<li>University of Chinese Academy of Sciences</li>
+<li>University of Cincinnati</li>
+<li>University of Bahrain</li>
+<li>University of Bridgeport</li>
+<li>University of Dayton</li>
+<li>University of Electronic Science and Technology of China</li>
+<li>University of Essex</li>
+<li>University of Fort Hare</li>
+<li>University of FuZhou</li>
+<li>University of Glasgow</li>
+<li>University of Granada</li>
+<li>University of Houston</li>
+<li>University of Hyogo</li>
+<li>University of Ljubljana</li>
+<li>University of Luxembourg</li>
+<li>University of Maryland</li>
+<li>University of New Haven</li>
+<li>University of Ontario</li>
+<li>University of Ottawa</li>
+<li>University of Oviedo</li>
+<li>University of Oxford</li>
+<li>University of Pennsylvania</li>
+<li>University of Santa Cruz Do Sul</li>
+<li>University of Science and Technology Beijing</li>
+<li>University of Science and Technology of China</li>
+<li>University of Strathclyde Glasgow</li>
+<li>University of St. Andrews</li>
+<li>University of Stavanger</li>
+<li>University of Surrey</li>
+<li>University of Tabriz</li>
+<li>University of Technology of Baghdad</li>
+<li>University of Tehran</li>
+<li>University of Texas at Dallas (UTDallas)</li>
+<li>University of Trento</li>
+<li>Univerisyt of Twente</li>
+<li>University of Washington</li>
+<li>University of West Florida</li>
+<li>University Utara Malaysia</li>
+<li>Victoria University of Wellington</li>
+<li><span><span class="ui-provider fz b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ae af ag ah ai aj ak" dir="ltr">Vilnius University</span></span></li>
+<li>Warsaw University of Technology</li>
+<li>Western Washington University (WWU)</li>
+<li>Wright State University</li>
+<li>Wuhan University</li>
+<li>Xidian University</li>
+<li>YANDEX Co.</li>
+<li>Yeditepe University</li>
+<li>Yonsei University</li>
+<li>Yildiz Technical University</li>
+<li>Zhejiang University</li>
+<li>ZIGHRA Co.</li>
+</ul>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                    </div>
+ 
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+
+<script>
+     
+</script>
+<style>
+
+
+
+.accordion .expandable {
+  margin-bottom:0;
+  padding-bottom:5px;
+  cursor: pointer;
+  }
+
+.accordion h3.expandable {
+  font-size:20px;
+  line-height:1.4;
+  padding:7px 5px;
+  background-color:#F5F5F5; /* Same as breadcrumb background */
+  color: #007fa3;
+}
+
+.accordion h3.expandable:last-child {
+  margin-bottom:20px;
+}
+
+.expandable .toggleicon {
+  font-size:20px;
+  color:#D72E3A; /* Our red */
+  top:0;
+  margin-right:5px;
+}
+
+.subSectionContent {
+  background-color:#F5F5F5;
+  margin-bottom:0;
+  margin-top:0;
+}
+
+.subSectionContent h4 {
+  margin-top:5px;
+  padding:10px 15px;
+}
+</style>
+
+                            
+                                                    
+                        
+                                               
+                                              
+                       
+                       
+                        
+                                       
+                    
+                  
+                    
+                    
+                                
+                                                
+                        
+                        
+            
+            
+                        
+                        
+                
+                
+    </div>        </div>
+        
+                
+                        
+                                    
+            <div class="bkgrblank">        
+        
+            
+                                    <div class="row onecol">
+                        
+                                    
+                
+                            
+            
+            
+            
+                                                               
+                                                
+                
+                                                	                                                                                
+                                       
+                                                           
+                                        
+                    
+                        
+                                                            
+                                                                      
+                                                                                                                                                                     
+                        
+                                                    
+        
+         
+        
+    
+    
+            <h2>Common questions</h2>
+            <p></p>
+       
+                
+                <div class="accordion">
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> When I click the link to download a dataset from your website, I get a red screen with a warning. Is there something wrong with the website?</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <span data-teams="true">This occurs in some web browsers such as Google and sometimes Firefox. The download documents often reference viruses or malware and has been reported as containing harmful software. Choose another browser, such as Internet Explorer.</span>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> I am trying to download  one of your datasets and a green box appears asking for a username and password.</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <p>We do not use login pages and passwords to download our datasets. We do have a short form to collect basic data for reporting, but this does not require a password.</p>
+<p>To navigate to the dataset download site, use the download button on the bottom of the dataset information webpage.&#160;</p>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> I would like to use your dataset but every time I try to download it, it stops in the middle. Is there any better way to download the dataset?</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <p>We recommend using <a href="https://www.internetdownloadmanager.com/">Internet Download Manager (IDM)</a> to download files.</p>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> Do you have any additional information about the datasets beyond what is already on your website?</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <p>We shared everything we have on the datasets on their related information pages and in the published paper, however, other researchers have used the datasets and published article. You may find more information by searching for and reviewing these articles.</p>
+<p>Some of our researchers created&#160;<span>videos to help explain either how their dataset were created or how they were used.&#160; These videos are shared on <a href="https://www.youtube.com/@canadianinstituteforcybersecur">CIC's YouTube channel</a>.&#160; If there is a video, then a link will be included on the dataset's webpage.</span></p>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> I downloaded the dataset from your site, but I cannot find any license documentation in the download or on the site. Is there somewhere on that states permission for the use of the dataset?</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            We try to include a licensing note at the bottom of each dataset page, right above the download button. If we missed it, we apologize. With any of our datasets, you may redistribute, republish, and mirror our datasets in any form. However, any use or redistribution of the data must include a citation to the dataset and the research paper listed.
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> I have been trying to download one of your datasets for my research, but the download speed is slow. Is there any workaround for downloading the dataset?</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            We recommend using <a href="https://www.internetdownloadmanager.com/">Internet Download Manager (IDM)</a> to download files.
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> What is the relationship between the CSV and PCAP files?</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <p>Sorry, we do not have file level information. Everything we have on the datasets is on the released documents (related information page and published paper).&#160;</p>
+<p>For many of the datasets, the projects are closed, and the researchers have moved on to other projects and organizations.&#160; We suggest trying to reach out to them.&#160;</p>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> What is your policy of using your dataset collections by private companies, for commercial use?</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            You may redistribute, republish, and mirror our datasets in any form; however, any use or redistribution of the data must include a citation to the dataset and the research paper listed on the webpage.
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> Could you send me a copy of your dataset for my research?</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <p>Our datasets are available to download from anywhere in the world so long as you have an internet connection. After you choose a <a href="https://www.unb.ca/cic/datasets/index.html">dataset from the main list</a>, you will be taken to the dataset page where the research team provided information about the project. At the bottom of the page is a red button that takes you to a download form.&#160; Once the form is completed, you will have access to the dataset files.</p>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> Do you have a data dictionary the defines all the fields of the data set and how they are measured?</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            <p>Sorry, we do not have file level information on our datasets. What we have is shared on our website and for many of the datasets, the projects closed several years ago.&#160;</p>
+<p>In many cases, the people who worked on the datasets have moved on to other projects and organizations. We suggest trying to reach out to them.&#160;</p>
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                            <h3 class="expandable"><span aria-hidden="true" class="fa fa-angle-down toggleicon"></span> I cannot find the publication that you reference on your dataset webpage. Is the paper publicly available? If so, could send me a link?</h3>
+                                                    <div class="row subSectionContent">
+                    
+                                            
+                                                
+                                             
+                        <div class="col-lg-12 col-md-12 col-sm-12">   
+                
+                            We provided links to most of the papers cited on the dataset webpages. If the link does not work for you, Google the article or look for it on your university or college research library database.
+                
+                        </div><br clear="all"/>
+                       
+                                          </div>
+                
+                
+                                
+                
+                
+                    
+                    </div>
+ 
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+
+<script>
+     
+</script>
+<style>
+
+
+
+.accordion .expandable {
+  margin-bottom:0;
+  padding-bottom:5px;
+  cursor: pointer;
+  }
+
+.accordion h3.expandable {
+  font-size:20px;
+  line-height:1.4;
+  padding:7px 5px;
+  background-color:#F5F5F5; /* Same as breadcrumb background */
+  color: #007fa3;
+}
+
+.accordion h3.expandable:last-child {
+  margin-bottom:20px;
+}
+
+.expandable .toggleicon {
+  font-size:20px;
+  color:#D72E3A; /* Our red */
+  top:0;
+  margin-right:5px;
+}
+
+.subSectionContent {
+  background-color:#F5F5F5;
+  margin-bottom:0;
+  margin-top:0;
+}
+
+.subSectionContent h4 {
+  margin-top:5px;
+  padding:10px 15px;
+}
+</style>
+
+                            
+                                                    
+                        
+                                               
+                                              
+                       
+                       
+                        
+                                       
+                    
+                  
+                    
+                    
+                                
+                                                
+                        
+                        
+            
+            
+                        
+                        
+                
+                
+    </div>        </div>
+    
+                      </div>  
+    </div>
+</div>
+
+
+
+<div id="footer">
+<div class="row" id="desktopfooter">
+<div class="container">
+<div class="col-md-12 col-lg 12">
+<div class="col-md-3 col-sm-12">
+<div class="foot-header"><img alt="University of New Brunswick" height="86" src="//www.unb.ca/webcomps/_css/unb_logo_white.png" width="195"/></div>
+</div>
+<!--/col-sm-3-->
+<div class="col-md-3 col-sm-4 col-xs-12">
+<div class="foot-header"><strong>Resources</strong></div>
+<div class="foot-links">
+<ul>
+<li><a href="//www.unb.ca/aboutunb/">About UNB</a></li>
+<li><a href="http://es.unb.ca/apps/map/index.cgi">Campus Maps</a></li>
+<li><a href="//www.unb.ca/security/">Campus Security</a></li>
+<li><a href="//www.unb.ca/aboutunb/employment.html">Careers at UNB</a></li>
+<li><a href="//www.unb.ca/aboutunb/services-at-unb.html">Services at UNB</a></li>
+</ul>
+</div>
+</div>
+<div class="col-md-3 col-sm-4 col-xs-12">
+<div class="foot-header">&#160;</div>
+<div class="foot-links">
+<ul>
+<li><a href="//www.unb.ca/housing/">Conference Services</a></li>
+<li><a href="//lib.unb.ca/">Libraries</a></li>
+<li><a href="//www.unb.ca/cel/">Online &amp; Continuing Ed</a></li>
+<li><a href="//unb.ca/leadership">Leadership</a></li>
+</ul>
+</div>
+</div>
+<div class="col-md-3 col-sm-4 col-xs-12">
+<div class="foot-header">Connect with UNB</div>
+<p><a class="ghost-button contact" href="//www.unb.ca/contact/">Contact UNB</a></p>
+<ul class="social-buttons list-inline">
+<li><a href="https://www.facebook.com/uofnb" rel="noopener" target="_blank" title="Follow us on Facebook"><span class="fa fa-facebook">&#160;</span></a></li>
+<li><a href="https://twitter.com/UNB" rel="noopener" target="_blank" title="Follow us on Twitter"><span class="fa fa-twitter">&#160;</span></a></li>
+<li><a href="https://ca.linkedin.com/school/university-of-new-brunswick/" rel="noopener" target="_blank" title="Follow us on Linked In"><span class="fa fa-linkedin">&#160;</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- End Desktop Footer -->
+<div class="row" id="mobilefooter">
+<div class="col-md-8 col-md-offset-2">
+<div class="col-sm-12 col-xs-12">
+<div class="foot-header"><img alt="University of New Brunswick" height="86" src="//www.unb.ca/webcomps/_css/unb_logo_white.png" width="195"/></div>
+</div>
+<div class="col-xs-12">
+<div class="foot-header">Connect with UNB</div>
+<p><a class="ghost-button contact" href="//www.unb.ca/contact/">Contact UNB</a></p>
+<ul class="social-buttons list-inline">
+<li><a href="https://www.facebook.com/uofnb" rel="noopener" target="_blank" title="Follow us on Facebook"><span class="fa fa-facebook">&#160;</span></a></li>
+<li><a href="https://twitter.com/UNB" rel="noopener" target="_blank" title="Follow us on Twitter"><span class="fa fa-twitter">&#160;</span></a></li>
+<li><a href="https://ca.linkedin.com/school/university-of-new-brunswick/" rel="noopener" target="_blank" title="Follow us on Linked In"><span class="fa fa-linkedin">&#160;</span></a></li>
+</ul>
+</div>
+<div class=" col-xs-12">
+<div class="navbar-header">
+<div class="foot-header"><button class="navbar-toggle" style="width: 95%;" id="footertoggle"><span class="button-label">Resources</span><div class="button-bars"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></div></button></div>
+
+
+<div class="foot-links" id="mobilefooterlinks">
+<ul>
+<li><a href="//www.unb.ca/aboutunb/">About UNB</a></li>
+<li><a href="http://es.unb.ca/apps/map/index.cgi">Campus Maps</a></li>
+<li><a href="//www.unb.ca/security/">Campus Security</a></li>
+<li><a href="//www.unb.ca/aboutunb/employment.html">Careers at UNB</a></li>
+<li><a href="//www.unb.ca/aboutunb/services-at-unb.html">Services at UNB</a></li>
+<li><a href="//www.unb.ca/housing/">Conference Services</a></li>
+<li><a href="//lib.unb.ca/">Libraries</a></li>
+<li><a href="//www.unb.ca/cel/">Online &amp; Continuing Ed</a></li>
+<li><a href="//unb.ca/leadership">Leadership</a></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Mobile footer --> <!-- End Mobile Footer --></div>
+</div>
+<div class="drkdvdr">
+<div class="row rownospace"></div>
+<div class="container">
+<div class="col-md-12 col-lg-12">
+<ul class="footer">
+<li><a href="//www.unb.ca/copyright/">&#169; University of New Brunswick</a></li>
+<li><a href="//www.unb.ca/privacy/">Privacy</a></li>
+<li><a class="hidden-xs" href="//www.unb.ca/aboutunb/accessibility/">Accessibility</a></li>
+<li><a href="//es.unb.ca/forms/web-feedback/">Web feedback</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+<script src="../_assets/scripts/custom.js"></script>
+
+
+
+                
+    
+     
+
+<!-- scripts-->
+
+<script src="//www.unb.ca/webcomps/_js/webslidemenu.js" type="text/javascript"></script>
+<script src="//www.unb.ca/webcomps/_js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+$(document).ready(function() {
+    $("table").each(function(){
+        $(this).addClass( 'table-responsive' );
+    });
+    $(".imgcap").each(function(){
+        //get the alt attr
+        var thealt=$(this).attr("alt");
+        $(this).wrap( '<figure class="embed hide-smooth dark"></figure>' );
+        $(this).after("<figcaption>"+thealt+"</figcaption>");
+    	
+	});
+    
+    
+        //make all iframes responsive
+     // $("iframe").each(function(){
+        
+        //$(this).wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
+        //$(this).removeAttr('height width');
+        //$(this).addClass('embed-responsive-item');
+        
+    //});
+    //make all images responsive
+     $("img").each(function(){
+         $(this).addClass('img-responsive');
+        //$(this).removeAttr('height width');
+    });
+});
+</script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-9026165-1']);
+_gaq.push(['_setDomainName','.unb.ca']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<script type="text/javascript">
+  sAId = "18";
+  sCId = "85";
+  
+  (function() {
+    function async_load(){
+      var s = document.createElement('script'); s.type = 'text/javascript';
+      s.src = (('https:' == document.location.protocol) ? "https://ssl" : "http://cdn") + ".spectate.com/s.js";
+      var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+    }
+    if(window.attachEvent) { window.attachEvent('onload', async_load); }
+    else { window.addEventListener('load', async_load, false); }
+  })();
+</script>
+<script type="text/javascript">
+// <![CDATA[
+var _elqQ = _elqQ || [];
+_elqQ.push(['elqSetSiteId', '1961286906']);
+_elqQ.push(['elqTrackPageView']);
+(function () {
+function async_load() {
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+s.src = '//img03.en25.com/i/elqCfg.min.js';
+var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+}
+if (window.addEventListener) window.addEventListener('DOMContentLoaded', async_load, false);
+else if (window.attachEvent) window.attachEvent('onload', async_load);
+})();
+// ]]>
+</script>
+
+<!-- Google tag (gtag.js) --> 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GDSPR8016V"></script> 
+<script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-GDSPR8016V'); </script>
+
+</body>
+</html>

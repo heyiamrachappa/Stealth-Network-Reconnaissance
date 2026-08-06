@@ -586,3 +586,57 @@
 2026-07-27 13:00:44,518 [INFO] (realtime_detector.py:244) - PhantomTrace System closed.
 2026-07-27 14:15:28,241 [INFO] (engine.py:31) - Loading StandardScaler from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/scaler.joblib
 2026-07-27 14:15:28,410 [INFO] (engine.py:42) - Loading ML classifier: 'random_forest' from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/random_forest_model.joblib
+2026-07-29 21:11:35,420 [INFO] (parser.py:90) - Opening and parsing capture file: /home/yi/My-Projects/Stealth-Network-Reconnaissance/pcaps/uploaded_temp.pcap
+2026-07-29 21:11:37,918 [INFO] (parser.py:139) - Successfully processed PCAP: 14676 packets loaded across 15684.43 seconds.
+2026-07-29 21:11:37,949 [INFO] (engine.py:31) - Loading StandardScaler from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/scaler.joblib
+2026-07-29 21:11:38,304 [INFO] (engine.py:42) - Loading ML classifier: 'random_forest' from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/random_forest_model.joblib
+2026-07-29 21:11:49,455 [INFO] (parser.py:90) - Opening and parsing capture file: /home/yi/My-Projects/Stealth-Network-Reconnaissance/pcaps/uploaded_temp.pcap
+2026-07-29 21:11:51,943 [INFO] (parser.py:139) - Successfully processed PCAP: 14676 packets loaded across 15684.43 seconds.
+2026-07-29 21:11:51,971 [INFO] (engine.py:31) - Loading StandardScaler from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/scaler.joblib
+2026-07-29 21:11:51,972 [INFO] (engine.py:42) - Loading ML classifier: 'xgboost' from /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/xgboost_model.joblib
+2026-07-29 21:35:08,538 [INFO] (pipeline.py:67) - Processing offline PCAP capture: dataset/lab/tcp_syn_scan.pcap
+2026-07-29 21:35:08,539 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-29 21:35:08,561 [INFO] (pipeline.py:60) - Total labeled flows: 10 anomalies / 12 total flows.
+2026-07-29 21:35:08,564 [INFO] (pipeline.py:113) - Saved raw feature dataset to /home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/raw_features.csv
+2026-07-29 21:35:08,571 [INFO] (pipeline.py:125) - Saved feature list schema to /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/feature_names.json
+2026-07-29 21:35:08,579 [INFO] (pipeline.py:138) - Standard scaler successfully saved to /home/yi/My-Projects/Stealth-Network-Reconnaissance/models/scaler.joblib
+2026-07-29 21:35:08,581 [INFO] (pipeline.py:153) - Saved preprocessed train split to /home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/train_features.csv (9 samples)
+2026-07-29 21:35:08,581 [INFO] (pipeline.py:154) - Saved preprocessed test split to /home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/test_features.csv (3 samples)
+2026-07-29 21:38:22,129 [INFO] (pipeline.py:67) - Processing offline PCAP capture: dataset/lab/benign_traffic.pcap
+2026-07-29 21:38:22,129 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-29 21:38:22,134 [INFO] (pipeline.py:46) - Labeled 0 flows based on attacker IP list.
+2026-07-29 21:38:22,135 [INFO] (pipeline.py:60) - Total labeled flows: 0 anomalies / 2 total flows.
+2026-07-29 21:38:22,135 [INFO] (pipeline.py:67) - Processing offline PCAP capture: dataset/lab/tcp_syn_scan.pcap
+2026-07-29 21:38:22,136 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-29 21:38:22,138 [INFO] (pipeline.py:46) - Labeled 10 flows based on attacker IP list.
+2026-07-29 21:38:22,139 [INFO] (pipeline.py:60) - Total labeled flows: 10 anomalies / 12 total flows.
+2026-07-29 21:38:22,139 [INFO] (pipeline.py:67) - Processing offline PCAP capture: dataset/lab/tcp_fin_scan.pcap
+2026-07-29 21:38:22,140 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-29 21:38:22,142 [INFO] (pipeline.py:46) - Labeled 10 flows based on attacker IP list.
+2026-07-29 21:38:22,143 [INFO] (pipeline.py:60) - Total labeled flows: 10 anomalies / 12 total flows.
+2026-07-29 21:38:22,143 [INFO] (pipeline.py:67) - Processing offline PCAP capture: dataset/lab/tcp_null_scan.pcap
+2026-07-29 21:38:22,143 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-29 21:38:22,146 [INFO] (pipeline.py:46) - Labeled 10 flows based on attacker IP list.
+2026-07-29 21:38:22,147 [INFO] (pipeline.py:60) - Total labeled flows: 10 anomalies / 12 total flows.
+2026-07-29 21:38:22,147 [INFO] (pipeline.py:67) - Processing offline PCAP capture: dataset/lab/tcp_xmas_scan.pcap
+2026-07-29 21:38:22,147 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-29 21:38:22,150 [INFO] (pipeline.py:46) - Labeled 10 flows based on attacker IP list.
+2026-07-29 21:38:22,150 [INFO] (pipeline.py:60) - Total labeled flows: 10 anomalies / 12 total flows.
+2026-07-29 21:38:22,151 [INFO] (pipeline.py:67) - Processing offline PCAP capture: dataset/lab/udp_scan.pcap
+2026-07-29 21:38:22,151 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-29 21:38:22,153 [INFO] (pipeline.py:46) - Labeled 10 flows based on attacker IP list.
+2026-07-29 21:38:22,154 [INFO] (pipeline.py:60) - Total labeled flows: 10 anomalies / 12 total flows.
+2026-07-29 21:38:22,154 [INFO] (pipeline.py:67) - Processing offline PCAP capture: dataset/lab/subnet_sweep.pcap
+2026-07-29 21:38:22,154 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-29 21:38:22,157 [INFO] (pipeline.py:46) - Labeled 14 flows based on attacker IP list.
+2026-07-29 21:38:22,158 [INFO] (pipeline.py:60) - Total labeled flows: 14 anomalies / 16 total flows.
+2026-07-29 21:38:22,158 [INFO] (pipeline.py:67) - Processing offline PCAP capture: dataset/lab/slow_rate_scan.pcap
+2026-07-29 21:38:22,158 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-29 21:38:22,161 [INFO] (pipeline.py:46) - Labeled 10 flows based on attacker IP list.
+2026-07-29 21:38:22,162 [INFO] (pipeline.py:60) - Total labeled flows: 10 anomalies / 12 total flows.
+2026-07-29 21:38:22,162 [INFO] (pipeline.py:67) - Processing offline PCAP capture: dataset/lab/distributed_scan.pcap
+2026-07-29 21:38:22,162 [INFO] (tracker.py:140) - Session pruner thread started.
+2026-07-29 21:38:22,165 [INFO] (pipeline.py:46) - Labeled 10 flows based on attacker IP list.
+2026-07-29 21:38:22,166 [INFO] (pipeline.py:60) - Total labeled flows: 10 anomalies / 12 total flows.
+2026-07-29 21:38:22,169 [INFO] (pipeline.py:115) - Saved raw feature dataset to /home/yi/My-Projects/Stealth-Network-Reconnaissance/dataset/raw_features.csv
+2026-07-29 21:38:22,189 [INFO] (pipeline.py:205) - Saved split report to /home/yi/My-Projects/Stealth-Network-Reconnaissance/results/split_report.json

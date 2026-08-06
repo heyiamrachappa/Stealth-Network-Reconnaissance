@@ -1,0 +1,87 @@
+{
+  "strategy": "host_wise",
+  "model": "isolation_forest",
+  "seed": 13,
+  "feature_importance_mean_abs_shap": [
+    {
+      "feature": "flow_packet_count",
+      "importance": 1.260986
+    },
+    {
+      "feature": "flow_bytes",
+      "importance": 1.0712
+    },
+    {
+      "feature": "flow_size_mean",
+      "importance": 0.889214
+    },
+    {
+      "feature": "flow_ack_ratio",
+      "importance": 0.403766
+    },
+    {
+      "feature": "flow_duration",
+      "importance": 0.161892
+    },
+    {
+      "feature": "flow_size_var",
+      "importance": 0.13099
+    },
+    {
+      "feature": "flow_interval_mean",
+      "importance": 0.115034
+    },
+    {
+      "feature": "flow_interval_var",
+      "importance": 0.075023
+    },
+    {
+      "feature": "flow_syn_ratio",
+      "importance": 0.064817
+    },
+    {
+      "feature": "flow_fin_ratio",
+      "importance": 0.045976
+    },
+    {
+      "feature": "host_packet_rate",
+      "importance": 0.031391
+    },
+    {
+      "feature": "host_dst_diversity",
+      "importance": 0.03071
+    },
+    {
+      "feature": "host_interval_mean",
+      "importance": 0.025457
+    },
+    {
+      "feature": "host_port_entropy",
+      "importance": 0.019513
+    },
+    {
+      "feature": "host_syn_ratio",
+      "importance": 0.010127
+    },
+    {
+      "feature": "host_failed_flow_ratio",
+      "importance": 0.009177
+    },
+    {
+      "feature": "host_dst_entropy",
+      "importance": 0.004557
+    },
+    {
+      "feature": "flow_rst_ratio",
+      "importance": 0.0
+    },
+    {
+      "feature": "host_interval_var",
+      "importance": 0.0
+    },
+    {
+      "feature": "host_packet_size_var",
+      "importance": 0.0
+    }
+  ]
+}
