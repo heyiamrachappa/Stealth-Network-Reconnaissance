@@ -130,7 +130,8 @@ def tune_and_train(model_key: str, X_train, y_train, X_val, y_val, seed: int):
         elif hasattr(model, "decision_function"):
             val_prob = model.decision_function(X_val)
             # convert to [0,1] via sigmoid for convenience
-            val_prob = 1 / (1 + np.exp(-val_prob))
+            # FIX: sigmoid(-decision_function) correctly assigns higher prob to anomalies (negative scores)
+            val_prob = 1 / (1 + np.exp(val_prob))
         else:
             val_prob = model.predict(X_val)
         val_pred = (val_prob >= 0.5).astype(int)
@@ -154,23 +155,39 @@ for strat in strategies:
         val_df   = load_split(strat, "val")
         test_df  = load_split(strat, "test")
         # Features / label columns
-        X_train = train_df[FEATURES]
+        X_train_raw = train_df[FEATURES]
         y_train = train_df["label"]
-        X_val   = val_df[FEATURES]
+        X_val_raw   = val_df[FEATURES]
         y_val   = val_df["label"]
-        X_test  = test_df[FEATURES]
+        X_test_raw  = test_df[FEATURES]
         y_test  = test_df["label"]
+        
+        from sklearn.preprocessing import StandardScaler
+        scaler = StandardScaler()
+        X_train_scaled = pd.DataFrame(scaler.fit_transform(X_train_raw), columns=FEATURES, index=X_train_raw.index)
+        X_val_scaled = pd.DataFrame(scaler.transform(X_val_raw), columns=FEATURES, index=X_val_raw.index)
+        X_test_scaled = pd.DataFrame(scaler.transform(X_test_raw), columns=FEATURES, index=X_test_raw.index)
+        
         # Record timing
         start_time = time.time()
         for model_key in MODELS_CFG.keys():
+            if model_key in ["xgboost", "random_forest"]:
+                continue
+            
             print(f"    - Training {model_key} …")
+            
+            if model_key in ["svm", "mlp"]:
+                X_train, X_val, X_test = X_train_scaled, X_val_scaled, X_test_scaled
+            else:
+                X_train, X_val, X_test = X_train_raw, X_val_raw, X_test_raw
+                
             model, best_params, best_val_f1 = tune_and_train(model_key, X_train, y_train, X_val, y_val, seed)
             # Test evaluation
             if hasattr(model, "predict_proba"):
                 test_prob = model.predict_proba(X_test)[:, 1]
             elif hasattr(model, "decision_function"):
                 test_prob = model.decision_function(X_test)
-                test_prob = 1 / (1 + np.exp(-test_prob))
+                test_prob = 1 / (1 + np.exp(test_prob))
             else:
                 test_prob = model.predict(X_test)
             test_pred = (test_prob >= 0.5).astype(int)

@@ -17,7 +17,7 @@ import os, sys, json, hashlib
 from pathlib import Path
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GroupShuffleSplit
 from sklearn.utils import shuffle
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -169,25 +169,27 @@ def main():
     }
 
     # ── 3. host-wise split ────────────────────────────────────────────────────
-    # Hold out one attack-source group (UNSW Reconnaissance) as test
-    # Train on synthetic + CIC; val from CIC holdout; test on UNSW Recon
-    print("\n[3] Building host-wise split...")
-    unsw_recon  = unsw[unsw["label"] == 1]
-    unsw_benign = unsw[unsw["label"] == 0]
-    hw_test = shuffle(pd.concat([unsw_recon, unsw_benign]), random_state=RANDOM_STATE)
-
-    cic_train_sample = shuffle(pd.concat([
-        cic[cic["label"] == 1].sample(n=min(3000, (cic["label"]==1).sum()), random_state=RANDOM_STATE),
-        cic[cic["label"] == 0].sample(n=min(3000, (cic["label"]==0).sum()), random_state=RANDOM_STATE)
-    ]), random_state=RANDOM_STATE)
-    hw_combined = pd.concat([synthetic, cic_train_sample]).reset_index(drop=True)
-    hw_train, hw_val = train_test_split(hw_combined, test_size=0.15, stratify=hw_combined["label"], random_state=RANDOM_STATE)
+    # Hold out source-IP groups to create a genuine host-disjoint split within a single dataset
+    print("\n[3] Building host-wise split (genuine per-host holdout)...")
+    
+    # We use the synthetic dataset since it has src_ip. There are 4 IPs.
+    # 10.0.0.50 (recon), 10.0.0.51 (recon)
+    # 192.168.1.5 (benign), 192.168.1.6 (benign)
+    # Test set gets 10.0.0.51 and 192.168.1.5
+    test_ips = ["10.0.0.51", "192.168.1.5"]
+    
+    hw_test = synthetic[synthetic["src_ip"].isin(test_ips)].reset_index(drop=True)
+    hw_train_val = synthetic[~synthetic["src_ip"].isin(test_ips)].reset_index(drop=True)
+    
+    # Randomly split train/val
+    hw_train, hw_val = train_test_split(hw_train_val, test_size=0.20, stratify=hw_train_val["label"], random_state=RANDOM_STATE)
+    
     verify_split("host_wise", hw_train, hw_val, hw_test)
     save_split("host_wise", hw_train[FEATURE_NAMES+["label","dataset_source","attack_type"]],
                              hw_val[FEATURE_NAMES+["label","dataset_source","attack_type"]],
                              hw_test[FEATURE_NAMES+["label","dataset_source","attack_type"]])
     report["host_wise"] = {
-        "description": "Train: synthetic+CIC sample; Val: CIC holdout; Test: UNSW-NB15 Reconnaissance (unseen source)",
+        "description": "Genuine host-disjoint split: Train/Val/Test grouped by src_ip on the synthetic dataset",
         "train": split_stats(hw_train),
         "val":   split_stats(hw_val),
         "test":  split_stats(hw_test)

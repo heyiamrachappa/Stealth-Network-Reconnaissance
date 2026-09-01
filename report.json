@@ -986,170 +986,51 @@
     }
   ],
   "third_dataset": {
-    "dataset_chosen": null,
+    "dataset_chosen": "TON_IoT (NF-ToN-IoT-v2)",
     "attempted": [
-      "BoT-IoT",
-      "CSE-CIC-IDS2018",
       "TON_IoT"
     ],
-    "blocked_reason": "None of the third datasets were found locally in dataset/public/, and no download scripts/network access is provided in the repository.",
-    "results": null,
-    "if_resilience_holds": null
-  },
-  "shap_directionality": [
-    {
-      "strategy": "UNSW-to-CIC",
-      "model": "Isolation Forest",
-      "features": [
-        {
-          "feature": "flow_interval_mean",
-          "direction": "low values push toward reconnaissance",
-          "monotonic": false
-        },
-        {
-          "feature": "flow_packet_count",
-          "direction": "low values push toward reconnaissance",
-          "monotonic": true
-        },
-        {
-          "feature": "flow_duration",
-          "direction": "low values push toward reconnaissance",
-          "monotonic": true
-        },
-        {
-          "feature": "flow_bytes",
-          "direction": "low values push toward reconnaissance",
-          "monotonic": false
-        },
-        {
-          "feature": "flow_size_mean",
-          "direction": "low values push toward reconnaissance",
-          "monotonic": false
-        }
-      ]
-    }
-  ],
-  "notes": [
-    "Task 0 Model Check: Confirmed loading real .joblib models.",
-    "Model synthetic-to-CIC RF: <class 'sklearn.ensemble._forest.RandomForestClassifier'>, n_features_in_ = 20",
-    "Model synthetic-to-CIC XGB: <class 'xgboost.sklearn.XGBClassifier'>, n_features_in_ = 20",
-    "Model synthetic-to-CIC SVM: <class 'sklearn.svm._classes.SVC'>, n_features_in_ = 20",
-    "Model synthetic-to-CIC IF: <class 'sklearn.ensemble._iforest.IsolationForest'>, n_features_in_ = 20",
-    "Model synthetic-to-CIC MLP: <class 'sklearn.neural_network._multilayer_perceptron.MLPClassifier'>, n_features_in_ = 20",
-    "Model temporal-holdout RF: <class 'sklearn.ensemble._forest.RandomForestClassifier'>, n_features_in_ = 20",
-    "Model temporal-holdout XGB: <class 'xgboost.sklearn.XGBClassifier'>, n_features_in_ = 20",
-    "Model temporal-holdout SVM: <class 'sklearn.svm._classes.SVC'>, n_features_in_ = 20",
-    "Model temporal-holdout IF: <class 'sklearn.ensemble._iforest.IsolationForest'>, n_features_in_ = 20",
-    "Model temporal-holdout MLP: <class 'sklearn.neural_network._multilayer_perceptron.MLPClassifier'>, n_features_in_ = 20",
-    "Model CIC-to-UNSW RF: <class 'sklearn.ensemble._forest.RandomForestClassifier'>, n_features_in_ = 20",
-    "Model CIC-to-UNSW XGB: <class 'xgboost.sklearn.XGBClassifier'>, n_features_in_ = 20",
-    "Model CIC-to-UNSW SVM: <class 'sklearn.svm._classes.SVC'>, n_features_in_ = 20",
-    "Model CIC-to-UNSW IF: <class 'sklearn.ensemble._iforest.IsolationForest'>, n_features_in_ = 20",
-    "Model CIC-to-UNSW MLP: <class 'sklearn.neural_network._multilayer_perceptron.MLPClassifier'>, n_features_in_ = 20",
-    "Model UNSW-to-CIC RF: <class 'sklearn.ensemble._forest.RandomForestClassifier'>, n_features_in_ = 20",
-    "Model UNSW-to-CIC XGB: <class 'xgboost.sklearn.XGBClassifier'>, n_features_in_ = 20",
-    "Model UNSW-to-CIC SVM: <class 'sklearn.svm._classes.SVC'>, n_features_in_ = 20",
-    "Model UNSW-to-CIC IF: <class 'sklearn.ensemble._iforest.IsolationForest'>, n_features_in_ = 20",
-    "Model UNSW-to-CIC MLP: <class 'sklearn.neural_network._multilayer_perceptron.MLPClassifier'>, n_features_in_ = 20",
-    "Task 1: Duplicate rate for synthetic-to-CIC is 93.66%.",
-    "Task 1: Duplicate rate for temporal-holdout is 41.71%.",
-    "Task 1: Duplicate rate for CIC-to-UNSW is 14.29%.",
-    "Task 1: Duplicate rate for UNSW-to-CIC is 93.66%.",
-    "Task 3 Bootstrap: Using n=2000 iterations due to runtime constraints instead of 10000.",
-    "Task 3 DeLong: Real Fast DeLong not available in standard scipy/sklearn. Using bootstrap-based AUC CIs instead of mislabeled DeLong.",
-    "Task 3 McNemar z-stat = 388.6244865825754 for RF vs XGB in synthetic-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 175.57720051410715 for RF vs SVM in synthetic-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 361.7397552274928 for RF vs IF in synthetic-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 18.33137207632929 for RF vs MLP in synthetic-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 346.69904749663556 for XGB vs SVM in synthetic-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 84.05493977078302 for XGB vs IF in synthetic-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 388.316830234731 for XGB vs MLP in synthetic-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 316.73110867943313 for SVM vs IF in synthetic-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 174.2041006460971 for SVM vs MLP in synthetic-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 361.59615045190804 for IF vs MLP in synthetic-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 29.428362829297612 for RF vs SVM in temporal-holdout. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 34.23459712144882 for RF vs IF in temporal-holdout. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 29.428362829297612 for XGB vs SVM in temporal-holdout. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 34.23459712144882 for XGB vs IF in temporal-holdout. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 29.058721531618595 for SVM vs MLP in temporal-holdout. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 34.088433977788135 for IF vs MLP in temporal-holdout. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 24.20055487314862 for RF vs SVM in CIC-to-UNSW. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 33.63066919650474 for RF vs IF in CIC-to-UNSW. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 24.21661548408798 for XGB vs SVM in CIC-to-UNSW. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 33.645533008388554 for XGB vs IF in CIC-to-UNSW. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 24.20055487314862 for SVM vs MLP in CIC-to-UNSW. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 33.63066919650474 for IF vs MLP in CIC-to-UNSW. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 128.3226870753647 for RF vs XGB in UNSW-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 385.93320644039045 for RF vs SVM in UNSW-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 56.62446691740175 for RF vs IF in UNSW-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 130.52095554729306 for RF vs MLP in UNSW-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 361.8786252272597 for XGB vs SVM in UNSW-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 145.41825714564933 for XGB vs IF in UNSW-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 20.80434097703939 for XGB vs MLP in UNSW-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 390.35709484888525 for SVM vs IF in UNSW-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 363.5425496955648 for SVM vs MLP in UNSW-to-CIC. Highly correlated outputs.",
-    "Task 3 McNemar z-stat = 143.14113874312275 for IF vs MLP in UNSW-to-CIC. Highly correlated outputs.",
-    "Task 4: Third datasets not found, emitted blocked reason.",
-    "Task 5: Created results/shap/signed/UNSW-to-CIC_IF_beeswarm.png",
-    "Task 5: Created results/shap/signed/CIC-to-UNSW_IF_beeswarm.png",
-    "Task 5: Created results/shap/signed/synthetic-to-CIC_RF_beeswarm.png",
-    "Task 5: Created results/shap/signed/temporal-holdout_RF_beeswarm.png",
-    "Task 3 validation gate failed. Check extraction logic."
-  ],
-  "task3_validation_gate": {
-    "synthetic-to-CIC": {
-      "RF": {
-        "published_f1": 0.994,
-        "recomputed_f1": 0.993858466435124,
-        "within_tolerance": true
+    "blocked_reason": null,
+    "results": {
+      "random_forest": {
+        "accuracy": 0.5823238238537757,
+        "precision": 0.015377657168701944,
+        "recall": 0.0015256899259591655,
+        "f1": 0.0027759634225996083,
+        "mcc": -0.1492440391819171,
+        "roc_auc": 0.5643899036595219
       },
-      "XGB": {
-        "published_f1": 0.991,
-        "recomputed_f1": 0.9914048523713926,
-        "within_tolerance": true
+      "xgboost": {
+        "accuracy": 0.7945815629515008,
+        "precision": 0.8190544234592445,
+        "recall": 0.5915862687906663,
+        "f1": 0.686980537244991,
+        "mcc": 0.555786749572266,
+        "roc_auc": 0.7672552631322143
       },
-      "IF": {
-        "published_f1": 0.002,
-        "recomputed_f1": 0.0015843376902619816,
-        "within_tolerance": true
+      "svm": {
+        "accuracy": 0.3945165895820332,
+        "precision": 0.3862182543122129,
+        "recall": 0.9997307606013013,
+        "f1": 0.5571839439789921,
+        "mcc": 0.09060874676536186,
+        "roc_auc": 0.5024576446767507
+      },
+      "isolation_forest": {
+        "accuracy": 0.5934205914286447,
+        "precision": 0.3214627151051625,
+        "recall": 0.06035449854161992,
+        "f1": 0.1016283199214175,
+        "mcc": -0.03404991108188266,
+        "roc_auc": 0.5690767165718407
+      },
+      "mlp": {
+        "accuracy": 0.43550965623958077,
+        "precision": 0.4016066466752868,
+        "recall": 0.982589185550819,
+        "f1": 0.5701712701068241,
+        "mcc": 0.15714349448326087,
+        "roc_auc": 0.3631321859767648
       }
     },
-    "UNSW-to-CIC": {
-      "RF": {
-        "published_f1": 0.077,
-        "recomputed_f1": 0.07719642734499217,
-        "within_tolerance": true
-      },
-      "IF": {
-        "published_f1": 0.987,
-        "recomputed_f1": 0.9866295924933489,
-        "within_tolerance": true
-      },
-      "SVM": {
-        "published_f1": 0.985,
-        "recomputed_f1": 0.984523323603373,
-        "within_tolerance": true
-      }
-    }
-  },
-  "task2_task3_reconciliation": {
-    "synthetic-to-CIC": {
-      "SVM": {
-        "task2_f1_mean": 0.5847346388534128,
-        "task3_bootstrap_f1_ci": [
-          0.5836835859007018,
-          0.5858456300971182
-        ],
-        "reconciled": true
-      },
-      "MLP": {
-        "task2_f1_mean": 0.19774360786506745,
-        "task3_bootstrap_f1_ci": [
-          0.2971215985119694,
-          0.29956033292470785
-        ],
-        "reconciled": false
-      }
-    }
-  }
-}
+    "if_resilience_holds": 

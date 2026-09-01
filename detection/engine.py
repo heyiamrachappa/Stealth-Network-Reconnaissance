@@ -97,7 +97,7 @@ class MLInferenceEngine:
         port_entropy = raw_features.get("host_port_entropy", 0.0)
         failed_flow_ratio = raw_features.get("host_failed_flow_ratio", 0.0)
         dst_diversity = raw_features.get("host_dst_diversity", 1.0)
-        syn_ratio = raw_features.get("host_syn_ratio", 0.0)
+        syn_ratio= raw_features.get("host_syn_ratio", 0.0)
         
         # Rule 1: High port entropy + failed flows (Horizontal/Vertical Port Scan)
         if port_entropy > 2.2 and failed_flow_ratio > 0.8:

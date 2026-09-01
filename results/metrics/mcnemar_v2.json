@@ -1,0 +1,26 @@
+{
+  "pcap_wise": {
+    "b": 157398,
+    "c": 71,
+    "n_discordant": 157469,
+    "mcnemar_chi2": 157183.1299
+  },
+  "time_wise": {
+    "b": 3,
+    "c": 0,
+    "n_discordant": 3,
+    "mcnemar_chi2": 1.3333
+  },
+  "host_wise": {
+    "b": 9,
+    "c": 0,
+    "n_discordant": 9,
+    "mcnemar_chi2": 7.1111
+  },
+  "cross_dataset": {
+    "b": 0,
+    "c": 1344,
+    "n_discordant": 1344,
+    "mcnemar_chi2": 1342.0007
+  }
+}

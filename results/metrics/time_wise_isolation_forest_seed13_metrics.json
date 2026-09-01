@@ -6,33 +6,33 @@
     "random_state": 13,
     "contamination": 0.1
   },
-  "validation_f1": 0.6883116883116883,
+  "validation_f1": 0.0,
   "test_metrics": {
-    "accuracy": 0.5799109351806037,
-    "precision": 0.5386710239651417,
-    "recall": 0.9979818365287588,
-    "f1": 0.6996816413158825,
-    "mcc": 0.30449887458323377,
-    "roc_auc": 0.9974253720376594,
-    "pr_auc": 0.998575320253069,
+    "accuracy": 0.4190994557149926,
+    "precision": 0.0106951871657754,
+    "recall": 0.0020181634712411706,
+    "f1": 0.003395585738539898,
+    "mcc": -0.3063811241179562,
+    "roc_auc": 0.0025746279623406775,
+    "pr_auc": 0.3583943192622359,
     "confusion_matrix": [
       [
-        183,
-        847
+        845,
+        185
       ],
       [
-        2,
-        989
+        989,
+        2
       ]
     ]
   },
   "meta": {
     "seed": 13,
-    "timestamp": "2026-08-01 12:39:30",
+    "timestamp": "2026-08-27 10:04:46",
     "python_version": "3.12.3",
-    "platform": "Linux-6.17.0-40-generic-x86_64-with-glibc2.39",
+    "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.39",
     "cpu_count": 16,
-    "memory_gb": 16.44,
+    "memory_gb": 16.43,
     "library_versions": {
       "numpy": "2.4.6",
       "pandas": "3.0.3",

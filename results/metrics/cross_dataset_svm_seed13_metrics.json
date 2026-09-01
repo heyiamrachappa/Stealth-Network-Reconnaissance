@@ -5,36 +5,36 @@
   "hyperparameters": {
     "probability": true,
     "random_state": 13,
-    "C": 5.0,
+    "C": 1.0,
     "kernel": "rbf"
   },
-  "validation_f1": 0.7991266375545851,
+  "validation_f1": 0.8604651162790697,
   "test_metrics": {
-    "accuracy": 0.9706328064878944,
-    "precision": 0.9766104318216994,
-    "recall": 0.9925564714025042,
-    "f1": 0.9845188872072522,
-    "mcc": 0.7086367066176507,
-    "roc_auc": 0.9240455823318441,
-    "pr_auc": 0.9848010277781992,
+    "accuracy": 0.059142840229680936,
+    "precision": 0.09090909090909091,
+    "recall": 6.292078273453721e-06,
+    "f1": 1.2583285621708684e-05,
+    "mcc": -0.02906204027051322,
+    "roc_auc": 0.9917341279179513,
+    "pr_auc": 0.9986608671174423,
     "confusion_matrix": [
       [
-        6222,
-        3778
+        9990,
+        10
       ],
       [
-        1183,
-        157747
+        158929,
+        1
       ]
     ]
   },
   "meta": {
     "seed": 13,
-    "timestamp": "2026-08-01 13:01:56",
+    "timestamp": "2026-08-27 10:05:57",
     "python_version": "3.12.3",
-    "platform": "Linux-6.17.0-40-generic-x86_64-with-glibc2.39",
+    "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.39",
     "cpu_count": 16,
-    "memory_gb": 16.44,
+    "memory_gb": 16.43,
     "library_versions": {
       "numpy": "2.4.6",
       "pandas": "3.0.3",

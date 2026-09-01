@@ -73,40 +73,38 @@
     }
   },
   "host_wise": {
-    "description": "Train: synthetic+CIC sample; Val: CIC holdout; Test: UNSW-NB15 Reconnaissance (unseen source)",
+    "description": "Genuine host-disjoint split: Train/Val/Test grouped by src_ip on the synthetic dataset",
     "train": {
-      "total": 5186,
-      "benign": 2565,
-      "recon": 2621,
-      "class_balance_ratio": 1.022,
-      "duplicate_feature_rows": 2532,
+      "total": 70,
+      "benign": 7,
+      "recon": 63,
+      "class_balance_ratio": 9.0,
+      "duplicate_feature_rows": 60,
       "missing_values": 0,
       "dataset_sources": {
-        "cic_ids_2017_friday_portscan": 5099,
-        "synthetic": 87
+        "synthetic": 70
       }
     },
     "val": {
-      "total": 916,
-      "benign": 453,
-      "recon": 463,
-      "class_balance_ratio": 1.022,
-      "duplicate_feature_rows": 315,
+      "total": 18,
+      "benign": 2,
+      "recon": 16,
+      "class_balance_ratio": 8.0,
+      "duplicate_feature_rows": 11,
       "missing_values": 0,
       "dataset_sources": {
-        "cic_ids_2017_friday_portscan": 901,
-        "synthetic": 15
+        "synthetic": 18
       }
     },
     "test": {
-      "total": 5277,
-      "benign": 3518,
-      "recon": 1759,
-      "class_balance_ratio": 0.5,
-      "duplicate_feature_rows": 754,
+      "total": 14,
+      "benign": 9,
+      "recon": 5,
+      "class_balance_ratio": 0.556,
+      "duplicate_feature_rows": 10,
       "missing_values": 0,
       "dataset_sources": {
-        "unsw_nb15": 5277
+        "synthetic": 14
       }
     }
   },

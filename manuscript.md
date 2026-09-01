@@ -1,12 +1,14 @@
 # PhantomTrace: A Multi-Strategy Evaluation Framework for Machine Learning-Based Network Reconnaissance Detection
 
+**[Author 1 Name]**, *[Author 1 Affiliation]*, ORCID: [0000-0000-0000-0000], [email1@example.com]  
+**[Author 2 Name]**, *[Author 2 Affiliation]*, ORCID: [0000-0000-0000-0000], [email2@example.com]  
+**[Author 3 Name]**, *[Author 3 Affiliation]*, ORCID: [0000-0000-0000-0000], [email3@example.com]  
+
 ---
 
-## Abstract
+**ABSTRACT** Network reconnaissance remains a critical precursor to cyber-attacks, yet existing detection approaches are rarely validated across diverse splitting strategies or subjected to formal statistical testing. This paper presents PhantomTrace, a reproducible evaluation framework that benchmarks five machine learning classifiers — Random Forest (RF), XGBoost (XGB), Support Vector Machine (SVM), Isolation Forest (IF), and Multi-Layer Perceptron (MLP) — across four rigorous data-splitting strategies: pcap-wise, time-wise, host-wise, and cross-dataset. Using CIC-IDS-2017 and UNSW-NB15 public datasets mapped to a canonical 20-feature schema, we report mean ± standard deviation metrics over five random seeds with Friedman non-parametric tests and Bonferroni-corrected Wilcoxon post-hoc analysis. Our results reveal that in-distribution performance (time-wise RF: F1 = 0.999 ± 0.000) collapses dramatically under domain shift (cross-dataset RF: F1 = 0.077 ± 0.164), exposing critical generalization gaps. SHAP-based explainability analysis identifies `flow_interval_mean`, `flow_packet_count`, and `flow_duration` as the most discriminative features for cross-domain detection. All code, trained models, and raw outputs are publicly available for full reproducibility.
 
-Network reconnaissance remains a critical precursor to cyber-attacks, yet existing detection approaches are rarely validated across diverse splitting strategies or subjected to formal statistical testing. This paper presents PhantomTrace, a reproducible evaluation framework that benchmarks five machine learning classifiers — Random Forest (RF), XGBoost (XGB), Support Vector Machine (SVM), Isolation Forest (IF), and Multi-Layer Perceptron (MLP) — across four rigorous data-splitting strategies: pcap-wise, time-wise, host-wise, and cross-dataset. Using CIC-IDS-2017 and UNSW-NB15 public datasets mapped to a canonical 20-feature schema, we report mean ± standard deviation metrics over five random seeds with Friedman non-parametric tests and Bonferroni-corrected Wilcoxon post-hoc analysis. Our results reveal that in-distribution performance (time-wise RF: F1 = 0.999 ± 0.000) collapses dramatically under domain shift (cross-dataset RF: F1 = 0.077 ± 0.164), exposing critical generalization gaps. SHAP-based explainability analysis identifies `flow_interval_mean`, `flow_packet_count`, and `flow_duration` as the most discriminative features for cross-domain detection. All code, trained models, and raw outputs are publicly available for full reproducibility.
-
-**Keywords:** Network reconnaissance detection, intrusion detection systems, machine learning evaluation, cross-dataset generalization, SHAP explainability, statistical validation
+**INDEX TERMS** Network reconnaissance detection, intrusion detection systems, machine learning evaluation, cross-dataset generalization, SHAP explainability, statistical validation
 
 ---
 
@@ -276,3 +278,13 @@ PhantomTrace provides a rigorous, reproducible framework for evaluating ML-based
 7. Pedregosa, F., et al. (2011). Scikit-learn: Machine learning in Python. *JMLR*, 12, 2825–2830.
 8. Chen, T., & Guestrin, C. (2016). XGBoost: A scalable tree boosting system. *KDD*, 785–794.
 9. Liu, F. T., Ting, K. M., & Zhou, Z. H. (2008). Isolation forest. *ICDM*, 413–422.
+
+---
+
+## Author Biographies
+
+**[Author 1 Name]** (M'24) received the B.S. degree in Computer Science from [University Name], in [Year]. They are currently a [Title] at [Organization/University]. Their research interests include [Research Interest 1], [Research Interest 2], and [Research Interest 3].
+
+**[Author 2 Name]** (SM'24) received the Ph.D. degree in Cybersecurity from [University Name], in [Year]. They are currently a [Title] at [Organization/University]. Their research focuses on [Research Interest 1] and [Research Interest 2].
+
+**[Author 3 Name]** (F'24) received the Ph.D. degree in Computer Engineering from [University Name]. They are currently a Professor at [Organization/University]. They have authored over [Number] publications in top-tier conferences and journals.

@@ -2,8 +2,8 @@
   "cross_dataset": {
     "accuracy": {
       "friedman": {
-        "statistic": 17.12,
-        "p_value": 0.001832,
+        "statistic": 18.08,
+        "p_value": 0.00119,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -39,9 +39,9 @@
           "significant_005": false
         },
         "mlp vs random_forest": {
-          "statistic": 3.0,
-          "p_value_raw": 0.3125,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "mlp vs svm": {
@@ -51,15 +51,15 @@
           "significant_005": false
         },
         "mlp vs xgboost": {
-          "statistic": 5.0,
-          "p_value_raw": 0.625,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "random_forest vs svm": {
           "statistic": 0.0,
           "p_value_raw": 0.0625,
           "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs svm": {
+          "statistic": 5.0,
+          "p_value_raw": 0.625,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "random_forest vs xgboost": {
@@ -78,8 +78,8 @@
     },
     "f1": {
       "friedman": {
-        "statistic": 17.44,
-        "p_value": 0.001587,
+        "statistic": 16.0,
+        "p_value": 0.003019,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -97,9 +97,9 @@
           "significant_005": false
         },
         "isolation_forest vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "statistic": 7.0,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "isolation_forest vs svm": {
@@ -115,9 +115,9 @@
           "significant_005": false
         },
         "mlp vs random_forest": {
-          "statistic": 2.0,
-          "p_value_raw": 0.1875,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "mlp vs svm": {
@@ -127,15 +127,15 @@
           "significant_005": false
         },
         "mlp vs xgboost": {
-          "statistic": 2.0,
-          "p_value_raw": 0.1875,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "random_forest vs svm": {
           "statistic": 0.0,
           "p_value_raw": 0.0625,
           "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs svm": {
+          "statistic": 3.0,
+          "p_value_raw": 0.3125,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "random_forest vs xgboost": {
@@ -154,8 +154,8 @@
     },
     "mcc": {
       "friedman": {
-        "statistic": 17.44,
-        "p_value": 0.001587,
+        "statistic": 18.08,
+        "p_value": 0.00119,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -191,9 +191,9 @@
           "significant_005": false
         },
         "mlp vs random_forest": {
-          "statistic": 1.0,
-          "p_value_raw": 0.125,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "mlp vs svm": {
@@ -203,15 +203,15 @@
           "significant_005": false
         },
         "mlp vs xgboost": {
-          "statistic": 1.0,
-          "p_value_raw": 0.125,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "random_forest vs svm": {
           "statistic": 0.0,
           "p_value_raw": 0.0625,
           "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs svm": {
+          "statistic": 1.0,
+          "p_value_raw": 0.125,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "random_forest vs xgboost": {
@@ -230,8 +230,8 @@
     },
     "roc_auc": {
       "friedman": {
-        "statistic": 16.48,
-        "p_value": 0.002438,
+        "statistic": 19.04,
+        "p_value": 0.000772,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -243,9 +243,9 @@
       },
       "wilcoxon_posthoc": {
         "isolation_forest vs mlp": {
-          "statistic": 3.0,
-          "p_value_raw": 0.3125,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "isolation_forest vs random_forest": {
@@ -267,9 +267,9 @@
           "significant_005": false
         },
         "mlp vs random_forest": {
-          "statistic": 5.0,
-          "p_value_raw": 0.625,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "mlp vs svm": {
@@ -306,8 +306,8 @@
     },
     "pr_auc": {
       "friedman": {
-        "statistic": 14.08,
-        "p_value": 0.007044,
+        "statistic": 20.0,
+        "p_value": 0.000499,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -319,15 +319,15 @@
       },
       "wilcoxon_posthoc": {
         "isolation_forest vs mlp": {
-          "statistic": 3.0,
-          "p_value_raw": 0.3125,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "isolation_forest vs random_forest": {
-          "statistic": 1.0,
-          "p_value_raw": 0.125,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "isolation_forest vs svm": {
@@ -337,15 +337,15 @@
           "significant_005": false
         },
         "isolation_forest vs xgboost": {
-          "statistic": 5.0,
-          "p_value_raw": 0.625,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "mlp vs random_forest": {
-          "statistic": 7.0,
-          "p_value_raw": 1.0,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "mlp vs svm": {
@@ -355,9 +355,9 @@
           "significant_005": false
         },
         "mlp vs xgboost": {
-          "statistic": 3.0,
-          "p_value_raw": 0.3125,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "random_forest vs svm": {
@@ -384,8 +384,8 @@
   "host_wise": {
     "accuracy": {
       "friedman": {
-        "statistic": 20.0,
-        "p_value": 0.000499,
+        "statistic": 19.7526,
+        "p_value": 0.000559,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -422,8 +422,390 @@
         },
         "mlp vs random_forest": {
           "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "mlp vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 0.5,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "mlp vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "svm vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        }
+      }
+    },
+    "f1": {
+      "friedman": {
+        "statistic": 19.7526,
+        "p_value": 0.000559,
+        "significant_005": true,
+        "models_compared": [
+          "isolation_forest",
+          "mlp",
+          "random_forest",
+          "svm",
+          "xgboost"
+        ]
+      },
+      "wilcoxon_posthoc": {
+        "isolation_forest vs mlp": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "isolation_forest vs random_forest": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "isolation_forest vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "isolation_forest vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "mlp vs random_forest": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "mlp vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 0.5,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "mlp vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "svm vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        }
+      }
+    },
+    "mcc": {
+      "friedman": {
+        "statistic": 16.9302,
+        "p_value": 0.001994,
+        "significant_005": true,
+        "models_compared": [
+          "isolation_forest",
+          "mlp",
+          "random_forest",
+          "svm",
+          "xgboost"
+        ]
+      },
+      "wilcoxon_posthoc": {
+        "isolation_forest vs mlp": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "isolation_forest vs random_forest": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "isolation_forest vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "isolation_forest vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "mlp vs random_forest": {
+          "statistic": 0.0,
+          "p_value_raw": 0.5,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "mlp vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 0.5,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "mlp vs xgboost": {
+          "statistic": 6.0,
+          "p_value_raw": 0.625,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "random_forest vs svm": {
+          "statistic": 0.0,
           "p_value_raw": 1.0,
           "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "random_forest vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "svm vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        }
+      }
+    },
+    "roc_auc": {
+      "friedman": {
+        "statistic": 18.6506,
+        "p_value": 0.00092,
+        "significant_005": true,
+        "models_compared": [
+          "isolation_forest",
+          "mlp",
+          "random_forest",
+          "svm",
+          "xgboost"
+        ]
+      },
+      "wilcoxon_posthoc": {
+        "isolation_forest vs mlp": {
+          "statistic": 0.0,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "isolation_forest vs random_forest": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "isolation_forest vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "isolation_forest vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "mlp vs random_forest": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "mlp vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "mlp vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs xgboost": {
+          "statistic": 2.0,
+          "p_value_raw": 0.1875,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "svm vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        }
+      }
+    },
+    "pr_auc": {
+      "friedman": {
+        "statistic": 18.6506,
+        "p_value": 0.00092,
+        "significant_005": true,
+        "models_compared": [
+          "isolation_forest",
+          "mlp",
+          "random_forest",
+          "svm",
+          "xgboost"
+        ]
+      },
+      "wilcoxon_posthoc": {
+        "isolation_forest vs mlp": {
+          "statistic": 0.0,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "isolation_forest vs random_forest": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "isolation_forest vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "isolation_forest vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "mlp vs random_forest": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "mlp vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "mlp vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "random_forest vs xgboost": {
+          "statistic": 2.0,
+          "p_value_raw": 0.1875,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "svm vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        }
+      }
+    }
+  },
+  "pcap_wise": {
+    "accuracy": {
+      "friedman": {
+        "statistic": 19.36,
+        "p_value": 0.000668,
+        "significant_005": true,
+        "models_compared": [
+          "isolation_forest",
+          "mlp",
+          "random_forest",
+          "svm",
+          "xgboost"
+        ]
+      },
+      "wilcoxon_posthoc": {
+        "isolation_forest vs mlp": {
+          "statistic": 1.0,
+          "p_value_raw": 0.125,
+          "p_value_bonferroni": 1.0,
+          "significant_005": false
+        },
+        "isolation_forest vs random_forest": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "isolation_forest vs svm": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "isolation_forest vs xgboost": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
+          "significant_005": false
+        },
+        "mlp vs random_forest": {
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "mlp vs svm": {
@@ -460,8 +842,8 @@
     },
     "f1": {
       "friedman": {
-        "statistic": 20.0,
-        "p_value": 0.000499,
+        "statistic": 19.36,
+        "p_value": 0.000668,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -473,9 +855,9 @@
       },
       "wilcoxon_posthoc": {
         "isolation_forest vs mlp": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "statistic": 1.0,
+          "p_value_raw": 0.125,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "isolation_forest vs random_forest": {
@@ -498,8 +880,8 @@
         },
         "mlp vs random_forest": {
           "statistic": 0.0,
-          "p_value_raw": 1.0,
-          "p_value_bonferroni": 1.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "mlp vs svm": {
@@ -536,160 +918,8 @@
     },
     "mcc": {
       "friedman": {
-        "statistic": 20.0,
-        "p_value": 0.000499,
-        "significant_005": true,
-        "models_compared": [
-          "isolation_forest",
-          "mlp",
-          "random_forest",
-          "svm",
-          "xgboost"
-        ]
-      },
-      "wilcoxon_posthoc": {
-        "isolation_forest vs mlp": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 1.0,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "mlp vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 1.0,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "mlp vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "random_forest vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 1.0,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "random_forest vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "svm vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        }
-      }
-    },
-    "roc_auc": {
-      "friedman": {
-        "statistic": 17.28,
-        "p_value": 0.001705,
-        "significant_005": true,
-        "models_compared": [
-          "isolation_forest",
-          "mlp",
-          "random_forest",
-          "svm",
-          "xgboost"
-        ]
-      },
-      "wilcoxon_posthoc": {
-        "isolation_forest vs mlp": {
-          "statistic": 5.0,
-          "p_value_raw": 0.625,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "isolation_forest vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "random_forest vs svm": {
-          "statistic": 6.0,
-          "p_value_raw": 0.8125,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "random_forest vs xgboost": {
-          "statistic": 2.0,
-          "p_value_raw": 0.1875,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "svm vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        }
-      }
-    },
-    "pr_auc": {
-      "friedman": {
-        "statistic": 17.44,
-        "p_value": 0.001587,
+        "statistic": 17.92,
+        "p_value": 0.001279,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -731,238 +961,8 @@
           "significant_005": false
         },
         "mlp vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "random_forest vs svm": {
-          "statistic": 3.0,
-          "p_value_raw": 0.3125,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "random_forest vs xgboost": {
-          "statistic": 2.0,
-          "p_value_raw": 0.1875,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "svm vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        }
-      }
-    }
-  },
-  "pcap_wise": {
-    "accuracy": {
-      "friedman": {
-        "statistic": 17.92,
-        "p_value": 0.001279,
-        "significant_005": true,
-        "models_compared": [
-          "isolation_forest",
-          "mlp",
-          "random_forest",
-          "svm",
-          "xgboost"
-        ]
-      },
-      "wilcoxon_posthoc": {
-        "isolation_forest vs mlp": {
-          "statistic": 7.0,
-          "p_value_raw": 1.0,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "isolation_forest vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs svm": {
-          "statistic": 3.0,
-          "p_value_raw": 0.3125,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "mlp vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "random_forest vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "random_forest vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "svm vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        }
-      }
-    },
-    "f1": {
-      "friedman": {
-        "statistic": 19.36,
-        "p_value": 0.000668,
-        "significant_005": true,
-        "models_compared": [
-          "isolation_forest",
-          "mlp",
-          "random_forest",
-          "svm",
-          "xgboost"
-        ]
-      },
-      "wilcoxon_posthoc": {
-        "isolation_forest vs mlp": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs svm": {
-          "statistic": 1.0,
-          "p_value_raw": 0.125,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "mlp vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "random_forest vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "random_forest vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "svm vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        }
-      }
-    },
-    "mcc": {
-      "friedman": {
-        "statistic": 18.08,
-        "p_value": 0.00119,
-        "significant_005": true,
-        "models_compared": [
-          "isolation_forest",
-          "mlp",
-          "random_forest",
-          "svm",
-          "xgboost"
-        ]
-      },
-      "wilcoxon_posthoc": {
-        "isolation_forest vs mlp": {
-          "statistic": 3.0,
-          "p_value_raw": 0.3125,
-          "p_value_bonferroni": 1.0,
-          "significant_005": false
-        },
-        "isolation_forest vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "isolation_forest vs xgboost": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs random_forest": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
-          "significant_005": false
-        },
-        "mlp vs svm": {
-          "statistic": 1.0,
-          "p_value_raw": 0.125,
+          "statistic": 6.0,
+          "p_value_raw": 0.75,
           "p_value_bonferroni": 1.0,
           "significant_005": false
         },
@@ -994,8 +994,8 @@
     },
     "roc_auc": {
       "friedman": {
-        "statistic": 18.08,
-        "p_value": 0.00119,
+        "statistic": 19.36,
+        "p_value": 0.000668,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -1013,9 +1013,9 @@
           "significant_005": false
         },
         "isolation_forest vs random_forest": {
-          "statistic": 7.0,
-          "p_value_raw": 1.0,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "isolation_forest vs svm": {
@@ -1037,15 +1037,15 @@
           "significant_005": false
         },
         "mlp vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "statistic": 5.0,
+          "p_value_raw": 0.625,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "mlp vs xgboost": {
-          "statistic": 3.0,
-          "p_value_raw": 0.3125,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "random_forest vs svm": {
@@ -1070,8 +1070,8 @@
     },
     "pr_auc": {
       "friedman": {
-        "statistic": 19.36,
-        "p_value": 0.000668,
+        "statistic": 18.08,
+        "p_value": 0.00119,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -1083,15 +1083,15 @@
       },
       "wilcoxon_posthoc": {
         "isolation_forest vs mlp": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "statistic": 5.0,
+          "p_value_raw": 0.625,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "isolation_forest vs random_forest": {
-          "statistic": 2.0,
-          "p_value_raw": 0.1875,
-          "p_value_bonferroni": 1.0,
+          "statistic": 0.0,
+          "p_value_raw": 0.0625,
+          "p_value_bonferroni": 0.625,
           "significant_005": false
         },
         "isolation_forest vs svm": {
@@ -1113,9 +1113,9 @@
           "significant_005": false
         },
         "mlp vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "statistic": 5.0,
+          "p_value_raw": 0.625,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "mlp vs xgboost": {
@@ -1186,8 +1186,8 @@
         },
         "mlp vs random_forest": {
           "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "mlp vs svm": {
@@ -1198,8 +1198,8 @@
         },
         "mlp vs xgboost": {
           "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "random_forest vs svm": {
@@ -1262,8 +1262,8 @@
         },
         "mlp vs random_forest": {
           "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "mlp vs svm": {
@@ -1274,8 +1274,8 @@
         },
         "mlp vs xgboost": {
           "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "random_forest vs svm": {
@@ -1338,8 +1338,8 @@
         },
         "mlp vs random_forest": {
           "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "mlp vs svm": {
@@ -1350,8 +1350,8 @@
         },
         "mlp vs xgboost": {
           "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "p_value_raw": 1.0,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "random_forest vs svm": {
@@ -1376,8 +1376,8 @@
     },
     "roc_auc": {
       "friedman": {
-        "statistic": 19.36,
-        "p_value": 0.000668,
+        "statistic": 18.08,
+        "p_value": 0.00119,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -1431,9 +1431,9 @@
           "significant_005": false
         },
         "random_forest vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "statistic": 1.0,
+          "p_value_raw": 0.125,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "random_forest vs xgboost": {
@@ -1452,8 +1452,8 @@
     },
     "pr_auc": {
       "friedman": {
-        "statistic": 19.36,
-        "p_value": 0.000668,
+        "statistic": 18.08,
+        "p_value": 0.00119,
         "significant_005": true,
         "models_compared": [
           "isolation_forest",
@@ -1507,9 +1507,9 @@
           "significant_005": false
         },
         "random_forest vs svm": {
-          "statistic": 0.0,
-          "p_value_raw": 0.0625,
-          "p_value_bonferroni": 0.625,
+          "statistic": 5.0,
+          "p_value_raw": 0.625,
+          "p_value_bonferroni": 1.0,
           "significant_005": false
         },
         "random_forest vs xgboost": {
